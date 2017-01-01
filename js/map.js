@@ -168,6 +168,8 @@ var nodelabels = svg.selectAll(".nodelabel")
     .append("text")
     .attr({"x":function(d){return d.x;},
            "y":function(d){return d.y;},
+           "dx":-5,
+           "dy":4,
            "class":"nodelabel",
            "stroke":"black"})
     .text(function(d){return d.name;});
