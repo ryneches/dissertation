@@ -3,9 +3,10 @@ var h = window.innerHeight - 60;
 //var w = 800;
 //var h = 400;
 
-var linkDistance = Math.min(w, h) / 2.5;
+var linkDistance = Math.min(w, h) / 3;
 
-var colors = d3.scale.category10();
+var colors = d3.scale.ordinal().range(["#79BED9","#A7E4F2","#618C70","#BFB960","#A6A053"]);
+var edgeColor = '#AEBFD4';
 
 var dataset = {
   nodes: [
@@ -102,27 +103,9 @@ var edges = svg.selectAll("line")
     .append("line")
     .attr("id",function(d,i) {return 'edge'+i})
     //.attr('marker-end','url(#arrowhead)')
-    .style("stroke","#ccc")
+    .style("stroke",edgeColor)
+    .style("stroke-width",2)
     .style("pointer-events", "none");
-
-var nodes = svg.selectAll("circle")
-    .data(dataset.nodes)
-    .enter()
-    .append("circle")
-    .attr({"r":25 })
-    .style("fill",function(d,i){return colors(i);})
-    .call(force.drag)
-
-var nodelabels = svg.selectAll(".nodelabel") 
-    .data(dataset.nodes)
-    .enter()
-    .append("a").attr({"href":function(d){return d.url;}})
-    .append("text")
-    .attr({"x":function(d){return d.x;},
-           "y":function(d){return d.y;},
-           "class":"nodelabel",
-           "stroke":"black"})
-    .text(function(d){return d.name;});
 
 var edgepaths = svg.selectAll(".edgepath")
     .data(dataset.edges)
@@ -130,10 +113,10 @@ var edgepaths = svg.selectAll(".edgepath")
     .append('path')
     .attr({'d': function(d) {return 'M '+d.source.x+' '+d.source.y+' L '+ d.target.x +' '+d.target.y},
            'class':'edgepath',
-           'fill-opacity':0,
-           'stroke-opacity':0,
            'fill':'blue',
+           'fill-opacity':0,
            'stroke':'red',
+           'stroke-opacity':0,
            'id':function(d,i) {return 'edgepath'+i}})
     .style("pointer-events", "none");
 
@@ -145,10 +128,9 @@ var edgelabels = svg.selectAll(".edgelabel")
     .attr({'class':'edgelabel',
            'id':function(d,i) {return 'edgelabel'+i},
            'dx':60,
-           'dy':0,
-           'font-size':'12pt',
-           'font-family':'serif',
-           'fill':'#aaa'});
+           'dy':-5,
+           'font-size':'10pt',
+           'fill':edgeColor});
 
 edgelabels.append('textPath')
     .attr('xlink:href',function(d,i) {return '#edgepath'+i})
@@ -170,6 +152,25 @@ svg.append('defs').append('marker')
         .attr('fill', '#ccc')
         .attr('stroke','#ccc');
  
+
+var nodes = svg.selectAll("circle")
+    .data(dataset.nodes)
+    .enter()
+    .append("circle")
+    .attr({"r":25 })
+    .style("fill",function(d,i){return colors(i);})
+    .call(force.drag)
+
+var nodelabels = svg.selectAll(".nodelabel") 
+    .data(dataset.nodes)
+    .enter()
+    .append("a").attr({"href":function(d){return d.url;}})
+    .append("text")
+    .attr({"x":function(d){return d.x;},
+           "y":function(d){return d.y;},
+           "class":"nodelabel",
+           "stroke":"black"})
+    .text(function(d){return d.name;});
 
 force.on("tick", function(){
 

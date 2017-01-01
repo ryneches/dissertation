@@ -29,14 +29,17 @@ body {
 }
 
 .edgelabel {
-    font-size: 10;
+    text-transform: uppercase;
+    font-size: 10px;
 }
 
 .nodelabel {
-    font-size: 10;
+    /* text-shadow: 1px 1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff; */
 }
 
-circle {
+svg circle {
+    stroke: #eee;
+    stroke-width: 1.5px;
     cursor: move;
 }
 
