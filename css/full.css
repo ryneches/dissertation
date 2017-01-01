@@ -6,12 +6,7 @@
 
 body {
     margin-top: 50px; /* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-}
-
-/* Header Image Background - Change the URL below to your image path (example: ../images/background.jpg) */
-
-.full {
-    background: url('http://placehold.it/1920x1080') no-repeat center center fixed;
+    background: url('../images/kamchatka.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -34,9 +29,21 @@ body {
 }
 
 .edgelabel {
-	font-size: 10;
+    font-size: 10;
 }
 
 .nodelabel {
-	font-size: 10;
+    font-size: 10;
+}
+
+circle {
+    cursor: move;
+}
+
+.bg-credit {
+    position: absolute;
+    bottom: 0.2em;
+    left: 0.5em;
+    font-size: smaller;
+    opacity: 0.5;
 }

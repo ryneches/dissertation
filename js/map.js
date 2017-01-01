@@ -3,7 +3,7 @@ var h = window.innerHeight - 60;
 //var w = 800;
 //var h = 400;
 
-var linkDistance = 170;
+var linkDistance = Math.min(w, h) / 2.5;
 
 var colors = d3.scale.category10();
 
