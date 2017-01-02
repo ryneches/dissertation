@@ -157,7 +157,8 @@ var nodes = svg.selectAll("circle")
     .data(dataset.nodes)
     .enter()
     .append("circle")
-    .attr({"r":25 })
+    .attr({"r":25,
+           "id":function(d,i) {return 'node'+i}, })
     .style("fill",function(d,i){return colors(i);})
     .call(force.drag)
 
