@@ -1,0 +1,39 @@
+\documentclass{article}
+
+\usepackage[paperheight=2.5in,paperwidth=6.5in,margin=0.1in,heightrounded]{geometry}
+
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{booktabs}
+
+\begin{document}
+
+  \begin{minipage}[c]{0.55\linewidth}
+    \centering
+    \includegraphics[width=\textwidth]{Fig1}
+    \par\vspace{0pt}
+  \end{minipage}%
+  \begin{minipage}[c]{0.40\linewidth}
+    \centering%
+    
+    \begin{tabular}{@{}lll@{}}
+    \toprule
+    Method       & $\,^{\circ}\mathrm{C}$ & $\Delta$t \\ \midrule
+    HTST         & 72      & 15s    \\
+    UHT          & 138     & 2s     \\
+    stovetop     & 63      & 30m    \\
+    thermization & 63      & 15s    \\
+    flash        & 132     & 3m     \\
+    gravity      & 121     & 30m    \\
+    prevacuum    & 132     & 4m     \\
+    FDM          & 190-240 & 10-120s\\ \bottomrule
+    \end{tabular}
+
+    \par\vspace{0pt}
+    \end{minipage}
+
+
+
+\end{document}

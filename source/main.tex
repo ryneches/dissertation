@@ -1,0 +1,54 @@
+\documentclass[PhD]{ucdavisthesis}
+
+\usepackage{subfiles}
+\usepackage{fancyref}
+\usepackage{hyperref}
+\usepackage{gensymb}
+\usepackage{booktabs}
+
+% bibliographies
+\usepackage[backend=biber,refsegment=chapter,defernumbers=true]{biblatex}
+
+\addbibresource[label=SaltyBugs]{SaltyBugs/SaltyBugs.bib}
+%\addbibresource[label=NMF]{NMF/NMF.bib}
+\addbibresource[label=sterility]{sterility/sterility.bib}
+%\addbibresource[label=uLakes]{uLakes/uLakes.bib}
+
+\title{The secret lives of microbes}
+
+\author{Russell Y. Neches}
+\authordegrees{B.S. (Northeastern University, Boston) 2004}
+\officialmajor{Microbiology}
+\graduateprogram{Microbiology}
+\degreemonth{Boopuary}
+\degreeyear{2017}
+\committee{Jonathan A. Eisen}{Marc T. Facciotti}{Marcel Holyoak}{David J. Begun}{}
+\copyrightyear{2017}
+
+\dedication{}
+\acknowledgments{}
+\abstract{}
+
+\makeatletter
+\newcommand{\chapterauthor}[1]{%
+  {\parindent0pt\vspace*{-25pt}%
+  \linespread{1.1}\large\scshape#1%
+  \par\nobreak\vspace*{35pt}}
+  \@afterheading%
+}
+\makeatother
+
+\begin{document}
+
+\makeintropages
+
+\subfile{SaltyBugs/SaltyBugs}
+\subfile{sterility/sterility}
+%\subfile{NMF/NMF}
+%\subfile{sterility/sterility}
+%\subfile{uLakes/uLakes}
+
+%\nocite{*}
+%\printbibliography
+
+\end{document}
