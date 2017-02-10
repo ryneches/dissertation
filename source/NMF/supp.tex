@@ -1,0 +1,112 @@
+\clearpage
+
+\section{Supplementary Text}
+
+% \clearpage
+
+
+%\subsection*{Concordance plot of model selection}
+
+%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!ht]
+\centering
+%\includegraphics[width=4.8in,height=5.2in]{GOS/pfam_model_plot.big.Rout-0.pdf}
+\includegraphics[width=\textwidth]{NMF/figures/figS1}
+  \caption{Model selection of NMF. The concordance plot shows the repeatability of realizations of the NMF factorization for different ranks.  There are two natural ranks for NMF factorization, given by the two peaks in the plot ($k=$ 2 or 5); we used rank 5 for this paper.}
+ \label{ModelSelection}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{figure}[!ht]
+\centering
+% \subfigure[]{\includegraphics[scale=0.32, trim=0mm 38mm 20mm 0mm, clip=TRUE]{GOS/subplots_random.Rout-0.pdf}}
+% \subfigure[]{\includegraphics[scale=0.32, trim=0mm 38mm 20mm 0mm, clip=TRUE]{GOS/pfamSim_plot_pca.Rout.pdf}} 
+% \subfigure[]{\includegraphics[scale=0.32, trim=0mm 38mm 20mm 0mm, clip=TRUE]{GOS/direct_pfams.Rout.pdf}}
+\includegraphics[width=\textwidth]{NMF/figures/figS2}
+ \caption{The comparison of Pfam similarities using NMF, PCA and direct similarity. (a) Pfam similarity using NMF: $ \bar W \bar W^{T}$, $\bar W$ is the row-normalized functional profile matrix; (b) Pfam similarity using the profile matrix reconstructed from the top 5 principal components of PCA; (c) Direct similarity matrix: $\bar X^{T} \bar X$, here $\bar X$ is the row-normalized Pfam profile matrix.}
+ \label{PfamSimilarity}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%\subsection*{Comparison of filtered similarity with direct and PCA similarity}
+
+\begin{figure}[!ht]
+\centering
+ %\subfigure[]{\includegraphics[scale=0.32, trim=0mm 38mm 20mm 0mm, clip=TRUE]{GOS/reorder_P5.Rout.pdf}}
+ %\subfigure[]{\includegraphics[scale=0.32, trim=0mm 38mm 20mm 0mm, clip=TRUE]{GOS/pcaH.Rout-1.pdf}} 
+ %\subfigure[]{\includegraphics[scale=0.32, trim=0mm 38mm 20mm 0mm, clip=TRUE]{GOS/direct_sites.Rout.pdf}}
+ \includegraphics[width=\textwidth]{NMF/figures/figS3}
+ \caption{Comparison of site similarities using NMF, PCA and direct similarity. (a) Site similarity from NMF: $ \hat H^{T} \hat H$, $\hat H$ is the normalized site profiles matrix; (b) Site similarity using the profile matrix reconstructed from the top 5 principal components of PCA; (c) Direct similarity matrix: $\hat X^{T} \hat X$, here $\hat X$ is the column-normalized Pfam profile matrix. }
+ \label{SimilarityCompare}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\subsection*{Comparison of Pfam selection methods}
+
+\begin{figure}[!ht]
+\centering
+ %\subfigure[]{\includegraphics[scale=0.3, trim=0mm 0mm 15mm 0mm, clip=TRUE]{GOS/select_cor.Rout.pdf}}
+ %\subfigure[]{\includegraphics[scale=0.3, trim=0mm 0mm 15mm 0mm, clip=TRUE]{GOS/select_similarity.Rout.pdf}} 
+ %\subfigure[]{\includegraphics[scale=0.3, trim=0mm 0mm 15mm 0mm, clip=TRUE]{GOS/select_projection.Rout.pdf}} 
+ \includegraphics[width=\textwidth]{NMF/figures/figS4}
+ \caption{Comparison of methods for selecting Pfams associated with functional components. 100 pfams are selected for each component based on three methods: (a) correlation; (b) similarity; (c) specificity.}
+ \label{specComp}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!ht]
+\centering
+ %\subfigure[]{\includegraphics[width=3in,height=3in]{GOS/components.Rout-0.pdf}}
+ %\subfigure[]{\includegraphics[width=3in,height=3in]{GOS/components.Rout-1.pdf}}
+ \includegraphics[width=\textwidth]{NMF/figures/figS5}
+ \caption{The similarity among components from (a) site profiles (b) functional profiles.}
+ \label{component_sim}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+\centering
+ \subfigure{\includegraphics[width=2.8in]{NMF/figures/figS6a}}
+ \subfigure{\includegraphics[width=2.8in]{NMF/figures/figS6b}} 
+ \caption{A comparison of Pfam selection methods.  For each selection method, we show the distribution of how many sites selected Pfams are found in.  Pfams that are selected by both methods in each panel are shown in purple.  Choosing by projection or specificity gives a strong bias towards Pfams found in only a few sites, while choosing based on similarity gives a strong bias towards those found in many sites.  Correlation gives a more balanced result.}
+
+ \label{sitedist}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!ht]
+\centering
+ \subfigure{\includegraphics[width=2in]{NMF/figures/figS7a}}
+ \subfigure{\includegraphics[width=2in]{NMF/figures/figS7b}}
+ \subfigure{\includegraphics[width=2in]{NMF/figures/figS7c}}\\
+ \subfigure{\includegraphics[width=2in]{NMF/figures/figS7d}}
+ \subfigure{\includegraphics[width=2in]{NMF/figures/figS7e}}
+ \caption{For each component, the distribution of correlation coefficients between Pfam distributions across sites and the site profile associated with the component.  These are precisely the values we used to select the top 100 Pfams associated with each component.}
+ \label{simHist}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[!ht]
+\centering
+ \subfigure{\includegraphics[width=2.8in]{NMF/figures/figS8a}}
+ \subfigure{\includegraphics[width=2.8in]{NMF/figures/figS8b}}
+ \subfigure{\includegraphics[width=2.8in]{NMF/figures/figS8c}}
+ \subfigure{\includegraphics[width=2.8in]{NMF/figures/figS8d}}
+ \caption{Biogeographic analysis using rank 4 and rank 6 non-negative factorization. Left: Environmental distance vs. functional distance; The partial correlation coefficients between them conditional to logged geographic distance are 0.424 ($P<0.001$) and 0.46 ($P<0.001$) respectively, see (a) and (b). Right: Logged geographic distance vs. functional distance.The partial correlation coefficients between them conditional to environmental distance are 0.137($P<0.004$) and 0.147 ($P<0.003$) respectively, see (c) and (d). }
+ \label{scatterplot}
+\end{figure}
+
+%%% the global map with functional and environmental network 
+%\begin{figure*}[!ht]
+%\centering
+% \includegraphics[width=4in,height=4in]{GOS/PFAMgif.Rout.pdf}
+% \caption{Pfam similarity and environmental similarity between sites. The left is Pfam similarity which is a filtered %similarity matrix from NMF. The right is environmental similarity, transformed by environmental distance matrix $D$ by %a simple formula $1/1+D$. The high similar sites above a threshold are linked, the number of links is 405 for both %maps.}
+% \label{PFAMmap.fig}
+%\end{figure*}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

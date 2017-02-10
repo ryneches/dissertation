@@ -1,0 +1,44 @@
+\section{Materials and Methods}
+
+\subsection*{Datasets}
+
+\paragraph{Pfam profile:} The Global Ocean Sampling expedition \cite{rusch_sorcerer_2007} is a complex data set.  We selected a subset of samples which had been processed in similar ways.  In particular, we used only samples with filter size $0.1-0.8 \mu m$, and excluded samples that appeared to represent completely distinct environmental conditions, such as those from freshwater environments. An additional ten samples with very few reads were deleted, while another six samples were excluded due to no hits being found in a preliminary search against the SEED protein database on the {\tt MG-RAST} server \cite{meyer_metagenomics_2008}. Lastly, four samples that were extreme outliers in a preliminary NMF analysis ({\tt GS000a}, {\tt GS020}, {\tt GS032} and {\tt GS033}) were not included. The final dataset is composed of 45 samples, summarized in Table S7. 
+
+A total of 20,729,138 protein sequences from unassembled reads for the 45 samples were downloaded from {\tt CAMERA} \cite{sun_community_2011}, and searched using {\tt HMMER} 3.0 (\url{http://hmmer.org}) against all 11,912 protein families from the Pfam database version 24 \cite{finn_pfam_2010} using Pfam's per-family gathering threshold cutoffs. The Pfam database has since been updated to version 26, but due to the large computational requirements of the original annotation, version 24 of Pfam was kept for analysis.  Multiple Pfams were allowed to be mapped to the same protein since Pfams often represent protein domains and many proteins are multi-domain. In all, 8,040,951 Pfam assignments were identified in 6,010,368 protein sequences and 8214 different Pfams were found at least once in the 45 samples. The number of assignments for each Pfam was counted per sample, and the counts were normalized to the number of Pfams assignments in the sample.  The result is a matrix of Pfam relative abundances (Pfam profile matrix) with 8214 rows (one for each Pfam) and 45 columns (one for each sample), whose column sums are equal to one. 
+
+% \paragraph*{Subcellular localization:} The identified Pfams in the metagenomic samples were mapped to a gene ontology (GO) term using the InterPro2GO \cite{HuntApwe09} mapping.  
+
+\paragraph{Geographic distance:} Geographic distances were calculated as pairwise distances among sample locations using the great circle route as well as the latitude and longitude recorded in the GOS sample metadata. We used log-transformed geographic distances in correlation analyses so as to not give undue weight to very large distances.
+
+\paragraph{Environmental factors:} We extracted salinity, sample depth, chlorophyll level, temperature and water depth from the GOS metadata \cite{rusch_sorcerer_2007}, and these values are shown in Table S8. Total incident solar insolation at the surface was obtained from the NASA Surface meteorology and Solar Energy (SSE, \url{http://eosweb.larc.nasa.gov/sse/}) Release 6.0 Data Set (Jan 2008) 22-year Monthly $\&$ Annual Average (July 1983 - June 2005). Missing environmental values were estimated as the average value for the respective variable.  We used the square root of water depth in correlation analyses to avoid over-weighting samples taken over the very deep ocean. 
+
+\subsection{Non-negative matrix factorization (NMF)}
+
+If we have $p$ Pfams and $s$ samples, then the size of the profile matrix $X$ is $p\times s$. NMF decomposition finds matrices $W$ and $H$, (with dimension $p \times k$ and $k\times s$, respectively, where $k$ is the \emph{rank} of our factorization) such that $WH \approx X$. We search for non-negative approximations that minimize the Kullback--Leibler (KL) divergence between $X$ and $WH$ \cite{lee_learning_1999, brunet_metagenes_2004}. 
+
+\paragraph{Selecting the rank for NMF decomposition:} We have introduced a method based on the $H$ matrix for choosing an appropriate rank ($k$) for NMF analysis in the presence of overlap \cite{jiang_non-negative_2012}. Approximate factorizations are typically found iteratively from a random starting point \cite{lee_learning_1999}, and rank is often chosen based on the stability of different realizations of this process. We constructed a symmetric similarity matrix $S = {\hat H}^T \hat H$, where $\hat H$ was column-normalized so that $S$ had ones down the diagonal; thus each off-diagonal entry gave the similarity of two samples as seen by our NMF decomposition. We then defined the ``concordance index" $C = 1-D$, where $D$ was the mean squared difference between off-diagonal entries of $S_j$ obtained from different realizations of the decomposition \cite{jiang_non-negative_2012}. The concordance index $C$ reflected the stability of this matrix across different realizations of the factorization, and was used to select a good decomposition rank $k$. 
+
+\paragraph{Normalization of $H$ and $W$:} Appropriate normalizations are employed for different purposes. In order to construct sites and Pfams similarity matrices from the results of NMF, we normalize the columns of $H$ (which are sites) and the rows of $W$  (which are Pfams) respectively so that each similarity matrix has ones down the diagonal. 
+
+\paragraph{Spectral reordering:} To investigate the clustering patterns of samples and Pfams, we employed spectral reordering instead of clustering technology because spectral reordering offers an attractive alternative for clustering \cite{maetschke_visual_2010}. We treated the symmetric, positive, similarity matrix $S = {\hat H}^T \hat H$ as a weighted graph-adjacency matrix, and applied spectral reordering after an ``affinity" transformation \cite{maetschke_visual_2010}. Choosing the scale $r$ of the affinity transformation is a complex problem \cite{zelnik2004self, alzate_multiway_2010}. We chose the value of $r$ that minimized the Laplacian distance criterion for the untransformed matrix.
+
+\subsection{Selecting Pfam similarity groups}
+
+We and others \cite{jiang_non-negative_2012, kim_sparse_2007} have used specificity-based methods (i.e., $W$-based) to select observed elements similar to NMF basis elements. Specificity-based methods, however, can be sensitive to sampling density (under-sampled Pfams will have a tendency to look specific). Here, therefore, we instead proposed two methods based on similarity and correlation respectively. Given a Pfam $f$ and a component $h$, we defined the similarity between them as $\theta_{fh} = \bar f \cdot \bar h$, where $\bar f$ and $\bar h$ denoted the normalization of them by their Euclidean norms.  n the ``correlation" method, we used the Pearson correlation coefficient for the correlation between a component profile and a Pfam profile. We found that the correlation method was better than specificity- and similarity-based methods in selecting Pfams. To investigate the possible function of components, we selected the 100 most strongly associated Pfams for each component to investigate their known functions. 
+
+\subsection{Measuring functional distance between sites}
+
+We propose a method for measuring sample distance based on NMF filtering of Pfam profiles. The matrix $H$ gives the coefficients that approximate each site's functional profile as a linear combination of site profiles.  We thus used Euclidean distances between columns of the normalized matrix $\hat H$ as a measure of functional distance. We called functional distance calculated using $H$ a ``filtered" functional distance.  We also calculated ``unfiltered" distances, based on Euclidean distances between columns of the original Pfam matrix $X$.
+
+\subsection{Mantel statistics and permutation tests}
+
+Mantel tests are used to test the significance of correlations between dissimilarity or distance matrices, while controlling for underlying correlation structure. The statistical method is widely used in ecology studies to test the linear or monotonic independence of the elements in two distance matrices \cite{martiny_microbial_2006, raes_toward_2011}. Furthermore, a recent study suggested that Mantel test is a robust and powerful tool to be used in ecological analysis \cite{borcard_is_2012}. The ``ecodist" and ``vegan" packages in {\tt R} were used to compute Euclidean distance for the Mantel and partial Mantel statistical analysis. 999 permutations in each test were used to obtain the p-value. 
+
+\subsection{Pfam function mining}
+
+Pfams within the 5 components were manually inspected for possible trends and common functions by looking at the Pfam annotations as well as Gene Ontology annotations using Pfam2GO.
+
+\subsection{Scripts and data}
+
+All of the data and scripts used in our analysis are available at \url{http://yushan.mcmaster.ca/theobio/GOS_NMF/}.
+
