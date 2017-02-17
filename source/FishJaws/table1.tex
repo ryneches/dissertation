@@ -1,0 +1,20 @@
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+% \usepackage{multirow}
+\begin{table}[]
+\centering
+\begin{tabular}{@{}c|c|ccccc@{}}
+\toprule
+Model & Prey & Rates & Overall & Non-pharyn. & Pharyn. & AIC score \\ \midrule
+\multirow{4}{*}{\textit{\begin{tabular}[c]{@{}c@{}}Brownian\\ motion\end{tabular}}} & \multirow{2}{*}{Fish} & One & 75.06 & - & - & 9,031.9 \\
+ &  & Two & - & 85.55 & 1.88 & 8,738.9 \\
+ & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Processing-\\ intensive\end{tabular}} & One & 24.67 & - & - & 8,085.1 \\
+ &  & Two & - & 20.2 & 55.59 & 8,025.8 \\
+\multirow{4}{*}{\textit{\begin{tabular}[c]{@{}c@{}}Stochastic\\ character\\ mapping\end{tabular}}} & \multirow{2}{*}{Fish} & One & $6.689 \times 10^{-03}$ & - & - & 958.9 \\
+ &  & Two & - & $7.96 \times 10^{-03}$ & $9.95 \times 10^{-04}$ & 938.4 \\
+ & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Processing-\\ intensive\end{tabular}} & One & $4.624 \times 10^{-03}$ & - & - & 844.9 \\
+ &  & Two & - & $4.029 \times 10^{-03}$ & $1.14 \times 10^{-02}$ & 836.3 \\ \bottomrule
+\end{tabular}
+\caption{AIC model comparisons}
+\label{FJ_table1}
+\end{table}
