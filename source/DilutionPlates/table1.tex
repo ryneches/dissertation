@@ -1,0 +1,26 @@
+\begin{table}[]
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Operaiton} & \textbf{Time (human)} & \textbf{Time (robot)} \\ \midrule
+switch pipetters & 3 & - \\
+look up sample in table & 5 & - \\
+read buffer volume from table & 5 & - \\
+set buffer volume & 10 & - \\
+pipette from buffer & 10 & 10 \\
+positon at reaction plate & 2 & 4 \\
+pipette to reaction plate & 3 & 10 \\
+switch pipetters & 3 & - \\
+read sample DNA volume table & 5 & - \\
+set sample volume & 10 & - \\
+pick up clean tip & 2 & 4 \\
+position at sample plate & 2 &  \\
+pipette from sample plate & 10 & 10 \\
+position at reaction plate & 2 & 4 \\
+pipette to reaction plate & 5 & 10 \\
+eject used tip & 3 & 4 \\ \midrule
+\textbf{Total} & \textbf{80} & \textbf{56} \\ \bottomrule
+\end{tabular}
+\caption{\textbf{Detailed breakdown of operations for DNA sample normalization.} These times are based on personal observations; there are no doubt technicians who can work faster than I can, and there are no doubt robots that are faster than the ones I have observed. Nevertheless, these times should serve as a reasonable estimate of how quickly a technician working carefully would work over the course of a session.}
+\label{DP_table1}
+\end{table}
