@@ -45,7 +45,7 @@ var dataset = {
     // software tools
     {source: 1,  target: 11, name: 'software tools'},
     {source: 1,  target: 2,  name: 'software tools'},
-    {source: 1,  target: 14, name: 'software tools'},
+    {source: 14, target: 1,  name: 'software tools'},
     // lab methods
     {source: 13,  target: 2, name: 'lab methods'},
     // hardware
