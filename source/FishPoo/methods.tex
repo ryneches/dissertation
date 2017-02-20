@@ -1,0 +1,52 @@
+\section{Materials \& Methods}
+
+### Build OTU table, sample metadata and host tree
+
+After much frustration, I've decided to abandon [`QIIME`](http://qiime.org/)
+in favor of a simpler, more direct approach. I think this approach will be 
+more useful to researchers who are pursuing novel statistical and phylogenetic
+treatments of community amplicon data. 
+
+I use [`vsearch`](https://github.com/torognes/vsearch) to perform chimera
+checking and to cluster the data into OTUs. This step goes a lot faster if
+a reference database of full-length 16S genes is used (I suggest the 
+[`SILVA SSU Ref`](http://www.arb-silva.de/download/arb-files/) database, 
+but it probably doesn't matter very much which one is used). The rest of 
+the analysis is reference-free, so there is perhaps an interest in running
+the chimera checking step *de novo*.
+
+Then I use [`ssu-align`](http://selab.janelia.org/software/ssu-align/) to build an
+alignment of all cluster centroids. Those who are not targeting an rRNA gene
+should use an alignment method appropriate to their gene(s) of interest, 
+such as [`LAST`](http://last.cbrc.jp/) for protein coding genes. Then, I build
+a maximum likelihood tree with [`RAxML`](https://github.com/stamatak/standard-RAxML).
+
+This analysis assumes you already have a tree for the host organisms. For my
+study, I'm using a subset of  [rate-smoothed mega-phylogeny of actinopterygiians by
+Rabosky *et al.*](http://datadryad.org/resource/doi:10.5061/dryad.j4802/1)
+with a few substitutions for sister taxa that were not available.
+
+A table of OTU counts is then constructed as a `pandas` DataFrame. Next, we load the
+sample metadata as a DataFrame, which we use to drop the control samples and the other
+experiments, and to merge the OTU counts for samples that have the same host species.
+
+Last, we use rpy2 to import the host phylogeny. This is silly, but all of the tests 
+for phylogenetic signal are in R, so we need to have the host tree as an R object.
+
+Questions :
+* Co-diversivtion or reciprocal adaptation?
+
+Required software :
+* [`vsearch`](https://github.com/torognes/vsearch)
+* [`ssu-align`](http://selab.janelia.org/software/ssu-align/)
+* [`RAxML`](https://github.com/stamatak/standard-RAxML)
+
+Required databases :
+* [`SILVA SSU Ref`](http://www.arb-silva.de/download/arb-files/)
+
+Required python packages :
+* `pandas`
+* `seaborn`
+* `dendropy`
+* `scikit-bio`
+* `ete2`
