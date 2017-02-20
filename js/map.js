@@ -6,7 +6,7 @@ var h = window.innerHeight - 60;
 var linkDistance = Math.min(w, h) / 3;
 
 var colors = d3.scale.ordinal().range(["#79BED9","#A7E4F2","#618C70","#BFB960","#A6A053"]);
-var edgeColor = '#AEBFD4';
+var edgeColor = '#36454F';
 
 var dataset = {
   nodes: [
@@ -23,7 +23,8 @@ var dataset = {
     /* 10 */ {name: "uLakes",          url: "http://onlinelibrary.wiley.com/doi/10.1111/mec.13463/full"},
     /* 11 */ {name: "Pique",           url: "https://peerj.com/preprints/290/"},
     /* 12 */ {name: "SaltyBugs",       url: "http://nar.oxfordjournals.org/content/40/10/e74.full"},
-    /* 13 */ {name: "SterilePrinting", url: "https://peerj.com/articles/2661/"}
+    /* 13 */ {name: "SterilePrinting", url: "https://peerj.com/articles/2661/"},
+    /* 14 */ {name: "Shand",           url: "https://github.com/ryneches/Shand/"}
   ],
   edges: [
     // cichlids
@@ -32,6 +33,8 @@ var dataset = {
     {source: 0,  target: 10, name: 'cichlids'},
     {source: 1,  target: 10, name: 'cichlids'},
     {source: 1,  target: 9,  name: 'cichlids'},
+    {source: 0,  target: 14, name: 'cichlids'},
+    {source: 1,  target: 14, name: 'cichlids'},
     // trait matrixes
     {source: 1,  target: 6,  name: 'trait matrixes'},
     {source: 0,  target: 6,  name: 'trait matrixes'},
@@ -42,6 +45,7 @@ var dataset = {
     // software tools
     {source: 1,  target: 11, name: 'software tools'},
     {source: 1,  target: 2,  name: 'software tools'},
+    {source: 1,  target: 14, name: 'software tools'},
     // lab methods
     {source: 13,  target: 2, name: 'lab methods'},
     // hardware
