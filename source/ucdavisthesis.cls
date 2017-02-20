@@ -259,7 +259,8 @@
   \thispagestyle{thshead}   % Page style of part page is 'thshead'
     \@tempswafalse          % @tempswa := false
   \null\vfil                % Add fil glue to center title
-  \bgroup  \centering       % BEGIN centering
+  %\bgroup  \centering       % BEGIN centering
+  \bgroup \begin{center}
   \secdef\@part\@spart}
 \def\@part[#1]#2{\ifnum \c@secnumdepth >-2\relax  % IF secnumdepth > -2
      \refstepcounter{part}%                    %   THEN step part counter
@@ -275,7 +276,7 @@
   \fi
   \huge\bfseries #2\par\@endpart}   % Print Title in \huge bold.
 \def\@spart#1{\normalsize\bfseries #1\par\@endpart} %
-\def\@endpart{\vfil\newpage              % End page with 1fil glue.
+\def\@endpart{\end{center}\vfil\newpage              % End page with 1fil glue.
   \if@twoside
     \if@openright
       \null
