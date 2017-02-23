@@ -2,8 +2,7 @@
 
 \subsection{Gut community structure in fish, and cichlids in particular}
 
-Here are some papers that examine the gut microbiome of fish, including
-African cichlids.
+Here are some papers that examine the gut microbiome of fish, including African cichlids.
 
 [Bacterial community structure in the intestinal ecosystem of rainbow trout (Oncorhynchus mykiss) as revealed by pyrosequencing-based analysis of 16S rRNA genes](http://dx.doi.org/10.1016/j.rvsc.2015.03.026). *Research in veterinary science*, Vol. 100 (June 2015), pp. 8-11 by Miray Etyemez, José Luis L. Balcázar
 
@@ -14,9 +13,10 @@ African cichlids.
 
 \subsection{On phylogenetic signal}
 
+in {\em Analysis of phylogenetics and evolution with {\tt R}} (p. 236), Emmanuael Paradis describes phylogenetic signal as follows :
+
 \begin{quote}
-The concept of phylogenetic signal is at the heart of most phylogenetic methods. From a statistical point of view, a phylogenetic signal is  defined by the non-null covariances (i.e., non-independence) among species. From a biological point of view, phylogenetic signal is a direct consequence of the evolution of traits and its form will depend on the evolutionary mechanisms in action.\\
-Emmanuael Paradis, {\em Analysis of phylogenetics and evolution with {\tt R}}, p. 236
+The concept of phylogenetic signal is at the heart of most phylogenetic methods. From a statistical point of view, a phylogenetic signal is  defined by the non-null covariances (i.e., non-independence) among species. From a biological point of view, phylogenetic signal is a direct consequence of the evolution of traits and its form will depend on the evolutionary mechanisms in action.
 \end{quote}
 
 \section{On cospeciation}
@@ -42,15 +42,14 @@ host and parasite evolution is parallel, and they look for likely violations
 
 Later on, I found that scikit-bio implements a function called [`hommola_cospeciation`](http://scikit-bio.org/docs/latest/generated/generated/skbio.stats.evolve.hommola_cospeciation.html), which led me to this paper :
 
-* [A Permutation Test of Host–Parasite Cospeciation](http://dx.doi.org/10.1093/molbev/msp062). *Molecular Biology and Evolution*, Vol. 26, No. 7. (01 July 2009), pp. 1457-1468, by Kerstin Hommola, Judith E. Smith, Yang Qiu, Walter R. Gilks
+* A Permutation Test of Host–Parasite Cospeciation. Molecular Biology and Evolution, Vol. 26, No. 7. (01 July 2009), pp. 1457-1468, by Kerstin Hommola, Judith E. Smith, Yang Qiu, Walter R. Gilks
 
-Hommola {\em et al.} describe a method extends the 
-[Mantel test](https://en.wikipedia.org/wiki/Mantel_test). The Mantel test
+Hommola {\em et al.} describe a method extends the Mantel test. \cite{mantel1967detection} The Mantel test
 requires matrixes of identical dimensions, and so when it is used for 
 co-speciation, the two trees must have the same number of memembers. When
 they don't, past studies have deleted or duplicated taxa, which results in
 anomalous results (the paper makes a direct comparison to such methods).
-To address this issue, Hommola {\em et al.} propose an approach that measures
+To address this issue, Hommola {\em et al.} \cite{hommola2009permutation} propose an approach that measures
 correlations like the Mantel test, but does not require identical matrix
 dimensions. They then couple this with a straightforward permutation test 
 to estimate the significance of the correlations.
