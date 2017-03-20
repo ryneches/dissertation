@@ -12,9 +12,9 @@
 
 Adapter removal, quality trimming and overlap alignment is performed using Trimmomatic.
 
-Chimera checking with [`vsearch`](https://github.com/torognes/vsearch)
+Chimera checking with {\tt vsearch}
 
-Unique reads are identified using hat-trie
+Unique reads are identified using {\tt hat-trie}
 
 A table of observation counts is constructed as a {\tt Pandas} {\tt DataFrame}object, and a count threshold is applied. Tables of raw counts and normalized counts are written as comma separated value files, and the corresponding sequences are written as a FASTA file.
 
@@ -30,7 +30,8 @@ The host tree and guest tree are loaded as {\tt SuchTree} objects, and linked to
 
 \subsection{Correlation-based analysis}
 
-For each clade of guest organisms, the {\tt SuchLinkedTrees.linked_distances} function is used to calculate the pairwise distances through the host and guest trees for every pair of non-null observations in the link matrix, as described by Hommola {\em et al.} \cite{hommola2009permutation} The Pierson's correlation for these distances is computed using the {\tt pearsonr} function from {\tt scipy.stats}.
+For each clade of guest organisms, the {\tt SuchLinkedTrees.linked\_distances} function is used to calculate the pairwise distances through the host and guest trees for every pair of non-null observations in the link matrix, as described by Hommola {\em et al.} \cite{hommola2009permutation} The Pierson's correlation for these distances is computed using the {\tt pearsonr} function from {\tt scipy.stats}.
 
-\subsection{Comparative analysis}
+\subsection{Literature search for comparative analysis}
 
+\subsection{Spectral density analysis}
