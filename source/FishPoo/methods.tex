@@ -1,52 +1,36 @@
 \section{Materials \& Methods}
 
-### Build OTU table, sample metadata and host tree
+\subsection{Specimen collection and housing}
 
-After much frustration, I've decided to abandon [`QIIME`](http://qiime.org/)
-in favor of a simpler, more direct approach. I think this approach will be 
-more useful to researchers who are pursuing novel statistical and phylogenetic
-treatments of community amplicon data. 
+\subsection{Sample collection}
 
-I use [`vsearch`](https://github.com/torognes/vsearch) to perform chimera
-checking and to cluster the data into OTUs. This step goes a lot faster if
-a reference database of full-length 16S genes is used (I suggest the 
-[`SILVA SSU Ref`](http://www.arb-silva.de/download/arb-files/) database, 
-but it probably doesn't matter very much which one is used). The rest of 
-the analysis is reference-free, so there is perhaps an interest in running
-the chimera checking step *de novo*.
+\subsection{Sample preparation and processing}
 
-Then I use [`ssu-align`](http://selab.janelia.org/software/ssu-align/) to build an
-alignment of all cluster centroids. Those who are not targeting an rRNA gene
-should use an alignment method appropriate to their gene(s) of interest, 
-such as [`LAST`](http://last.cbrc.jp/) for protein coding genes. Then, I build
-a maximum likelihood tree with [`RAxML`](https://github.com/stamatak/standard-RAxML).
+\subsection{Sequencing}
 
-This analysis assumes you already have a tree for the host organisms. For my
-study, I'm using a subset of  [rate-smoothed mega-phylogeny of actinopterygiians by
-Rabosky *et al.*](http://datadryad.org/resource/doi:10.5061/dryad.j4802/1)
-with a few substitutions for sister taxa that were not available.
+\subsection{Building the observation table}
 
-A table of OTU counts is then constructed as a `pandas` DataFrame. Next, we load the
-sample metadata as a DataFrame, which we use to drop the control samples and the other
-experiments, and to merge the OTU counts for samples that have the same host species.
+Adapter removal, quality trimming and overlap alignment is performed using Trimmomatic.
 
-Last, we use rpy2 to import the host phylogeny. This is silly, but all of the tests 
-for phylogenetic signal are in R, so we need to have the host tree as an R object.
+Chimera checking with [`vsearch`](https://github.com/torognes/vsearch)
 
-Questions :
-* Co-diversivtion or reciprocal adaptation?
+Unique reads are identified using hat-trie
 
-Required software :
-* [`vsearch`](https://github.com/torognes/vsearch)
-* [`ssu-align`](http://selab.janelia.org/software/ssu-align/)
-* [`RAxML`](https://github.com/stamatak/standard-RAxML)
+A table of observation counts is constructed as a {\tt Pandas} {\tt DataFrame}object, and a count threshold is applied. Tables of raw counts and normalized counts are written as comma separated value files, and the corresponding sequences are written as a FASTA file.
 
-Required databases :
-* [`SILVA SSU Ref`](http://www.arb-silva.de/download/arb-files/)
+\subsection{Building phylogeny of OTUs}
 
-Required python packages :
-* `pandas`
-* `seaborn`
-* `dendropy`
-* `scikit-bio`
-* `ete2`
+Alignment of the observed sequences is performed using {\tt Clustal Omega}, and an approximate maximum likelihood phylogeny is constructed using {\tt FastTree}.
+
+\subsection{Building phylogeny of hosts}
+
+\subsection{Processing co-phylogenies with {\tt SuchTree}}
+
+The host tree and guest tree are loaded as {\tt SuchTree} objects, and linked together through the observation table as a {\tt SuchLinkedTrees} object. The {\tt SuchTree} class allows for extremely rapid traversals of large trees, enabling distance correlations to be efficiently computed. The {\tt SuchLinkedTrees} class leverages this to compute graph adjacency and graph Laplacian matrixes of subtrees of host and guest phylogenies. Spectral decomposition and kernel densities of graph Laplacians are computed using {\tt numpy}, and the Jensen-Shannon divergence is calculated between each pair of spectral densities using the {\tt entropy} function in {\tt scipy.stats}. UPGMA clustering is performed using {\tt scipy.cluster.hierarchy.linkage}.
+
+\subsection{Correlation-based analysis}
+
+For each clade of guest organisms, the {\tt SuchLinkedTrees.linked_distances} function is used to calculate the pairwise distances through the host and guest trees for every pair of non-null observations in the link matrix, as described by Hommola {\em et al.} \cite{hommola2009permutation} The Pierson's correlation for these distances is computed using the {\tt pearsonr} function from {\tt scipy.stats}.
+
+\subsection{Comparative analysis}
+
