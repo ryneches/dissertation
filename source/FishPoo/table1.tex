@@ -1,6 +1,7 @@
 \begin{table}[]
 \centering
-\begin{tabular}{@{}llcl@{}}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}lccl@{}}
 \toprule
 \textbf{Organism} & \textbf{NCBI Taxonomy ID} & \textbf{Individuals} & \textbf{Diet} \\ \midrule
 \textit{Chalinochromis brichardi} & 34794 & 1 & Algae \\
@@ -17,7 +18,9 @@
 \textit{Plecodus straeleni} & 167846 & 1 & Scales \\
 \textit{Perissodus microlepis} & 32509 & 1 & Scales \\
 \textit{Reganochromis calliurus} & 70788 & 1 & Shrimp \\ \bottomrule
-\end{tabular}
-\caption{My caption}
+\end{tabular}%
+}
+\caption{NCBI Taxonomy identifier, number of individuals and diet of
+fishes used in this study.}
 \label{FP_table1}
 \end{table}

@@ -2,6 +2,15 @@
 
 \subsection{Specimen collection and housing}
 
+\subfile{FishPoo/figure1}
+\subfile{FishPoo/table1}
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{FishPoo/figures/mcgee_tree.pdf}
+    \caption{A maximum likelihood phylogeny of the host organisms.}
+    \label{FP_host_tree}
+\end{figure}
+
 \subsection{Sample collection}
 
 \subsection{Sample preparation and processing}
@@ -21,6 +30,12 @@ A table of observation counts is constructed as a {\tt Pandas} {\tt DataFrame}ob
 \subsection{Building phylogeny of OTUs}
 
 Alignment of the observed sequences is performed using {\tt Clustal Omega}, and an approximate maximum likelihood phylogeny is constructed using {\tt FastTree}.
+
+\begin{figure}
+    \includegraphics[width=\textwidth]{FishPoo/figures/fishpoo_tree.png}
+    \caption{An approximate maximum likelihood phylogeny of the guest organisms.}
+    \label{FP_guest_tree}
+\end{figure}
 
 \subsection{Building phylogeny of hosts}
 

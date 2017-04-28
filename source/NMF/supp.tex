@@ -69,8 +69,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!ht]
 \centering
- \subfigure{\includegraphics[width=2.8in]{NMF/figures/figS6a}}
- \subfigure{\includegraphics[width=2.8in]{NMF/figures/figS6b}} 
+    \begin{subfigure}[t]{2.8in}
+        \includegraphics[width=2.8in]{NMF/figures/figS6a}
+    \end{subfigure}
+    \begin{subfigure}[t]{2.8in}
+        \includegraphics[width=2.8in]{NMF/figures/figS6b}
+    \end{subfigure} 
  \caption{A comparison of Pfam selection methods.  For each selection method, we show the distribution of how many sites selected Pfams are found in.  Pfams that are selected by both methods in each panel are shown in purple.  Choosing by projection or specificity gives a strong bias towards Pfams found in only a few sites, while choosing based on similarity gives a strong bias towards those found in many sites.  Correlation gives a more balanced result.}
  \label{sitedist}
 \end{figure}
@@ -78,11 +82,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!ht]
 \centering
- \subfigure{\includegraphics[width=2in]{NMF/figures/figS7a}}
- \subfigure{\includegraphics[width=2in]{NMF/figures/figS7b}}
- \subfigure{\includegraphics[width=2in]{NMF/figures/figS7c}}\\
- \subfigure{\includegraphics[width=2in]{NMF/figures/figS7d}}
- \subfigure{\includegraphics[width=2in]{NMF/figures/figS7e}}
+ \begin{subfigure}[t]{2in}
+    \includegraphics[width=2in]{NMF/figures/figS7a}
+ \end{subfigure}
+ \begin{subfigure}[t]{2in}
+    \includegraphics[width=2in]{NMF/figures/figS7b}
+ \end{subfigure}
+ \begin{subfigure}[t]{2in}
+    \includegraphics[width=2in]{NMF/figures/figS7c}
+ \end{subfigure}\\
+ \begin{subfigure}[t]{2in}
+    \includegraphics[width=2in]{NMF/figures/figS7d}
+ \end{subfigure}
+ \begin{subfigure}[t]{2in}
+    \includegraphics[width=2in]{NMF/figures/figS7e}
+ \end{subfigure}
  \caption{For each component, the distribution of correlation coefficients between Pfam distributions across sites and the site profile associated with the component.  These are precisely the values we used to select the top 100 Pfams associated with each component.}
  \label{simHist}
 \end{figure}
@@ -90,10 +104,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[!ht]
 \centering
- \subfigure{\includegraphics[width=2.8in]{NMF/figures/figS8a}}
- \subfigure{\includegraphics[width=2.8in]{NMF/figures/figS8b}}
- \subfigure{\includegraphics[width=2.8in]{NMF/figures/figS8c}}
- \subfigure{\includegraphics[width=2.8in]{NMF/figures/figS8d}}
+ \begin{subfigure}[t]{2.8in}
+    \includegraphics[width=2.8in]{NMF/figures/figS8a}
+ \end{subfigure}
+ \begin{subfigure}[t]{2.8in}
+    \includegraphics[width=2.8in]{NMF/figures/figS8b}
+ \end{subfigure}
+ \begin{subfigure}[t]{2.8in}
+    \includegraphics[width=2.8in]{NMF/figures/figS8c}
+ \end{subfigure}
+ \begin{subfigure}[t]{2.8in}
+    \includegraphics[width=2.8in]{NMF/figures/figS8d}
+ \end{subfigure}
  \caption{Biogeographic analysis using rank 4 and rank 6 non-negative factorization. Left: Environmental distance vs. functional distance; The partial correlation coefficients between them conditional to logged geographic distance are 0.424 ($P<0.001$) and 0.46 ($P<0.001$) respectively, see (a) and (b). Right: Logged geographic distance vs. functional distance.The partial correlation coefficients between them conditional to environmental distance are 0.137($P<0.004$) and 0.147 ($P<0.003$) respectively, see (c) and (d). }
  \label{scatterplot}
 \end{figure}

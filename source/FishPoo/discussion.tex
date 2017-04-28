@@ -4,45 +4,47 @@
 
 Here are some papers that examine the gut microbiome of fish, including African cichlids.
 
-[Bacterial community structure in the intestinal ecosystem of rainbow trout (Oncorhynchus mykiss) as revealed by pyrosequencing-based analysis of 16S rRNA genes](http://dx.doi.org/10.1016/j.rvsc.2015.03.026). *Research in veterinary science*, Vol. 100 (June 2015), pp. 8-11 by Miray Etyemez, José Luis L. Balcázar
+%[Bacterial community structure in the intestinal ecosystem of rainbow trout (Oncorhynchus mykiss) as revealed by pyrosequencing-based analysis of 16S rRNA genes](http://dx.doi.org/10.1016/j.rvsc.2015.03.026). *Research in veterinary science*, Vol. 100 (June 2015), pp. 8-11 by Miray Etyemez, José Luis L. Balcázar
 
-[Perturbation and restoration of the fathead minnow gut microbiome after low-level triclosan exposure](http://dx.doi.org/10.1186/s40168-015-0069-6). *Microbiome*, Vol. 3 (2015), by Adrienne B. Narrowe, Munira Albuthi-Lantz, Erin P. Smith, et al.
+%[Perturbation and restoration of the fathead minnow gut microbiome after low-level triclosan exposure](http://dx.doi.org/10.1186/s40168-015-0069-6). *Microbiome*, Vol. 3 (2015), by Adrienne B. Narrowe, Munira Albuthi-Lantz, Erin P. Smith, et al.
 
-[Gut Microbiota Dynamics during Dietary Shift in Eastern African Cichlid Fishes](http://dx.doi.org/10.1371/journal.pone.0127462). *PLoS ONE*, Vol. 10, No. 5. (15 May 2015), e0127462, by Laura Baldo, Joan L. Riera, Ave Tooming-Klunderud, Mar M. Albà, Walter Salzburger
-
+%[Gut Microbiota Dynamics during Dietary Shift in Eastern African Cichlid Fishes](http://dx.doi.org/10.1371/journal.pone.0127462). *PLoS ONE*, Vol. 10, No. 5. (15 May 2015), e0127462, by Laura Baldo, Joan L. Riera, Ave Tooming-Klunderud, Mar M. Albà, Walter Salzburger
 
 \subsection{On phylogenetic signal}
 
 in {\em Analysis of phylogenetics and evolution with {\tt R}} (p. 236), Emmanuael Paradis describes phylogenetic signal as follows :
 
 \begin{quote}
-The concept of phylogenetic signal is at the heart of most phylogenetic methods. From a statistical point of view, a phylogenetic signal is  defined by the non-null covariances (i.e., non-independence) among species. From a biological point of view, phylogenetic signal is a direct consequence of the evolution of traits and its form will depend on the evolutionary mechanisms in action.
+The concept of phylogenetic signal is at the heart of most phylogenetic methods. From a statistical point of view, a phylogenetic signal is defined by the non-null covariances (i.e., non-independence) among species. From a biological point of view, phylogenetic signal is a direct consequence of the evolution of traits and its form will depend on the evolutionary mechanisms in action.
 \end{quote}
+
+\subfile{FishPoo/figure4}
 
 \section{On cospeciation}
 
 One of the classic datasets for cospeciation methods is probably the paper by 
-Hafner *et al.* from 1994 in which they look at the relationship between pocket
+Hafner {\em et al.} from 1994 in which they look at the relationship between pocket
 gophers and the lice that specialize. 
 
-* [Hafner, M. S. et al. Disparate rates of molecular evolution in cospeciating hosts and parasites. *Science (New York, N.Y.)* (1994).](http://www.calpoly.edu/~bio/LMOE/pdfs/Hafner%20et%20al.%201994.pdf)
+%* [Hafner, M. S. et al. Disparate rates of molecular evolution in cospeciating hosts and parasites. *Science (New York, N.Y.)* (1994).](http://www.calpoly.edu/~bio/LMOE/pdfs/Hafner%20et%20al.%201994.pdf)
 
 I was sort of interested in trying this randomization-based method by Balbuena 
-*et al.*, but Michael Turelli thinks the method may be lousy ("*ad hoc*") and 
+{\em et al.}, but Michael Turelli thinks the method may be lousy (``{\em ad hoc}'') and 
 that null hypothesis (hosts and parasites independently evolving).
 
-* [Balbuena, J. A., Míguez-Lozano, R. & Blasco-Costa, I. PACo: A novel procrustes application to cophylogenetic analysis. *PLoS ONE* (2013).](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0061048)
+%* [Balbuena, J. A., Míguez-Lozano, R. & Blasco-Costa, I. PACo: A novel procrustes application to cophylogenetic analysis. *PLoS ONE* (2013).](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0061048)
 
-Turelli suggested this paper by Huelsenbeck *et al.* which uses a Bayesian
+Turelli suggested this paper by Huelsenbeck {\em et al.} which uses a Bayesian
 framework to analyze the same data. In this paper, the null hypothesis is that
 host and parasite evolution is parallel, and they look for likely violations
 (i.e., host-switching events).
 
-* [Huelsenbeck, J. P., Rannala, B. & Larget, B. A bayesian framework for the analysis of cospeciation. *Evolution* (2000).](http://www.ncbi.nlm.nih.gov/pubmed/10937213)
+%* [Huelsenbeck, J. P., Rannala, B. & Larget, B. A bayesian framework for the analysis of cospeciation. *Evolution* (2000).](http://www.ncbi.nlm.nih.gov/pubmed/10937213)
 
-Later on, I found that scikit-bio implements a function called [`hommola_cospeciation`](http://scikit-bio.org/docs/latest/generated/generated/skbio.stats.evolve.hommola_cospeciation.html), which led me to this paper :
+Later on, I found that {\tt scikit-bio} implements a function called {\tt hommola_cospeciation} %[`hommola_cospeciation`](http://scikit-bio.org/docs/latest/generated/generated/skbio.stats.evolve.hommola_cospeciation.html),
+which led me to this paper :
 
-* A Permutation Test of Host–Parasite Cospeciation. Molecular Biology and Evolution, Vol. 26, No. 7. (01 July 2009), pp. 1457-1468, by Kerstin Hommola, Judith E. Smith, Yang Qiu, Walter R. Gilks
+%* A Permutation Test of Host–Parasite Cospeciation. Molecular Biology and Evolution, Vol. 26, No. 7. (01 July 2009), pp. 1457-1468, by Kerstin Hommola, Judith E. Smith, Yang Qiu, Walter R. Gilks
 
 Hommola {\em et al.} describe a method extends the Mantel test. \cite{mantel1967detection} The Mantel test
 requires matrixes of identical dimensions, and so when it is used for 
@@ -72,12 +74,12 @@ now that we've used Hommola's test to reject most parts of the OTU tree, it
 should be possible to apply Huelsenbeck *et al.* to the much smaller OTU 
 clades that show statistically significant phylogenetic concordance. There
 are other tests that may be intersting, though, such as the `TreeKO` method
-implemented in [`ete2`](http://etetoolkit.org/docs/latest/tutorial/tutorial_phylogeny.html#treeko-splitting-gene-trees-into-species-trees) :
+implemented in {\tt ete2} %[`ete2`](http://etetoolkit.org/docs/latest/tutorial/tutorial_phylogeny.html#treeko-splitting-gene-trees-into-species-trees) :
 
-* [TreeKO: a duplication-aware algorithm for the comparison of phylogenetic trees](http://nar.oxfordjournals.org/content/39/10/e66.long) *Nucleic Acids Research*, Vol. 39, No. 10. (01 May 2011), pp. e66-e66, doi:10.1093/nar/gkr087 by Marina Marcet-Houben, Toni Gabaldón
+%* [TreeKO: a duplication-aware algorithm for the comparison of phylogenetic trees](http://nar.oxfordjournals.org/content/39/10/e66.long) *Nucleic Acids Research*, Vol. 39, No. 10. (01 May 2011), pp. e66-e66, doi:10.1093/nar/gkr087 by Marina Marcet-Houben, Toni Gabaldón
 
-At the suggestion of Aaron Darling, I figured I would give 
-[`JPrIME-DLTRS`](https://github.com/arvestad/jprime) (nicknamed `Deleterious`)
+At the suggestion of Aaron Darling, I figured I would give {\tt JPrIME-DLTRS}
+%[`JPrIME-DLTRS`](https://github.com/arvestad/jprime) (nicknamed `Deleterious`)
 a try. It's a 
 
-http://sysbio.oxfordjournals.org/content/63/3/409
+%http://sysbio.oxfordjournals.org/content/63/3/409
