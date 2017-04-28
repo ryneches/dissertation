@@ -20,7 +20,7 @@ The concept of phylogenetic signal is at the heart of most phylogenetic methods.
 
 \subfile{FishPoo/figure4}
 
-\section{On cospeciation}
+\subsection{On cospeciation}
 
 One of the classic datasets for cospeciation methods is probably the paper by 
 Hafner {\em et al.} from 1994 in which they look at the relationship between pocket
@@ -41,7 +41,7 @@ host and parasite evolution is parallel, and they look for likely violations
 
 %* [Huelsenbeck, J. P., Rannala, B. & Larget, B. A bayesian framework for the analysis of cospeciation. *Evolution* (2000).](http://www.ncbi.nlm.nih.gov/pubmed/10937213)
 
-Later on, I found that {\tt scikit-bio} implements a function called {\tt hommola_cospeciation} %[`hommola_cospeciation`](http://scikit-bio.org/docs/latest/generated/generated/skbio.stats.evolve.hommola_cospeciation.html),
+Later on, I found that {\tt scikit-bio} implements a function called {\tt hommola\_cospeciation} %[`hommola_cospeciation`](http://scikit-bio.org/docs/latest/generated/generated/skbio.stats.evolve.hommola_cospeciation.html),
 which led me to this paper :
 
 %* A Permutation Test of Host–Parasite Cospeciation. Molecular Biology and Evolution, Vol. 26, No. 7. (01 July 2009), pp. 1457-1468, by Kerstin Hommola, Judith E. Smith, Yang Qiu, Walter R. Gilks
@@ -64,9 +64,9 @@ What we undertake here is to build a tree of all OTUs associated with our
 fish. We then construct a link matrix from the OTU counts by applying a
 threshold on relative abundance. Then, we traverse the OTU tree, generating
 trees for each clade of OTUs, and subsetting the link matrix to the OTUs
-present. Taken with the host phylogeny, the `hommola_cospeciation` method 
-from `scikit-bio` is applied to these three pieces of data, yielding a 
-Pearson's correlation and a *p*-value based on the permutation test for 
+present. Taken with the host phylogeny, the {\tt hommola\_cospeciation} method 
+from {\tt scikit-bio} is applied to these three pieces of data, yielding a 
+Pearson's correlation and a $p$-value based on the permutation test for 
 each clade of OTUs in the OTU tree.
 
 This approach leaves natural history of the association unexplored. However,
