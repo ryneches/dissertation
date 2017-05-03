@@ -1,22 +1,16 @@
 \section{Discussion}
 
-Some form of co-diversification is probably inevitable in almost any situation in which multiple species remain in ecological contact over evolutionary time. As a result, it is a fairly well-studied topic. 
+Some form of co-diversification is probably inevitable in situations where multiple species remain in ecological contact over evolutionary time. Most of the literature on the topic addresses the co-diversification in one of two ways, depending on the initial assumptions :
 
-{\em Given that co-diversification is known to have occurred, what is the most likely history?}
+\begin{enumerate}
+	\item {\em Given a system in which co-diversification may have occurred, what is the likelihood that it did?}
 
-{\em Given a system in which co-diversification may have occurred, what is the likelihood that it did?}
+	\item {\em Given that co-diversification is known to have occurred, what is the most likely history?}
+\end{enumerate}
 
-{\em Given a system in which there are many opportunities where co-diversification may have occurred, which cases are the most likely?}
+We are interested in learning about the natural history of the system, and so we would like to ask a somewhat enlarged question. {\em Given a system in which there are many opportunities where co-diversification may have occurred, which cases are the most likely?} 
 
 \subsection{Phylogenetic signal and trait-based approaches}
-
-%Here are some papers that examine the gut microbiome of fish, including African cichlids.
-
-%[Bacterial community structure in the intestinal ecosystem of rainbow trout (Oncorhynchus mykiss) as revealed by pyrosequencing-based analysis of 16S rRNA genes](http://dx.doi.org/10.1016/j.rvsc.2015.03.026). *Research in veterinary science*, Vol. 100 (June 2015), pp. 8-11 by Miray Etyemez, José Luis L. Balcázar
-
-%[Perturbation and restoration of the fathead minnow gut microbiome after low-level triclosan exposure](http://dx.doi.org/10.1186/s40168-015-0069-6). *Microbiome*, Vol. 3 (2015), by Adrienne B. Narrowe, Munira Albuthi-Lantz, Erin P. Smith, et al.
-
-%[Gut Microbiota Dynamics during Dietary Shift in Eastern African Cichlid Fishes](http://dx.doi.org/10.1371/journal.pone.0127462). *PLoS ONE*, Vol. 10, No. 5. (15 May 2015), e0127462, by Laura Baldo, Joan L. Riera, Ave Tooming-Klunderud, Mar M. Albà, Walter Salzburger
 
 For each organism that appears among the microbioms of a group of hosts, there exists a pattern of observed associations between the ``guest'' organism and the host organisms. These associations can be treated as traits of the host, and the history of each association can be examined like any phenotypic trait. Alternatively, the tendency to associate (or not) with a host could be treated as a trait distributed over a group of microbial organisms, although it is difficult to imagine how one might demarcate the boundaries between groups. Association with a particular host is more likely to correspond to different traits for more distantly related bacteria, and so it is probably not meaningful to naively apply stochastic trait mapping across all bacterial diversity.
 
@@ -32,66 +26,11 @@ A second disadvantage of trait-based approaches when applied to co-diversifying 
 
 \subfile{FishPoo/figure4}
 
-\subsection{Permutation tests for cospeciation}
+\subsection{Tests for cospeciation}
 
-One of the classic datasets for cospeciation methods is probably the paper by 
-Hafner {\em et al.} from 1994 in which they look at the relationship between pocket
-gophers and the lice that specialize. 
+In what could now be considered a classic paper, Hafner {\em et al.} \cite{hafner1994disparate} examine the relationship between pocket gophers and their chewing louse parasites. This paper addresses there first question using a tree reconciliation test implemented in {\em COMPONENT} by Roderic D. M. Page \cite{page1993genes}. It is, in essence, a parsimony approach; the gene duplication and loss events necessary to achieve topological congruence between two trees are minimized. Hafner {\em et al.} first reject the null hypothesis (independent evolution) by applying the tree reconciliation test among gopher, louse and randomly drawn trees, and then examine rates of nucleotide divergence between the gopher and louse. 
 
-%* [Hafner, M. S. et al. Disparate rates of molecular evolution in cospeciating hosts and parasites. *Science (New York, N.Y.)* (1994).](http://www.calpoly.edu/~bio/LMOE/pdfs/Hafner%20et%20al.%201994.pdf)
+This dataset has since been reanalyzed in many other publications, has become a sort of base-case for co-diversification methods. Notably, Huelsenbeck {\em et al.} introduced the use of Bayesian inference to cospeciation \cite{huelsenbeck2000bayesian}.
 
-I was sort of interested in trying this randomization-based method by Balbuena 
-{\em et al.}, but Michael Turelli thinks the method may be lousy (``{\em ad hoc}'') and 
-that null hypothesis (hosts and parasites independently evolving).
+Hommola {\em et al.} \cite{hommola2009permutation} describe a method extends the Mantel test. \cite{mantel1967detection} The Mantel test is a statistic on the correlation of two matrixes, and requires that the matrixes be of equal rank. When applied to distance matrixes for trees containing differing numbers of taxa, one must delete or duplicate taxa until the matrix ranks are equal. This results in anomalous results which Hommola {\em et al.} explore in detail. To address this issue, they take every pair of linked tips (e.g., a parasite species that is observed to associate with a host species), and examine the correlation of distances through the two trees. This accommodates trees of arbitrary size and arbitrary patterns of association among their tips, and can be coupled with a straightforward permutation test to estimate the significance of the correlations.
 
-%* [Balbuena, J. A., Míguez-Lozano, R. & Blasco-Costa, I. PACo: A novel procrustes application to cophylogenetic analysis. *PLoS ONE* (2013).](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0061048)
-
-Turelli suggested this paper by Huelsenbeck {\em et al.} which uses a Bayesian
-framework to analyze the same data. In this paper, the null hypothesis is that
-host and parasite evolution is parallel, and they look for likely violations
-(i.e., host-switching events).
-
-%* [Huelsenbeck, J. P., Rannala, B. & Larget, B. A bayesian framework for the analysis of cospeciation. *Evolution* (2000).](http://www.ncbi.nlm.nih.gov/pubmed/10937213)
-
-Later on, I found that {\tt scikit-bio} implements a function called {\tt hommola\_cospeciation} %[`hommola_cospeciation`](http://scikit-bio.org/docs/latest/generated/generated/skbio.stats.evolve.hommola_cospeciation.html),
-which led me to this paper :
-
-%* A Permutation Test of Host–Parasite Cospeciation. Molecular Biology and Evolution, Vol. 26, No. 7. (01 July 2009), pp. 1457-1468, by Kerstin Hommola, Judith E. Smith, Yang Qiu, Walter R. Gilks
-
-Hommola {\em et al.} describe a method extends the Mantel test. \cite{mantel1967detection} The Mantel test
-requires matrixes of identical dimensions, and so when it is used for 
-co-speciation, the two trees must have the same number of memembers. When
-they don't, past studies have deleted or duplicated taxa, which results in
-anomalous results (the paper makes a direct comparison to such methods).
-To address this issue, Hommola {\em et al.} \cite{hommola2009permutation} propose an approach that measures
-correlations like the Mantel test, but does not require identical matrix
-dimensions. They then couple this with a straightforward permutation test 
-to estimate the significance of the correlations.
-
-The null hypothesis being tested is that the two groups of organisms have
-evolved independently, which seems appropriate when attempting to *identify*
-examples of co-speciation among the organisms found in a microbiome. 
-
-What we undertake here is to build a tree of all OTUs associated with our
-fish. We then construct a link matrix from the OTU counts by applying a
-threshold on relative abundance. Then, we traverse the OTU tree, generating
-trees for each clade of OTUs, and subsetting the link matrix to the OTUs
-present. Taken with the host phylogeny, the {\tt hommola\_cospeciation} method 
-from {\tt scikit-bio} is applied to these three pieces of data, yielding a 
-Pearson's correlation and a $p$-value based on the permutation test for 
-each clade of OTUs in the OTU tree.
-
-This approach leaves natural history of the association unexplored. However,
-now that we've used Hommola's test to reject most parts of the OTU tree, it
-should be possible to apply Huelsenbeck *et al.* to the much smaller OTU 
-clades that show statistically significant phylogenetic concordance. There
-are other tests that may be intersting, though, such as the `TreeKO` method
-implemented in {\tt ete2} %[`ete2`](http://etetoolkit.org/docs/latest/tutorial/tutorial_phylogeny.html#treeko-splitting-gene-trees-into-species-trees) :
-
-%* [TreeKO: a duplication-aware algorithm for the comparison of phylogenetic trees](http://nar.oxfordjournals.org/content/39/10/e66.long) *Nucleic Acids Research*, Vol. 39, No. 10. (01 May 2011), pp. e66-e66, doi:10.1093/nar/gkr087 by Marina Marcet-Houben, Toni Gabaldón
-
-At the suggestion of Aaron Darling, I figured I would give {\tt JPrIME-DLTRS}
-%[`JPrIME-DLTRS`](https://github.com/arvestad/jprime) (nicknamed `Deleterious`)
-a try. It's a 
-
-%http://sysbio.oxfordjournals.org/content/63/3/409
