@@ -28,7 +28,7 @@ A second disadvantage of trait-based approaches when applied to co-diversifying 
 
 \subsection{Tests for cospeciation}
 
-In what could now be considered a classic paper, Hafner {\em et al.} \cite{hafner1994disparate} examine the relationship between pocket gophers and their chewing louse parasites. This paper addresses there first question using a tree reconciliation test implemented in {\em COMPONENT} by Roderic D. M. Page \cite{page1993genes}. It is, in essence, a parsimony approach; the gene duplication and loss events necessary to achieve topological congruence between two trees are minimized. Hafner {\em et al.} first reject the null hypothesis (independent evolution) by applying the tree reconciliation test among gopher, louse and randomly drawn trees, and then examine rates of nucleotide divergence between the gopher and louse. 
+In what could now be considered a classic paper, Hafner {\em et al.} \cite{hafner1994disparate} examine the relationship between pocket gophers and their chewing louse parasites. This paper addresses there first question using a tree reconciliation test implemented in {\tt COMPONENT} by Roderic D. M. Page \cite{page1993genes}. It is, in essence, a parsimony approach; the gene duplication and loss events necessary to achieve topological congruence between two trees are minimized. Hafner {\em et al.} first reject the null hypothesis (independent evolution) by applying the tree reconciliation test among gopher, louse and randomly drawn trees, and then examine rates of nucleotide divergence between the gopher and louse. 
 
 This dataset has since been reanalyzed in many other publications, has become a sort of base-case for co-diversification methods. Notably, Huelsenbeck {\em et al.} introduced the use of Bayesian inference to cospeciation \cite{huelsenbeck2000bayesian}.
 
@@ -42,7 +42,7 @@ The second difficulty arises from the need to perform unsupervised correlation t
 
 \subfile{FishPoo/figure6}
 
-At root, though, there are many subtle ways that summary statistics can be misleading. As a discipline, statistics warns people against drawing conclusions from them without examining the structure of the data. \cite{anscombe1973graphs} For example, compare the distribution of pairwise distances for the Gopher/Louse dataset \cite{hafner1994disparate} to Clade 72223, which appears just below it in Figure \ref{FP_highcorr}. Both have about the same correlation coefficient ($r=0.490$ verses $r=0.488$), very high significance ($1.38\times 10^{-9}$ verses $p=3.21\times 10^{-223}$ and are within an order of magnitude in size ($15 \times 17$ verses $14 \times 68$). Nevertheless, the two distributions are obviously different, and the vertical banding pattern in Clade 72223 is strongly reminiscent of Case 4 in Anscombe's quartet. The structure of these interactions are also clearly different when examined directly as tanglegrams (Figure \ref{fig:FP_tangles}.)
+The reliance on a summary statistic likely dooms the application of Hommola {\em et al} as a way to detect co-diversification in the microbiome, where a supervised method is not practical. All summary statistics are a form of information reduction, usually a projection into a 1-dimensional space, and their interpretation depends on structural properties within the data. While it is often possible to construct complimentary tests to insure that assumptions hold, those tests are themselves likely to rely on summary statistics. Ultimately, someone has to actually inspect the data. \cite{anscombe1973graphs} For example, compare the distribution of pairwise distances for the Gopher/Louse dataset \cite{hafner1994disparate} to Clade 72223, which appears just below it in Figure \ref{FP_highcorr}. Both have about the same correlation coefficient ($r=0.490$ verses $r=0.488$), very high significance ($1.38\times 10^{-9}$ verses $p=3.21\times 10^{-223}$ and are within an order of magnitude in size ($15 \times 17$ verses $14 \times 68$). Nevertheless, the two distributions are obviously different, and the vertical banding pattern in Clade 72223 is strongly reminiscent of Case 4 in Anscombe's quartet. The structural differences between these interactions can also be seen clearly when represented as tanglegrams (Figure \ref{fig:FP_tangles}).
 
 \subfile{FishPoo/figure7}
 
@@ -52,22 +52,30 @@ In principle, one could develop a hierarchical Bonferroni correction, design cor
 
 All model-based methods must convincingly demonstrate that they provide the appropriate selectivity, sensitivity and parameter selection for their application. This is more challenging for some applications than others, and the detection of co-diversificaiton among hosts and their associated organisms of their microbiomes using markers with low temporal resolution appears to be rather unkind to model-based methods. Comparative methods sidestep many statistical vulnerabilities of model-based methods, exchanging them instead for the epistemological vulnerabilities of database bias. Fortunately, the number of multi-species interactions is combinatorial with the number of species (though constrained by propinquity), and the ecological literature is rich with examples. A database drawn from the existing literature would suffer from bias, but it would not be small.
 
-Rather than comparing candidate cases to a model, a comparative approach calls for a metric that scales with dissimilarity among cases. Then 
-
-% construction of the adjacency matrix
+Rather than comparing candidate cases to a model, a comparative approach calls for a metric that scales with dissimilarity among cases. Measures of dissimilarity are not summary statistics, and it is possible to construct them with fewer assumptions. 
 
 \subfile{FishPoo/figure8}
 
+Here, we propose an comparative method for co-diversifying systems that extends an approach developed by Lewitus and Morlon \cite{lewitus2015characterizing} for use with phylogenetic trees. The graph adjacency matrixes for each phylogenetic tree are constructed, as per Lewitus and Morlon. The total phylogenetic distance for each tree is then normalized to unity. Then, the adjacency matrixes for the two trees are joined along a common diagonal, creating two empty rectangular blocks symmetric about the diagonal. These rectangular blocks are where the any between the two joined graphs must exist, and so the interactions between the leaf nodes in the phylogeny are placed here, weighted at the mean branch length of the two trees. The graph Laplacian is constructed (Figure \ref{fig:FP_ajlp}), the eigenvalues are computed and a spectral density distribution (Figure \ref{fig:FP_eigendensity}) is computed, as in Lewitus and Morlon. 
+
 \subfile{FishPoo/figure9}
 
+These spectral density distributions represent 
+
+The dissimilarity between two distribution can be measured using the Kullback-Leibler divergence, $D_{\rm KL}$. 
+
+\begin{equation}
+    D_{\rm KL}( p, q ) = \int_{-\infty}^\infty p(x) \, \log\frac{p(x)}{q(x)} \, {\rm d}x
+\end{equation}
+
+\noindent The Kullback-Leibler divergence measures the information lost when using distribution $q(x)$ to approximate distribution $p(x)$. This is almost what we want, but unfortunately $D_{\rm KL}$, like subtraction and division, is not metric (in general, $D_{\rm KL}(p,q) \neq D_{\rm KL}(q,p)$ unless $p=q$, in which case $D_{\rm KL}=0$). The information radius, or Jensen-Shannon divergence between the two distributions is metric.
+
+\begin{equation}
+    D_{\rm JD}( p, q ) = \sqrt{ \frac{1}{2} D_{\rm KL}( p, q ) + \frac{1}{2} D_{\rm KL}( q, p ) }
+\end{equation}
+
+\noindent To demonstrate how this metric performs, we compare permutations of the Gopher/Louse dataset from Hafner {\em et al.}. Keeping the tree structures intact, a collection of spectra were computed by randomly reassigning links between leaf nodes (Figure \ref{fig:FP_ajperm}) and computing the Jensen-Shannon divergence between successively more permuted spectral distributions and the spectral distribution of the original, un-permuted graph (Figure \ref{fig:FP_permuted_distances}). The metric is neither linear nor monotonic, but it does diverge predictably. 
+
 \subfile{FishPoo/figure10}
-
-\begin{equation}
-    S( p(x), q(x) ) = \int_{-\infty}^\infty p(x) \, \log\frac{p(x)}{q(x)} \, {\rm d}x
-\end{equation}
-
-\begin{equation}
-    D( p(x), q(x) ) = \sqrt{ \frac{1}{2} S( p(x), q(x) ) + \frac{1}{2} S( q(x), p(x) ) }
-\end{equation}
 
 \subfile{FishPoo/figure11}
