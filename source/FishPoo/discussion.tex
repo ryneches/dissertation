@@ -81,3 +81,35 @@ The dissimilarity between two distribution can be measured using the Kullback-Le
 \subfile{FishPoo/figure11}
 
 \subfile{FishPoo/figure12}
+
+\begin{equation}
+\psi =
+\bordermatrix{
+        & \lambda_{\delta}   & \gamma_{1}   & \gamma_{2}   & r_{H}   & p_{H}   & D_{t}   & k      & q      & n_{L}   \cr
+G_{L,0} & \lambda_{\delta,0} & \gamma_{1,0} & \gamma_{2,0} & r_{H,0} & p_{H,0} & D_{t,0} & k_{0}  & q_{0}  & n_{L,0} \cr
+G_{L,1} & \lambda_{\delta,1} & \gamma_{1,1} & \gamma_{2,1} & r_{H,1} & p_{H,1} & D_{t,1} & k_{1}  & q_{1}  & n_{L,1} \cr
+G_{L,2} & \lambda_{\delta,2} & \gamma_{1,2} & \gamma_{2,2} & r_{H,2} & p_{H,2} & D_{t,2} & k_{2}  & q_{2}  & n_{L,2} \cr
+\vdots  & \vdots             & \vdots       & \vdots       & \vdots  & \vdots  & \vdots  & \vdots & \vdots & \vdots  \cr 
+G_{L,n} & \lambda_{\delta,n} & \gamma_{1,n} & \gamma_{2,n} & r_{H,n} & p_{H,n} & D_{t,n} & k_{n}  & q_{n}  & n_{L,n} \cr
+}
+\end{equation}
+
+\begin{equation}
+    D_{L,L,n,m} = D_{\rm JD}( G_{L,n}, G_{L,m} )
+\end{equation}
+
+\begin{equation}
+\xi =
+\bordermatrix{
+        & G_{L,0}     & G_{L,1}     & G_{L,2}     & \cdots & G_{L,n}     \cr
+G_{L,0} & D_{L,L,0,0} & D_{L,L,0,1} & D_{L,L,0,2} & \cdots & D_{L,L,0,n} \cr
+G_{L,1} & D_{L,L,1,0} & D_{L,L,1,1} & D_{L,L,1,2} & \cdots & D_{L,L,1,n} \cr
+G_{L,2} & D_{L,L,2,0} & D_{L,L,2,1} & D_{L,L,2,2} & \cdots & D_{L,L,2,n} \cr
+\vdots  & \vdots      & \vdots      & \vdots      & \ddots & \vdots      \cr
+G_{L,n} & D_{L,L,n,0} & D_{L,L,n,1} & D_{L,L,n,2} & \cdots & D_{L,L,n,n} \cr
+}
+\end{equation}
+
+\begin{equation}
+    \Psi_{L} = \left[ \psi_{(n \times 9)} | \xi_{(n \times n)} \right]
+\end{equation}
