@@ -1,10 +1,10 @@
 \section{Discussion}
 
-Some form of co-diversification is probably inevitable in situations where multiple species remain in ecological contact over evolutionary time. Most of the literature on the topic addresses the co-diversification in one of two ways, depending on the initial assumptions :
+When species remain in ecological contact over evolutionary time, the nature of their interaction may leave distinctive signatures in their phylogenies. \cite{bastolla2009architecture} Most of the literature on the topic addresses the co-diversification in one of two ways, depending on the initial assumptions :
 
 \begin{enumerate}
     \item {\em Given a system in which co-diversification may have occurred, what is the likelihood that it did?}
-    
+
     \item {\em Given that co-diversification is known to have occurred, what is the most likely history?}
 \end{enumerate}
 
@@ -56,25 +56,27 @@ Rather than comparing candidate cases to a model, a comparative approach calls f
 
 \subfile{FishPoo/figure8}
 
-Here, we propose an comparative method for co-diversifying systems that extends an approach developed by Lewitus and Morlon \cite{lewitus2015characterizing} for use with phylogenetic trees. The graph adjacency matrixes for each phylogenetic tree are constructed, as per Lewitus and Morlon. The total phylogenetic distance for each tree is then normalized to unity. Then, the adjacency matrixes for the two trees are joined along a common diagonal, creating two empty rectangular blocks symmetric about the diagonal. These rectangular blocks are where the any between the two joined graphs must exist, and so the interactions between the leaf nodes in the phylogeny are placed here, weighted at the mean branch length of the two trees. The graph Laplacian is constructed (Figure \ref{fig:FP_ajlp}), the eigenvalues are computed and a spectral density distribution (Figure \ref{fig:FP_eigendensity}) is computed, as in Lewitus and Morlon. 
+Here, we propose an comparative method for co-diversifying systems that extends an approach developed by Lewitus and Morlon \cite{lewitus2015characterizing} for use with phylogenetic trees. The graph adjacency matrixes for each phylogenetic tree are constructed, as per Lewitus and Morlon. The total phylogenetic distance for each tree is then normalized to unity. Then, the adjacency matrixes for the two trees are joined along a common diagonal, creating two empty rectangular blocks symmetric about the diagonal. These rectangular blocks are where the any between the two joined graphs must exist, and so the interactions between the leaf nodes in the phylogeny are placed here, weighted at the mean branch length of the two trees. The graph Laplacian is constructed (Figure \ref{fig:FP_ajlp}), the eigenvalues are computed and a spectral density distribution (Figure \ref{fig:FP_eigendensity}) is computed using a kernel density estimator with a Gaussian kernel, as in Lewitus and Morlon. 
 
 \subfile{FishPoo/figure9}
 
-These spectral density distributions represent 
+The eigenvalues of a network's Laplacian corresponds to the frequency with which a random walker would visit each node in steady state (i.e., in the limit of the number of random steps as the number of steps approaches infinity). In a network with edge weights (or a tree with branch lengths), the probability distribution of random steps made by the walker from each node is partitioned by the edge weights (or branch lengths) of each edge connected connected to that node. It is a measure of the relative connectivity of each node in the network. 
 
-The dissimilarity between two distribution can be measured using the Kullback-Leibler divergence, $D_{\rm KL}$. 
+The eigenvalues of a network comprise its spectrum. A network's spectrum is a not perfectly unique; very small networks with different topologies may share the same eigenvalues. The probability of one tree being a superset of another approaches unity in the limit of very large trees. For trees of intermediate size ($ \approx 5 < n < n \rightarrow \infty$), the probability that two randomly selected trees will share the same spectrum is finite but negligible. \cite{matsen2012ubiquity} For networks constructed from two interconnected trees, individual internal nodes of the trees will have the same connectivity regardless of whether they are in a network or in a tree. Thus, the spectrum of such a network will be composed of eigenvalues that correspond to those of the internal nodes of each of the two trees, and a third group of eigenvalues corresponding to the leafs and their interactions. There are more possible configurations for networks of this general topology than for trees of a given number of nodes, and thus a larger number of spectra are possible for a network than for a tree.
+
+Spectra are a discrete set of values equal to the number of nodes in the network, and so comparing the structure of networks with unequal sizes requires some additional transformation. As with Lewitus and Morlon, and Matsen and Evans \cite{lewitus2015characterizing, matsen2012ubiquity} work with trees, we map the Laplacian spectra into a continuous, unit space by applying a Gaussian kernel density estimator, yielding a continuous distribution function for each spectra. The dissimilarity between two distribution can be measured using the Kullback-Leibler divergence, $D_{\rm KL}$. 
 
 \begin{equation}
     D_{\rm KL}( p, q ) = \int_{-\infty}^\infty p(x) \, \log\frac{p(x)}{q(x)} \, {\rm d}x
 \end{equation}
 
-\noindent The Kullback-Leibler divergence measures the information lost when using distribution $q(x)$ to approximate distribution $p(x)$. This is almost what we want, but unfortunately $D_{\rm KL}$, like subtraction and division, is not metric (in general, $D_{\rm KL}(p,q) \neq D_{\rm KL}(q,p)$ unless $p=q$, in which case $D_{\rm KL}=0$). The information radius, or Jensen-Shannon divergence between the two distributions is metric.
+\noindent The Kullback-Leibler divergence measures the information lost when using distribution $q(x)$ to approximate distribution $p(x)$. This is almost what we want, but unfortunately $D_{\rm KL}$, like subtraction and division, is not metric (in general, $D_{\rm KL}(p,q) \neq D_{\rm KL}(q,p)$ unless $p=q$, in which case $D_{\rm KL}=0$). However, the Jensen-Shannon divergence between the two distributions is metric.
 
 \begin{equation}
     D_{\rm JD}( p, q ) = \sqrt{ \frac{1}{2} D_{\rm KL}( p, q ) + \frac{1}{2} D_{\rm KL}( q, p ) }
 \end{equation}
 
-\noindent To demonstrate how this metric performs, we compare permutations of the Gopher/Louse dataset from Hafner {\em et al.}. Keeping the tree structures intact, a collection of spectra were computed by randomly reassigning links between leaf nodes (Figure \ref{fig:FP_ajperm}) and computing the Jensen-Shannon divergence between successively more permuted spectral distributions and the spectral distribution of the original, un-permuted graph (Figure \ref{fig:FP_permuted_distances}). The metric is neither linear nor monotonic, but it does diverge predictably. 
+\noindent To demonstrate how this metric performs, we compare permutations of the Gopher/Louse dataset from Hafner {\em et al.}. Keeping the tree structures intact, a collection of spectra were computed by randomly reassigning links between leaf nodes (Figure \ref{fig:FP_ajperm}) and computing the Jensen-Shannon divergence between successively more permuted spectral distributions and the spectral distribution of the original, un-permuted graph (Figure \ref{fig:FP_permuted_distances}). The metric is neither linear nor monotonic with these permutations, but it does diverge predictably. 
 
 \subfile{FishPoo/figure10}
 
@@ -82,10 +84,31 @@ The dissimilarity between two distribution can be measured using the Kullback-Le
 
 \subfile{FishPoo/figure12}
 
-For each interaction collected from the literature (which we'll denote $G_{L,i}$, there is a label for the type of ecological interaction taking place.
+In this way, a feature space constructed over the Laplaceian spectra of networks of interaction species with known ecologies (parasitic verses mutualistic interactions, for example). These networks are then projected into the space which they span, and a classifier is trained on their ecological labels. The spectra of interactions with unknown ecological labels are then projected into that space, and the trained classifier may then predict which ecological label is most likely for each unlabeled interaction.
 
+For each interaction collected from the literature (which we'll denote $G_{L,i}$, there is a label for the type of ecological interaction taking place. Each spectral density distribution has a set of endogenous features (see also Table \ref{FP_studies_table}) :
 
-\subfile{FishPoo/table2}
+\begin{itemize}
+    \item{\textbf{Links} ($n_{L}$)} The number of links connecting the interacting trees.
+
+    \item{\textbf{Occupancy} ($k$)} The ratio of the number of links to the number of leafs ($2 n_{L} : n_{\rm hosts} + n_{\rm guests}$).
+
+    \item{\textbf{Squareness} ($q$)} : The ratio of the number of leafs in each tree.
+
+    \item{\textbf{Eigengap} ($\lambda_{\delta}$)} The difference between the largest and second largest eigenvalues in the Laplacian spectrum.
+    
+    \item{\textbf{Kurtosis} ($\gamma_{2}$)} The sharpness of the peak in the distribution (the fourth standardized moment).
+
+    \item{\textbf{Skew} ($\gamma_{1}$)} The asymmetry of the distribution (the third standardized moment).
+
+    \item{\textbf{Hommola correlation} ($r_{H}$)} The Hommola correlation of the interaction \cite{hommola2009permutation}.
+
+    \item{\textbf{Hommola significance} ($p_{H}$)} The significance of the Hommola correlation \cite{hommola2009permutation}.
+
+    \item{\textbf{Tree distance} ($D_{t}$)} The Jensen-Shannon divergence between the spectral density distributions of each of the two phylogenetic trees in the interactions.
+\end{itemize}
+
+\noindent These properties form an $n\times 9$ matrix of features, like so :
 
 \begin{equation}
 \psi =
@@ -99,12 +122,16 @@ G_{L,n} & \lambda_{\delta,n} & \gamma_{1,n} & \gamma_{2,n} & r_{H,n} & p_{H,n} &
 }
 \end{equation}
 
-\begin{equation}
-    D_{L,L,n,m} = D_{\rm JD}( G_{L,n}, G_{L,m} )
-\end{equation}
+\noindent There are also the Shannon-Jensen distances between each pair of labeled interactions :
 
 \begin{equation}
-\xi =
+    D_{L,L,i,j} = D_{\rm JD}( G_{L,i}, G_{L,j} )
+\end{equation}
+
+\noindent These distances form an matrix of $n^2$ features, like so :
+
+\begin{equation}
+\xi_L =
 \bordermatrix{
         & G_{L,0}     & G_{L,1}     & G_{L,2}     & \cdots & G_{L,n}     \cr
 G_{L,0} & D_{L,L,0,0} & D_{L,L,0,1} & D_{L,L,0,2} & \cdots & D_{L,L,0,n} \cr
@@ -115,6 +142,44 @@ G_{L,n} & D_{L,L,n,0} & D_{L,L,n,1} & D_{L,L,n,2} & \cdots & D_{L,L,n,n} \cr
 }
 \end{equation}
 
+\noindent Together, these two matrixes form the feature space into which we will use to define the system.
+
 \begin{equation}
-    \Psi_{L} = \left[ \psi_{(n \times 9)} | \xi_{(n \times n)} \right]
+    \Psi_{L} = \left[ \psi_{L,(n \times 9)} | \xi_{L,(n \times n)} \right]
 \end{equation}
+
+Interactions with unknown ecology (unlabeled interactions) can then be placed into this space. Like the labeled interactions, the endogenous properties of the Laplacian spectra are tabulated :
+
+\begin{equation}
+\psi_U =
+\bordermatrix{
+        & \lambda_{\delta}   & \gamma_{1}   & \gamma_{2}   & r_{H}   & p_{H}   & D_{t}   & k      & q      & n_{L}   \cr
+G_{U,0} & \lambda_{\delta,0} & \gamma_{1,0} & \gamma_{2,0} & r_{H,0} & p_{H,0} & D_{t,0} & k_{0}  & q_{0}  & n_{L,0} \cr
+G_{U,1} & \lambda_{\delta,1} & \gamma_{1,1} & \gamma_{2,1} & r_{H,1} & p_{H,1} & D_{t,1} & k_{1}  & q_{1}  & n_{L,1} \cr
+G_{U,2} & \lambda_{\delta,2} & \gamma_{1,2} & \gamma_{2,2} & r_{H,2} & p_{H,2} & D_{t,2} & k_{2}  & q_{2}  & n_{L,2} \cr
+\vdots  & \vdots             & \vdots       & \vdots       & \vdots  & \vdots  & \vdots  & \vdots & \vdots & \vdots  \cr 
+G_{U,n} & \lambda_{\delta,n} & \gamma_{1,n} & \gamma_{2,n} & r_{H,n} & p_{H,n} & D_{t,n} & k_{n}  & q_{n}  & n_{L,n} \cr
+}
+\end{equation}
+
+\noindent For $m$ unlabled interactions and $n$ labled interactions, the Shannon-Jensen divergence between unlabled and labled interactions forms an $m\times n$ matrix of features.
+
+\begin{equation}
+\xi_U =
+\bordermatrix{
+        & G_{L,0}     & G_{L,1}     & G_{L,2}     & \cdots & G_{L,n}     \cr
+G_{U,0} & D_{L,L,0,0} & D_{L,L,0,1} & D_{L,L,0,2} & \cdots & D_{L,L,0,n} \cr
+G_{U,1} & D_{L,L,1,0} & D_{L,L,1,1} & D_{L,L,1,2} & \cdots & D_{L,L,1,n} \cr
+G_{U,2} & D_{L,L,2,0} & D_{L,L,2,1} & D_{L,L,2,2} & \cdots & D_{L,L,2,n} \cr
+\vdots  & \vdots      & \vdots      & \vdots      & \ddots & \vdots      \cr
+G_{U,m} & D_{L,L,m,0} & D_{L,L,m,1} & D_{L,L,m,2} & \cdots & D_{L,L,m,n} \cr
+}
+\end{equation}
+
+\noindent Appending these matrixes yields a set of features that allows us to project each unlabled interaction into the same feature space as the labeled interactions.
+
+\begin{equation}
+    \Psi_{U} = \left[ \psi_{U,(n \times 9)} | \xi_{U,(m \times n)} \right]
+\end{equation}
+
+\noindent A neural network is then trained on $\Psi_L$ and the corresponding ecological labels and used to predict the ecological labels for $\Psi_U$.
