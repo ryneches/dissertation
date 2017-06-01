@@ -5,48 +5,44 @@
 \subfile{FishPoo/figure1}
 \subfile{FishPoo/table1}
 
-\begin{figure}
-    \includegraphics[width=\textwidth]{FishPoo/figures/mcgee_tree.pdf}
-    \caption{A maximum likelihood phylogeny of the host organisms.}
-    \label{FP_host_tree}
-\end{figure}
+%\begin{figure}
+%    \includegraphics[width=\textwidth]{FishPoo/figures/mcgee_tree.pdf}
+%    \caption{A maximum likelihood phylogeny of the host organisms.}
+%    \label{FP_host_tree}
+%\end{figure}
+
+\subfile{FishPoo/figure2}
 
 \subsection{Sample collection}
 
-\subsection{Sample preparation and processing}
+Specimens fed until satiated and placed into a sterile autoclave bag prepared with 10 liters of molecular water augmented with a small amount of sodium chloride and calcium chloride. Sterile charcoal pellets were added to sequester nitrates, and a sterile plastic tube was submerged and connected to an air pump to aerate the water. Stool was removed using a sterile serological pipette and frozen.
 
-\subsection{Sequencing}
+\subsection{Sample preparation, processing and sequencing}
+
+Stool samples were subjected to bead beating for 60 seconds and DNA was extracted using MoBio PowerSoil DNA Isolation kit. 16S PCR and Illumina sequencing was carried out using the Earth Microbiome 16S Illumina Amplicon Protocol. 
 
 \subsection{Building the observation table}
 
-Adapter removal, quality trimming and overlap alignment is performed using Trimmomatic.
-
-Chimera checking with {\tt vsearch}
-
-Unique reads are identified using {\tt hat-trie}
-
-A table of observation counts is constructed as a {\tt Pandas} {\tt DataFrame}object, and a count threshold is applied. Tables of raw counts and normalized counts are written as comma separated value files, and the corresponding sequences are written as a FASTA file.
+Adapter removal, quality trimming and overlap alignment is performed using Trimmomatic. Chimera are identified with {\tt vsearch}, and unique reads are identified using {\tt hat-trie}. A table of observation counts is constructed as a {\tt Pandas} {\tt DataFrame}object, and a count threshold is applied. Tables of raw counts and normalized counts are written as comma separated value files, and the corresponding sequences are written as a FASTA file.
 
 \subsection{Building phylogeny of OTUs}
 
 Alignment of the observed sequences is performed using {\tt Clustal Omega}, and an approximate maximum likelihood phylogeny is constructed using {\tt FastTree}.
 
-\begin{figure}
-    \includegraphics[width=\textwidth]{FishPoo/figures/fishpoo_tree.png}
-    \caption{An approximate maximum likelihood phylogeny of the guest organisms.}
-    \label{FP_guest_tree}
-\end{figure}
+%\begin{figure}
+%    \includegraphics[width=\textwidth]{FishPoo/figures/fishpoo_tree.png}
+%    \caption{An approximate maximum likelihood phylogeny of the guest organisms.}
+%    \label{FP_guest_tree}
+%\end{figure}
 
-\subsection{Building phylogeny of hosts}
+\subfile{FishPoo/figure3}
 
 \subsection{Processing co-phylogenies with {\tt SuchTree}}
 
 The host tree and guest tree are loaded as {\tt SuchTree} objects, and linked together through the observation table as a {\tt SuchLinkedTrees} object. The {\tt SuchTree} class allows for extremely rapid traversals of large trees, enabling distance correlations to be efficiently computed. The {\tt SuchLinkedTrees} class leverages this to compute graph adjacency and graph Laplacian matrixes of subtrees of host and guest phylogenies. Spectral decomposition and kernel densities of graph Laplacians are computed using {\tt numpy}, and the Jensen-Shannon divergence is calculated between each pair of spectral densities using the {\tt entropy} function in {\tt scipy.stats}. UPGMA clustering is performed using {\tt scipy.cluster.hierarchy.linkage}.
 
-\subsection{Correlation-based analysis}
+subsection{Correlation-based analysis}
 
 For each clade of guest organisms, the {\tt SuchLinkedTrees.linked\_distances} function is used to calculate the pairwise distances through the host and guest trees for every pair of non-null observations in the link matrix, as described by Hommola {\em et al.} \cite{hommola2009permutation} The Pierson's correlation for these distances is computed using the {\tt pearsonr} function from {\tt scipy.stats}.
 
 \subsection{Literature search for comparative analysis}
-
-\subsection{Spectral density analysis}
