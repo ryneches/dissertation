@@ -148,7 +148,7 @@ G_{L,n} & D_{L,L,n,0} & D_{L,L,n,1} & D_{L,L,n,2} & \cdots & D_{L,L,n,n} \cr
     \Psi_{L} = \left[ \psi_{L,(n \times 9)} | \xi_{L,(n \times n)} \right]
 \end{equation}
 
-Interactions with unknown ecology (unlabeled interactions) can then be placed into this space. Like the labeled interactions, the endogenous properties of the Laplacian spectra are tabulated :
+Interactions with unknown ecology (unlabeled interactions) can then be placed into this space. Like the labeled interactions, the endogenous properties of the Laplacean spectra are tabulated :
 
 \begin{equation}
 \psi_U =
@@ -162,7 +162,7 @@ G_{U,n} & \lambda_{\delta,n} & \gamma_{1,n} & \gamma_{2,n} & r_{H,n} & p_{H,n} &
 }
 \end{equation}
 
-\noindent For $m$ unlabled interactions and $n$ labled interactions, the Shannon-Jensen divergence between unlabled and labled interactions forms an $m\times n$ matrix of features.
+\noindent For $m$ unlabeled interactions and $n$ labeled interactions, the Shannon-Jensen divergence between unlabeled and labeled interactions forms an $m\times n$ matrix of features.
 
 \begin{equation}
 \xi_U =
@@ -176,10 +176,10 @@ G_{U,m} & D_{L,L,m,0} & D_{L,L,m,1} & D_{L,L,m,2} & \cdots & D_{L,L,m,n} \cr
 }
 \end{equation}
 
-\noindent Appending these matrixes yields a set of features that allows us to project each unlabled interaction into the same feature space as the labeled interactions.
+\noindent Appending these matrixes yields a set of features that allows us to project each unlabeled interaction into the same feature space as the labeled interactions.
 
 \begin{equation}
     \Psi_{U} = \left[ \psi_{U,(n \times 9)} | \xi_{U,(m \times n)} \right]
 \end{equation}
 
-\noindent A neural network is then trained on $\Psi_L$ and the corresponding ecological labels and used to predict the ecological labels for $\Psi_U$.
+\noindent A neural network is then trained on $\Psi_L$ and the corresponding ecological labels and used to predict the ecological labels for $\Psi_U$. \cite{pedregosa2011scikit}
