@@ -73,7 +73,7 @@ Spectra are a discrete set of values equal to the number of nodes in the network
 \noindent The Kullback-Leibler divergence measures the information lost when using distribution $q(x)$ to approximate distribution $p(x)$. This is almost what we want, but unfortunately $D_{\rm KL}$, like subtraction and division, is not metric (in general, $D_{\rm KL}(p,q) \neq D_{\rm KL}(q,p)$ unless $p=q$, in which case $D_{\rm KL}=0$). However, the Jensen-Shannon divergence between the two distributions is metric.
 
 \begin{equation}
-    D_{\rm JD}( p, q ) = \sqrt{ \frac{1}{2} D_{\rm KL}( p, q ) + \frac{1}{2} D_{\rm KL}( q, p ) }
+    D_{\rm SJ}( p, q ) = \sqrt{ \frac{1}{2} D_{\rm KL}( p, q ) + \frac{1}{2} D_{\rm KL}( q, p ) }
 \end{equation}
 
 \noindent To demonstrate how this metric performs, we compare permutations of the Gopher/Louse dataset from Hafner {\em et al.}. Keeping the tree structures intact, a collection of spectra were computed by randomly reassigning links between leaf nodes (Figure \ref{fig:FP_ajperm}) and computing the Jensen-Shannon divergence between successively more permuted spectral distributions and the spectral distribution of the original, un-permuted graph (Figure \ref{fig:FP_permuted_distances}). The metric is neither linear nor monotonic with these permutations, but it does diverge predictably. 
@@ -125,7 +125,7 @@ G_{L,n} & \lambda_{\delta,n} & \gamma_{1,n} & \gamma_{2,n} & r_{H,n} & p_{H,n} &
 \noindent There are also the Shannon-Jensen distances between each pair of labeled interactions :
 
 \begin{equation}
-    D_{L,L,i,j} = D_{\rm JD}( G_{L,i}, G_{L,j} )
+    D_{L,L,i,j} = D_{\rm SJ}( G_{L,i}, G_{L,j} )
 \end{equation}
 
 \noindent These distances form an matrix of $n^2$ features, like so :
@@ -168,11 +168,11 @@ G_{U,n} & \lambda_{\delta,n} & \gamma_{1,n} & \gamma_{2,n} & r_{H,n} & p_{H,n} &
 \xi_U =
 \bordermatrix{
         & G_{L,0}     & G_{L,1}     & G_{L,2}     & \cdots & G_{L,n}     \cr
-G_{U,0} & D_{L,L,0,0} & D_{L,L,0,1} & D_{L,L,0,2} & \cdots & D_{L,L,0,n} \cr
-G_{U,1} & D_{L,L,1,0} & D_{L,L,1,1} & D_{L,L,1,2} & \cdots & D_{L,L,1,n} \cr
-G_{U,2} & D_{L,L,2,0} & D_{L,L,2,1} & D_{L,L,2,2} & \cdots & D_{L,L,2,n} \cr
+G_{U,0} & D_{U,L,0,0} & D_{U,L,0,1} & D_{U,L,0,2} & \cdots & D_{U,L,0,n} \cr
+G_{U,1} & D_{U,L,1,0} & D_{U,L,1,1} & D_{U,L,1,2} & \cdots & D_{U,L,1,n} \cr
+G_{U,2} & D_{U,L,2,0} & D_{U,L,2,1} & D_{U,L,2,2} & \cdots & D_{U,L,2,n} \cr
 \vdots  & \vdots      & \vdots      & \vdots      & \ddots & \vdots      \cr
-G_{U,m} & D_{L,L,m,0} & D_{L,L,m,1} & D_{L,L,m,2} & \cdots & D_{L,L,m,n} \cr
+G_{U,m} & D_{U,L,m,0} & D_{U,L,m,1} & D_{U,L,m,2} & \cdots & D_{U,L,m,n} \cr
 }
 \end{equation}
 
