@@ -77,6 +77,8 @@ Adapter removal, quality trimming and overlap alignment is performed using {\tt 
 
 \subsection{Building phylogeny of OTUs}
 
+The Illumina sequencing platform has a substitution error frequency of about 0.1\%. \cite{ross2013characterizing} Trimming and filtering reads based on quality score removes about 69\% of substitution errors, on average, \cite{schirmer2016illumina} and overlap correcting paired-end reads improves this to about one substitution error in every 14 reads. \cite{bolger2014trimmomatic} At the sacrifice of sensitivity, the error frequency can be reduced arbitrarily by excluding very rare sequences. For example, excluding sequences observed only once reduces the substitution error frequency to about one in every 200 sequences. Most substitution errors are likely to be corruptions of sequences already present in the data, and so phylogenetic reconstruction should place them as sister leafs of their uncorrupted sources. This confines the effect of substitution errors to the smallest topological scale, where it appears in the form of ``extra'' leafs that are randomly attached with the minimum branch length.
+
 Alignment of the observed sequences is performed using {\tt Clustal Omega}, \cite{goujon2010new, sievers2011fast} and an approximate maximum likelihood phylogeny is constructed using {\tt FastTree}. \cite{price2009fasttree, price2010fasttree}
 
 %\begin{figure}
@@ -88,6 +90,8 @@ Alignment of the observed sequences is performed using {\tt Clustal Omega}, \cit
 \subfile{FishPoo/figure3}
 
 \subsection{Spectral analysis and machine learning}
+
+Classifying organisms by how long they have been present in a particular habitat can yield insights regarding their origins, especially when these relationships are repeated in many similar but distinct habitats. Phylogeographic models regard this collection of habitats as the nodes of a meta-community network. The edges of this network represent dispersal rates, a convolution of both the vectors of dispersal and the barriers that impinge on those vectors. Organisms move from habitat to habitat in discrete events with probabilities related to the dispersal rates. If organisms are gathered from each habitat, and trees of related organisms are constructed, these trees may be used to infer the rates of dispersal. These rates reveal, at least in broad strokes, the structure of the relationships among the habitats.
 
 The host tree and guest tree are loaded as {\tt SuchTree} objects, and linked together through the observation table as a {\tt SuchLinkedTrees} object. The {\tt SuchTree} class allows for extremely rapid traversals of large trees, enabling distance correlations to be efficiently computed. The {\tt SuchLinkedTrees} class leverages this to compute graph adjacency and graph Laplacian matrixes of subtrees of host and guest phylogenies. Spectral decomposition and kernel densities of graph Laplacians are computed using {\tt numpy}, and the Jensen-Shannon divergence is calculated between each pair of spectral densities using the {\tt entropy} function in {\tt scipy.stats}. \cite{walt2011numpy} Feature tables were assembled using {\tt Pandas} \cite{mckinney2010data} and machine learning was carried out using {\tt scikit-learn}. \cite{pedregosa2011scikit}
 
