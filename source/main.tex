@@ -13,12 +13,12 @@
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage[utf8]{inputenc}
-
 % bibliographies
-\usepackage[backend=biber,refsegment=chapter,defernumbers=true]{biblatex}
+\usepackage[backend=biber,defernumbers=true,sorting=none]{biblatex}
 
 \setitemize{noitemsep,topsep=0pt,parsep=0pt,partopsep=0pt}
 
+\addbibresource[label=introduction]{introduction.bib}
 \addbibresource[label=FishPoo]{FishPoo/FishPoo.bib}
 \addbibresource[label=SaltyBugs]{SaltyBugs/SaltyBugs.bib}
 \addbibresource[label=NMF]{NMF/NMF.bib}
@@ -59,11 +59,16 @@
 
 \makeintropages
 
+\begin{refsection}
+\newrefsection
 \subfile{introduction}
+\end{refsection}
 
 \part{Fish}
 
+%\begin{refsegment}
 \subfile{FishPoo/FishPoo}
+%\end{refsegment}
 %\subfile{uLakes/uLakes}
 %\subfile{FishJaws/FishJaws}
 
