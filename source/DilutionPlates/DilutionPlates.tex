@@ -6,7 +6,7 @@
 
 \section{Author contributions}
 
-This project was conceived of, initiated and carried out by Russell Y. Neches in response to a problem initially posed by Aaron E. Darling in 2010. The process was refined over several years with input from Martijn Elserman, Erik de Bruijn and Siert Wijnia from Ultimaker BV and Mary Huang. The web application was written by Russell Y. Neches and Mary Huang.
+This project was conceived of, initiated and carried out by Russell Y. Neches in response to a problem initially posed by Aaron E. Darling in 2010. The process was refined over several years with input and from Martijn Elserman, Erik de Bruijn and Siert Wijnia from Ultimaker BV, who also donated components, and Mary Huang who advised on strategies for achieving water-tight 3D prints. The software was written by Russell Y. Neches and Mary Huang. Timing data for human liquid handling operations was collected by Ashanti M. Robinson. The manuscript was written by Russell Y. Neches and edited by Mary Huang.
 
 \section{Abstract}
 
@@ -14,7 +14,9 @@ When scaling molecular protocols to very large sample sizes ($N > 10,000$), any 
 
 \section{Introduction}
 
+Robotic liquid handling is capable of scaling the number and complexity of many tasks in molecular biology beyond what is practical for a human operator to undertake. However, the technology has seen limited applications in research settings due to the complexity of developing and debugging protocols. In particular, small academic laboratories often exploit their greater flexibility with respect to larger operations by making frequent adaptations and optimizations to molecular protocols. Small labs often rely on a very diverse repertoire of protocols relative to their size. It is often not worth the time and trouble to develop automated protocols. Along with the high cost of robotic liquid handling systems, the impracticality of using them means that molecular work in most research settings is an entirely manual operation. The scientific consequences are significant; projects that can be undertaken in academic laboratories are often limited in scale to what can be achieved by main force. A middle way between fully robotic automation and entirely manual benchwork could open up new areas of research.
 
+We observe that the great majority of steps in many important molecular protocols are identical among all samples. Often, only one or two steps require that individual samples be handled in a unique way. By automating only these steps, it is possible to adapt the protocol to simple parallelization using multi-channel pipetters and to eliminate tedious and error-prone manual lookup operations. Here, we present a simple example of a semi-automated protocol for sequencing library construction for genomic DNA using single use 3D printed parts to automate the normalization of eluent concentrations.
 
 \section{Materials \& Methods}
 
