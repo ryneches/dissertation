@@ -4,11 +4,11 @@ All model-based methods must convincingly demonstrate that they provide the appr
 
 Rather than comparing candidate cases to a model, a comparative approach calls for a metric that scales with dissimilarity among cases. Measures of dissimilarity are not summary statistics, and it is possible to construct them with fewer assumptions. 
 
-\subfile{FishPoo/figure8}
+\subfile{FishPoo/figures/figure8}
 
 Here, we propose an comparative method for co-diversifying systems that extends an approach developed by Lewitus and Morlon \cite{lewitus2015characterizing} for use with phylogenetic trees. The graph adjacency matrixes for each phylogenetic tree are constructed, as per Lewitus and Morlon. The total phylogenetic distance for each tree is then normalized to unity. Then, the adjacency matrixes for the two trees are joined along a common diagonal, creating two empty rectangular blocks symmetric about the diagonal. These rectangular blocks are where the any between the two joined graphs must exist, and so the interactions between the leaf nodes in the phylogeny are placed here, weighted at the mean branch length of the two trees. The graph Laplacian is constructed (Figure \ref{fig:FP_ajlp}), the eigenvalues are computed and a spectral density distribution (Figure \ref{fig:FP_eigendensity}) is computed using a kernel density estimator with a Gaussian kernel, as in Lewitus and Morlon. 
 
-\subfile{FishPoo/figure9}
+\subfile{FishPoo/figures/figure9}
 
 The eigenvalues of a network's Laplacian corresponds to the frequency with which a random walker would visit each node in steady state (i.e., in the limit of the number of random steps as the number of steps approaches infinity). In a network with edge weights (or a tree with branch lengths), the probability distribution of random steps made by the walker from each node is partitioned by the edge weights (or branch lengths) of each edge connected connected to that node. It is a measure of the relative connectivity of each node in the network. 
 
@@ -28,11 +28,11 @@ Spectra are a discrete set of values equal to the number of nodes in the network
 
 \noindent To demonstrate how this metric performs, we compare permutations of the Gopher/Louse dataset from Hafner {\em et al.}. Keeping the tree structures intact, a collection of spectra were computed by randomly reassigning links between leaf nodes (Figure \ref{fig:FP_ajperm}) and computing the Jensen-Shannon divergence between successively more permuted spectral distributions and the spectral distribution of the original, un-permuted graph (Figure \ref{fig:FP_permuted_distances}). The metric is neither linear nor monotonic with these permutations, but it does diverge predictably. 
 
-\subfile{FishPoo/figure10}
+\subfile{FishPoo/figures/figure10}
 
-\subfile{FishPoo/figure11}
+\subfile{FishPoo/figures/figure11}
 
-\subfile{FishPoo/figure12}
+\subfile{FishPoo/figures/figure12}
 
 In this way, a feature space constructed over the Laplaceian spectra of networks of interaction species with known ecologies (parasitic verses mutualistic interactions, for example). These networks are then projected into the space which they span, and a classifier is trained on their ecological labels. The spectra of interactions with unknown ecological labels are then projected into that space, and the trained classifier may then predict which ecological label is most likely for each unlabeled interaction.
 
