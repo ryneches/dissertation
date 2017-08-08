@@ -1,140 +1,50 @@
 \section{Discussion and Results}
 
-All model-based methods must convincingly demonstrate that they provide the appropriate selectivity, sensitivity and parameter selection for their application. This is more challenging for some applications than others, and the detection of co-diversificaiton among hosts and their associated organisms of their microbiomes using markers with low temporal resolution appears to be rather unkind to model-based methods. Comparative methods sidestep many statistical vulnerabilities of model-based methods, exchanging them instead for the epistemological vulnerabilities of database bias. Fortunately, the number of multi-species interactions is combinatorial with the number of species (though constrained by propinquity), and the ecological literature is rich with examples. A database drawn from the existing literature would suffer from bias, but it would not be small.
+Most of the literature on the topic addresses coevolution in one of two ways, depending on the initial assumptions. One may begin without the assumption coevolution has occurred, and then ascertain the likelihood that it did. Or, having established that coevolution has occurred either by testing for it or through some other piece of exogenous evidence, one may ascertain what history is most likely. The first approach yields an overall likelihood, and the second yields a sequence of events (host switches, extinctions and bifurcations) that may have resulted in the observed associations.
 
-Rather than comparing candidate cases to a model, a comparative approach calls for a metric that scales with dissimilarity among cases. Measures of dissimilarity are not summary statistics, and it is possible to construct them with fewer assumptions. 
+We are interested in learning about the natural history of the system, and so we would like to ask a somewhat enlarged question. {\em In a system where the hosts are associated with a very large number of related organisms, which clades show evidence of coevolution with the hosts?}
 
-\subfile{FishPoo/figures/figure8}
+For each organism that appears among the microbiomes of a group of hosts, there exists a pattern of observed associations between the ``guest'' organisms and the host organisms. These associations can be treated as traits of the host, and the history of each association can be examined like any phenotypic trait of the host. Alternatively, the tendency to associate (or not) with a host could be treated as a trait distributed over a group of microbial organisms, although it would require dividing the microbiome into groups of related OTUs in order to be meaningful. Association with a particular host is more likely to correspond to different traits for more distantly related OTUs, and so it is probably not meaningful to naively apply stochastic trait mapping across all bacterial diversity.
 
-Here, we propose an comparative method for co-diversifying systems that extends an approach developed by Lewitus and Morlon \cite{lewitus2015characterizing} for use with phylogenetic trees. The graph adjacency matrixes for each phylogenetic tree are constructed, as per Lewitus and Morlon. The total phylogenetic distance for each tree is then normalized to unity. Then, the adjacency matrixes for the two trees are joined along a common diagonal, creating two empty rectangular blocks symmetric about the diagonal. These rectangular blocks are where the any between the two joined graphs must exist, and so the interactions between the leaf nodes in the phylogeny are placed here, weighted at the mean branch length of the two trees. The graph Laplacian is constructed (Figure \ref{fig:FP_ajlp}), the eigenvalues are computed and a spectral density distribution (Figure \ref{fig:FP_eigendensity}) is computed using a kernel density estimator with a Gaussian kernel, as in Lewitus and Morlon. 
+%In {\em Analysis of phylogenetics and evolution with {\tt R}} (p. 236), Emmanuael Paradis describes phylogenetic signal as follows :
 
-\subfile{FishPoo/figures/figure9}
+%\begin{quote}
+%The concept of phylogenetic signal is at the heart of most phylogenetic methods. From a statistical point of view, a phylogenetic signal is defined by the non-null covariances (i.e., non-independence) among species. From a biological point of view, phylogenetic signal is a direct consequence of the evolution of traits and its form will depend on the evolutionary mechanisms in action.
+%\end{quote}
 
-The eigenvalues of a network's Laplacian corresponds to the frequency with which a random walker would visit each node in steady state (i.e., in the limit of the number of random steps as the number of steps approaches infinity). In a network with edge weights (or a tree with branch lengths), the probability distribution of random steps made by the walker from each node is partitioned by the edge weights (or branch lengths) of each edge connected connected to that node. It is a measure of the relative connectivity of each node in the network. 
+By treating OTUs, or groups of OTUs, as traits of the hosts, one can apply a variety of methods for estimating how likely it is that a trait is both conserved and vertically transmitted. These measures of ``phylogenetic signal,'' attempt to characterize the statistical independence (or autocorrelation) among species traits due to phylogenetic relatedness. The less the trait distribution can be said to be statistically independent from the phylogeny, the more phylogenetic signal is present in that trait. \cite{felsenstein1985phylogenies} M{\"u}nkem{\"u}ller {\em et al.} \cite{munkemuller2012measure} have prepared an excellent review covering the theory and application of Abouheif's $C_{mean}$, Pagel's $\lambda$, Moran's $I$, Blomberg's $K$ and some of their variations. Unfortunately, trait-based models do not account for interactions {\em among} traits, or a way to account for traits that have their own evolutionary model (i.e., traits that are themselves organisms). For an interaction of a particular host and microbe, this might not present a problem. For examining interactions of microbiomes (or a significant subset of one), the assumption that traits are distributed independently is a significant weakness. For example, individual OTUs may represent several organisms, each with their own pattern of association (Figure \ref{fig:FP_fig4}). Comparing phylogenetic signal among different OTUs thus depends on the diversity underlying each of the OTUs. Correcting for this would require a relatively complete and unbiased survey of microbial diversity.
 
-The eigenvalues of a network comprise its spectrum. A network's spectrum is a not perfectly unique; very small networks with different topologies may share the same eigenvalues. The probability of one tree being a superset of another approaches unity in the limit of very large trees. For trees of intermediate size ($ \approx 5 < n < n \rightarrow \infty$), the probability that two randomly selected trees will share the same spectrum is finite but negligible. \cite{matsen2012ubiquity} For networks constructed from two interconnected trees, individual internal nodes of the trees will have the same connectivity regardless of whether they are in a network or in a tree. Thus, the spectrum of such a network will be composed of eigenvalues that correspond to those of the internal nodes of each of the two trees, and a third group of eigenvalues corresponding to the leafs and their interactions. There are more possible configurations for networks of this general topology than for trees of a given number of nodes, and thus a larger number of spectra are possible for a network than for a tree.
+\subfile{FishPoo/figures/figure4}
 
-Spectra are a discrete set of values equal to the number of nodes in the network, and so comparing the structure of networks with unequal sizes requires some additional transformation. As with Lewitus and Morlon, and Matsen and Evans \cite{lewitus2015characterizing, matsen2012ubiquity} work with trees, we map the Laplacian spectra into a continuous, unit space by applying a Gaussian kernel density estimator, yielding a continuous distribution function for each spectra. The dissimilarity between two distribution can be measured using the Kullback-Leibler divergence, $D_{\rm KL}$. 
+\subsection{Tests for cospeciation}
 
-\begin{equation}
-    D_{\rm KL}( p, q ) = \int_{-\infty}^\infty p(x) \, \log\frac{p(x)}{q(x)} \, {\rm d}x
-\end{equation}
+Where phylogeneitic signal estimates the non-independence of a trait from the phylogeny of the organisms among which it is distributed, other methods exist for estimating the non-independence of interacting phylogneies from one another. For example, Hafner {\em et al.} \cite{hafner1994disparate} examine the relationship between pocket gophers and their chewing louse parasites using a tree reconciliation test implemented in {\tt COMPONENT} by Roderic D. M. Page \cite{page1993genes}. This is, in essence, a parsimony approach; the gene duplication and loss events necessary to achieve topological congruence between two trees are minimized. Hafner {\em et al.} first reject the null hypothesis (independent evolution) by applying the tree reconciliation test among gopher, louse and randomly drawn trees, and then examine rates of nucleotide divergence between the gopher and louse. This dataset has since been reanalyzed in many other publications, has become a sort of base-case for co-diversification methods. Notably, Huelsenbeck {\em et al.} use the gopher/louse data set to introduce the use of Bayesian inference to cospeciation. \cite{huelsenbeck2000bayesian} In the context of a microbiome where many nested interactions must be examined, parsimony methods are inapplicable due to a lack of statistical consistency, \cite{felsenstein1978cases} and Bayesian methods due to their large computational demands.
 
-\noindent The Kullback-Leibler divergence measures the information lost when using distribution $q(x)$ to approximate distribution $p(x)$. This is almost what we want, but unfortunately $D_{\rm KL}$, like subtraction and division, is not metric (in general, $D_{\rm KL}(p,q) \neq D_{\rm KL}(q,p)$ unless $p=q$, in which case $D_{\rm KL}=0$). However, the Jensen-Shannon divergence between the two distributions is metric.
+Hommola {\em et al.} \cite{hommola2009permutation} describe a method to extend the Mantel test. \cite{mantel1967detection} The Mantel test is a statistic on the correlation of two matrixes, and requires that the matrixes be of equal rank. When applied to distance matrixes for trees containing differing numbers of taxa, one must delete or duplicate taxa until the matrix ranks are equal. This results in anomalous results which Hommola {\em et al.} explore in detail. To address this issue, they take every pair of linked tips (e.g., a parasite species that is observed to associate with a host species), and examine the correlation of distances through the two trees. This accommodates trees of arbitrary size and arbitrary patterns of association among their tips, and can be coupled with a straightforward permutation test to estimate the significance of the correlations. One can walk through every clade in the phylogeny of host-associated OTUs and, for every clade, compute the Hommola correlation with the host phylogeny (Figure \ref{FP_hommola_corr}). 
 
-\begin{equation}
-    D_{\rm SJ}( p, q ) = \sqrt{ \frac{1}{2} D_{\rm KL}( p, q ) + \frac{1}{2} D_{\rm KL}( q, p ) }
-\end{equation}
+\subfile{FishPoo/figures/figure5}
 
-\noindent To demonstrate how this metric performs, we compare permutations of the Gopher/Louse dataset from Hafner {\em et al.}. Keeping the tree structures intact, a collection of spectra were computed by randomly reassigning links between leaf nodes (Figure \ref{fig:FP_ajperm}) and computing the Jensen-Shannon divergence between successively more permuted spectral distributions and the spectral distribution of the original, un-permuted graph (Figure \ref{fig:FP_permuted_distances}). The metric is neither linear nor monotonic with these permutations, but it does diverge predictably. 
+However, there are some important difficulties when it comes to applying the Hommola cospeciation test to a large number of clades belonging to the same tree. Fist of all, this approach necessarily entails multiple comparison, and so a correction to the significance values is required. However, a Bonferroni correction is not appropriate because the structure of each clade is not independent of the others. Rather, they are hierarchically nested within a tree, which is itself inferred from an probabilistic model (an approximate maximum likelihood model, in this case), which is based on nucelotide transitions inferred from from an alignment. The autocorrelation within the tree would need to be accounted for, but calculating it would not be straightforward. At a minimum, one would need to take into account the fact that the multiple comparisons have hierarchical relationships.
 
-\subfile{FishPoo/figures/figure10}
+The second difficulty arises from the need to perform unsupervised correlation tests. Hommola {\em et al.} use the Pearson product-moment correlation, which assumes that the processes are independent, identically distributed, and follow a bivariate normal distribution. Unfortunately, there is reason to suppose that the distances among tips of a phylogenetic tree would be normally distributed. Of course, other correlation statistics could be substituted at the expense of computational complexity (Spearman's rank correlation coefficient, for example, obeys quadratic scaling), but the number of OTUs present in a typical microbiome would call for the use of a supercomputer.
 
-\subfile{FishPoo/figures/figure11}
+\subfile{FishPoo/figures/figure6}
 
-\subfile{FishPoo/figures/figure12}
+The reliance on a summary statistic hobbles Hommola {\em et al} as a way to detect co-diversification in the microbiome, where a supervised method is not practical. All summary statistics are a form of information reduction, usually a projection into a 1-dimensional space, and their interpretation depends on structural properties within the data. While it is often possible to construct complimentary tests to insure that assumptions hold, those tests are themselves likely to rely on summary statistics. Ultimately, someone has to actually inspect the data to make sure that the correlations are meaningful. \cite{anscombe1973graphs} For example, compare the distribution of pairwise distances for the Gopher/Louse dataset \cite{hafner1994disparate} to Clade 72223, which appears just below it in Figure \ref{FP_highcorr}. Both have about the same correlation coefficient ($r=0.490$ verses $r=0.488$), very high significance ($1.38\times 10^{-9}$ verses $p=3.21\times 10^{-223}$ and are within an order of magnitude in size ($15 \times 17$ verses $14 \times 68$). Nevertheless, the two distributions are obviously different, and the vertical banding pattern in Clade 72223 is strongly reminiscent of Case 4 in Anscombe's quartet. The structural differences between these interactions can also be seen clearly when represented as tanglegrams (Figure \ref{fig:FP_tangles}).
 
-In this way, a feature space constructed over the Laplaceian spectra of networks of interaction species with known ecologies (parasitic verses mutualistic interactions, for example). These networks are then projected into the space which they span, and a classifier is trained on their ecological labels. The spectra of interactions with unknown ecological labels are then projected into that space, and the trained classifier may then predict which ecological label is most likely for each unlabeled interaction.
+\subfile{FishPoo/figures/figure7}
 
-For each interaction collected from the literature (which we'll denote $G_{L,i}$, there is a label for the type of ecological interaction taking place. Each spectral density distribution has a set of endogenous features (see also Table \ref{FP_studies_table}) :
+In principle, one could develop a hierarchical Bonferroni correction, design correlation tests that exclude artifactual features that crop up in distributions of patristic distances, and obtain the use of a powerful supercomputer. However, a third difficulty remains. All of the approaches mentioned so far are based upon an idealized model of coevolution. In the ideal case, the host and the guest organisms would diverge in lockstep and exhibit phylogenies of perfectly congruent structure. One might imagine this to be the case for vertically transmitted symbionts, but the reality is that it is not even true for different genes within the same organism (for example, due to incomplete lineage sorting). Coevolution can be expected to manifest alongside other effects. For example, a Red Queen interaction may ``leak'' lineages that escape from the reciprocal selective effects. A Red Queen interaction may emerge from a non-coevolutionary interaction, producing a embedded coevolution event. Organisms outside a coevolutionary interaction may impinge on the process, as may abiotic factors.
 
-\begin{itemize}
-    \item{\textbf{Links} ($n_{L}$)} The number of links connecting the interacting trees.
+The model, and the statistical tests applied to it, must be sensitive enough to detect coevolution from a background of other process and selective enough to discriminate real cases of coevolution from patterns exhibiting spurious or artifactual resemblance to coevolution.
 
-    \item{\textbf{Occupancy} ($k$)} The ratio of the number of links to the number of leafs ($2 n_{L} : n_{\rm hosts} + n_{\rm guests}$).
+As mentioned before, the Gopher/Louse dataset from Hafner {\em et. al.} exhibits a Hommola correlation of $r=0.49$, which is rather poor as correlated processes go. Nevertheless, the ecological case for cospeciation is solid and its physiological basis is sound. The Sedge/Smut interaction from Escudero \cite{escudero2015phylogenetic} is also well established, but has a Hommola correlation of only $r=0.15$. By itself, the Hommola test is neither sensitive nor selective enough to identify coevolution in microbiomes. However, it does measure an informative structural property of interacting phylogenies. Viewed in a broader context, it is a valuable feature to include in a more generalized framework for classifying these interactions.
 
-    \item{\textbf{Squareness} ($q$)} : The ratio of the number of leafs in each tree.
+\subsection{A comparative approach to coevolution}
 
-    \item{\textbf{Eigengap} ($\lambda_{\delta}$)} The difference between the largest and second largest eigenvalues in the Laplacian spectrum.
-    
-    \item{\textbf{Kurtosis} ($\gamma_{2}$)} The sharpness of the peak in the distribution (the fourth standardized moment).
+All model-based methods must convincingly demonstrate that they provide the appropriate selectivity, sensitivity and parameter selection for their application. This is more challenging for some applications than others, and searching for coevolution in microbiomes appears to be particularly challenging. Comparative methods exchange the statistical vulnerabilities of model-based methods for the epistemological vulnerabilities of database bias. Fortunately, the number of multi-species interactions is combinatorial with the number of species (though constrained by propinquity), and the ecological literature is rich with examples. A database drawn from the existing literature would suffer from bias, but it would not be small.
 
-    \item{\textbf{Skew} ($\gamma_{1}$)} The asymmetry of the distribution (the third standardized moment).
-
-    \item{\textbf{Hommola correlation} ($r_{H}$)} The Hommola correlation of the interaction \cite{hommola2009permutation}.
-
-    \item{\textbf{Hommola significance} ($p_{H}$)} The significance of the Hommola correlation \cite{hommola2009permutation}.
-
-    \item{\textbf{Tree distance} ($D_{t}$)} The Jensen-Shannon divergence between the spectral density distributions of each of the two phylogenetic trees in the interactions.
-\end{itemize}
-
-\noindent These properties form an $n\times 9$ matrix of features, like so :
-
-\begin{equation}
-\psi =
-\bordermatrix{
-        & \lambda_{\delta}   & \gamma_{1}   & \gamma_{2}   & r_{H}   & p_{H}   & D_{t}   & k      & q      & n_{L}   \cr
-G_{L,0} & \lambda_{\delta,0} & \gamma_{1,0} & \gamma_{2,0} & r_{H,0} & p_{H,0} & D_{t,0} & k_{0}  & q_{0}  & n_{L,0} \cr
-G_{L,1} & \lambda_{\delta,1} & \gamma_{1,1} & \gamma_{2,1} & r_{H,1} & p_{H,1} & D_{t,1} & k_{1}  & q_{1}  & n_{L,1} \cr
-G_{L,2} & \lambda_{\delta,2} & \gamma_{1,2} & \gamma_{2,2} & r_{H,2} & p_{H,2} & D_{t,2} & k_{2}  & q_{2}  & n_{L,2} \cr
-\vdots  & \vdots             & \vdots       & \vdots       & \vdots  & \vdots  & \vdots  & \vdots & \vdots & \vdots  \cr 
-G_{L,n} & \lambda_{\delta,n} & \gamma_{1,n} & \gamma_{2,n} & r_{H,n} & p_{H,n} & D_{t,n} & k_{n}  & q_{n}  & n_{L,n} \cr
-}
-\end{equation}
-
-\noindent There are also the Shannon-Jensen distances between each pair of labeled interactions :
-
-\begin{equation}
-    D_{L,L,i,j} = D_{\rm SJ}( G_{L,i}, G_{L,j} )
-\end{equation}
-
-\noindent These distances form an matrix of $n^2$ features, like so :
-
-\begin{equation}
-\xi_L =
-\bordermatrix{
-        & G_{L,0}     & G_{L,1}     & G_{L,2}     & \cdots & G_{L,n}     \cr
-G_{L,0} & D_{L,L,0,0} & D_{L,L,0,1} & D_{L,L,0,2} & \cdots & D_{L,L,0,n} \cr
-G_{L,1} & D_{L,L,1,0} & D_{L,L,1,1} & D_{L,L,1,2} & \cdots & D_{L,L,1,n} \cr
-G_{L,2} & D_{L,L,2,0} & D_{L,L,2,1} & D_{L,L,2,2} & \cdots & D_{L,L,2,n} \cr
-\vdots  & \vdots      & \vdots      & \vdots      & \ddots & \vdots      \cr
-G_{L,n} & D_{L,L,n,0} & D_{L,L,n,1} & D_{L,L,n,2} & \cdots & D_{L,L,n,n} \cr
-}
-\end{equation}
-
-\noindent Together, these two matrixes form the feature space into which we will use to define the system.
-
-\begin{equation}
-    \Psi_{L} = \left[ \psi_{L,(n \times 9)} | \xi_{L,(n \times n)} \right]
-\end{equation}
-
-Interactions with unknown ecology (unlabeled interactions) can then be placed into this space. Like the labeled interactions, the endogenous properties of the Laplacean spectra are tabulated :
-
-\begin{equation}
-\psi_U =
-\bordermatrix{
-        & \lambda_{\delta}   & \gamma_{1}   & \gamma_{2}   & r_{H}   & p_{H}   & D_{t}   & k      & q      & n_{L}   \cr
-G_{U,0} & \lambda_{\delta,0} & \gamma_{1,0} & \gamma_{2,0} & r_{H,0} & p_{H,0} & D_{t,0} & k_{0}  & q_{0}  & n_{L,0} \cr
-G_{U,1} & \lambda_{\delta,1} & \gamma_{1,1} & \gamma_{2,1} & r_{H,1} & p_{H,1} & D_{t,1} & k_{1}  & q_{1}  & n_{L,1} \cr
-G_{U,2} & \lambda_{\delta,2} & \gamma_{1,2} & \gamma_{2,2} & r_{H,2} & p_{H,2} & D_{t,2} & k_{2}  & q_{2}  & n_{L,2} \cr
-\vdots  & \vdots             & \vdots       & \vdots       & \vdots  & \vdots  & \vdots  & \vdots & \vdots & \vdots  \cr 
-G_{U,n} & \lambda_{\delta,n} & \gamma_{1,n} & \gamma_{2,n} & r_{H,n} & p_{H,n} & D_{t,n} & k_{n}  & q_{n}  & n_{L,n} \cr
-}
-\end{equation}
-
-\noindent For $m$ unlabeled interactions and $n$ labeled interactions, the Shannon-Jensen divergence between unlabeled and labeled interactions forms an $m\times n$ matrix of features.
-
-\begin{equation}
-\xi_U =
-\bordermatrix{
-        & G_{L,0}     & G_{L,1}     & G_{L,2}     & \cdots & G_{L,n}     \cr
-G_{U,0} & D_{U,L,0,0} & D_{U,L,0,1} & D_{U,L,0,2} & \cdots & D_{U,L,0,n} \cr
-G_{U,1} & D_{U,L,1,0} & D_{U,L,1,1} & D_{U,L,1,2} & \cdots & D_{U,L,1,n} \cr
-G_{U,2} & D_{U,L,2,0} & D_{U,L,2,1} & D_{U,L,2,2} & \cdots & D_{U,L,2,n} \cr
-\vdots  & \vdots      & \vdots      & \vdots      & \ddots & \vdots      \cr
-G_{U,m} & D_{U,L,m,0} & D_{U,L,m,1} & D_{U,L,m,2} & \cdots & D_{U,L,m,n} \cr
-}
-\end{equation}
-
-\noindent Appending these matrixes yields a set of features that allows us to project each unlabeled interaction into the same feature space as the labeled interactions.
-
-\begin{equation}
-    \Psi_{U} = \left[ \psi_{U,(n \times 9)} | \xi_{U,(m \times n)} \right]
-\end{equation}
-
-\noindent A neural network is then trained on $\Psi_L$ and the corresponding ecological labels and used to predict the ecological labels for $\Psi_U$. \cite{pedregosa2011scikit}
-
-The construction of a feature space of topological properties of interactions and dissimilarities with respect to interactions of known ecologies makes it possible to recast microbial ecology as a machine learning problem. This sketches out a powerful and flexible framework for extracting inferences on the nature of many kinds of ecological interactions without direct observation of their mechanism. The cost is that one must assemble a collection of relevant training data, and it is limited to cases where the interaction has persisted long enough to leave an significant imprint in the evolutionary history of the interacting groups. It should work particularly well in cases where two or more adaptive radiations have interacted.
+Rather than comparing candidate cases to a model, a comparative approach calls for a metric that scales with dissimilarity among cases. Measures of dissimilarity are not summary statistics (avoiding the problem of supervision), and it is possible to construct them with fewer assumptions. The construction of a feature space of topological properties of interactions and dissimilarities with respect to interactions of known ecologies makes it possible to undertake microbial ecology as a machine learning problem. This sketches out a powerful and flexible framework for extracting inferences on the nature of many kinds of ecological interactions without direct observation of their mechanism. The cost is that one must assemble a collection of relevant training data, and it is limited to cases where the interaction has persisted long enough to leave an significant imprint in the evolutionary history of the interacting groups. It should work particularly well in cases where two or more adaptive radiations have interacted.
 
 The training problem can be visualized by selecting a subspace spanned by two axes of the feature space and projecting the labeled training data and the unlabeled experimental data into it. Alternatively, one can project into a subspace spanned by principle components. Similarly, the predictions can be visualized by projecting the experimental data into one of these subspaces with labels corresponding to the predictions (Figure \ref{fig:FP_classified}).
 

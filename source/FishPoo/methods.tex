@@ -1,50 +1,138 @@
 \section{Materials \& Methods}
 
-Most of the literature on the topic addresses coevolution in one of two ways, depending on the initial assumptions. One may begin without the assumption coevolution has occurred, and then ascertain the likelihood that it did. Or, having established that coevolution has occurred either by testing for it or through some other piece of exogenous evidence, one may ascertain what history is most likely. The first approach yields an overall likelihood, and the second yields a sequence of events (host switches, extinctions and bifurcations) that may have resulted in the observed associations.
+Here, we propose an comparative method for co-diversifying systems that extends an approach developed by Lewitus and Morlon \cite{lewitus2015characterizing} for use with phylogenetic trees. The graph adjacency matrixes for each phylogenetic tree are constructed, as per Lewitus and Morlon. The total phylogenetic distance for each tree is then normalized to unity. Then, the adjacency matrixes for the two trees are joined along a common diagonal, creating two empty rectangular blocks symmetric about the diagonal. These rectangular blocks are where the any between the two joined graphs must exist, and so the interactions between the leaf nodes in the phylogeny are placed here, weighted at the mean branch length of the two trees. The graph Laplacian is constructed (Figure \ref{fig:FP_ajlp}), the eigenvalues are computed and a spectral density distribution (Figure \ref{fig:FP_eigendensity}) is computed using a kernel density estimator with a Gaussian kernel, as in Lewitus and Morlon. 
 
-We are interested in learning about the natural history of the system, and so we would like to ask a somewhat enlarged question. {\em In a system where the hosts are associated with a very large number of related organisms, which clades show evidence of coevolution with the hosts?}
+\subfile{FishPoo/figures/figure8}
 
-\subsection{Phylogenetic signal and trait-based approaches}
+The eigenvalues of a network's Laplacian corresponds to the frequency with which a random walker would visit each node in steady state (i.e., in the limit of the number of random steps as the number of steps approaches infinity). In a network with edge weights (or a tree with branch lengths), the probability distribution of random steps made by the walker from each node is partitioned by the edge weights (or branch lengths) of each edge connected connected to that node. It is a measure of the relative connectivity of each node in the network. 
 
-For each organism that appears among the microbiomes of a group of hosts, there exists a pattern of observed associations between the ``guest'' organisms and the host organisms. These associations can be treated as traits of the host, and the history of each association can be examined like any phenotypic trait of the host. Alternatively, the tendency to associate (or not) with a host could be treated as a trait distributed over a group of microbial organisms, although it would require breaking the microbiome down into groups of related OTUs in order to be meaningful. Association with a particular host is more likely to correspond to different traits for more distantly related bacteria, and so it is probably not meaningful to naively apply stochastic trait mapping across all bacterial diversity.
+\subfile{FishPoo/figures/figure9}
 
-In {\em Analysis of phylogenetics and evolution with {\tt R}} (p. 236), Emmanuael Paradis describes phylogenetic signal as follows :
+The eigenvalues of a network comprise its spectrum. A network's spectrum is a not perfectly unique; very small networks with different topologies may share the same eigenvalues. The probability of one tree being a superset of another approaches unity in the limit of very large trees. For trees of intermediate size ($ \approx 5 < n < n \rightarrow \infty$), the probability that two randomly selected trees will share the same spectrum is finite but negligible. \cite{matsen2012ubiquity} For networks constructed from two interconnected trees, individual internal nodes of the trees will have the same connectivity regardless of whether they are in a network or in a tree. Thus, the spectrum of such a network will be composed of eigenvalues that correspond to those of the internal nodes of each of the two trees, and a third group of eigenvalues corresponding to the leafs and their interactions. There are more possible configurations for networks of this general topology than for trees of a given number of nodes, and thus a larger number of spectra are possible for a network than for a tree.
 
-\begin{quote}
-The concept of phylogenetic signal is at the heart of most phylogenetic methods. From a statistical point of view, a phylogenetic signal is defined by the non-null covariances (i.e., non-independence) among species. From a biological point of view, phylogenetic signal is a direct consequence of the evolution of traits and its form will depend on the evolutionary mechanisms in action.
-\end{quote}
+Spectra are a discrete set of values equal to the number of nodes in the network, and so comparing the structure of networks with unequal sizes requires some additional transformation. As with Lewitus and Morlon, and Matsen and Evans \cite{lewitus2015characterizing, matsen2012ubiquity} work with trees, we map the Laplacian spectra into a continuous, unit space by applying a Gaussian kernel density estimator, yielding a continuous distribution function for each spectra. The dissimilarity between two distribution can be measured using the Kullback-Leibler divergence, $D_{\rm KL}$. 
 
-The advantage of this approach is that it decomposes the problem into a large number of smaller problems. Every OTU (operational taxonomic unit) is treated as an independent trait, and observed associations are simply plugged into one of the four established models. All of them have been implemented in {\tt R}. Unfortunately, this is also a key disadvantage. Most trait-based models do not account for interactions {\em among} traits, or a way to account for traits that have their own evolutionary model, independent of the organisms that exhibit them. 
+\begin{equation}
+    D_{\rm KL}( p, q ) = \int_{-\infty}^\infty p(x) \, \log\frac{p(x)}{q(x)} \, {\rm d}x
+\end{equation}
 
-A second disadvantage of trait-based approaches when applied to co-diversifying systems arises from the non-uniform distribution of microbial diversity with respect to 16S diversity. Individual OTUs may represent several organisms, each with their own pattern of association (Figure \ref{fig:FP_fig4}). Comparing phylogenetic signal among different OTUs thus depends on the diversity underlying each of the OTUs. Correcting for this would require a relatively complete and unbiased survey of microbial diversity.
+\noindent The Kullback-Leibler divergence measures the information lost when using distribution $q(x)$ to approximate distribution $p(x)$. This is almost what we want, but unfortunately $D_{\rm KL}$, like subtraction and division, is not metric (in general, $D_{\rm KL}(p,q) \neq D_{\rm KL}(q,p)$ unless $p=q$, in which case $D_{\rm KL}=0$). However, the Jensen-Shannon divergence between the two distributions is metric.
 
-\subfile{FishPoo/figures/figure4}
+\begin{equation}
+    D_{\rm SJ}( p, q ) = \sqrt{ \frac{1}{2} D_{\rm KL}( p, q ) + \frac{1}{2} D_{\rm KL}( q, p ) }
+\end{equation}
 
-\subsection{Tests for cospeciation}
+\noindent To demonstrate how this metric performs, we compare permutations of the Gopher/Louse dataset from Hafner {\em et al.}. Keeping the tree structures intact, a collection of spectra were computed by randomly reassigning links between leaf nodes (Figure \ref{fig:FP_ajperm}) and computing the Jensen-Shannon divergence between successively more permuted spectral distributions and the spectral distribution of the original, un-permuted graph (Figure \ref{fig:FP_permuted_distances}). The metric is neither linear nor monotonic with these permutations, but it does diverge predictably. 
 
-Hafner {\em et al.} \cite{hafner1994disparate} examines the relationship between pocket gophers and their chewing louse parasites. This paper addresses there first question using a tree reconciliation test implemented in {\tt COMPONENT} by Roderic D. M. Page \cite{page1993genes}. It is, in essence, a parsimony approach; the gene duplication and loss events necessary to achieve topological congruence between two trees are minimized. Hafner {\em et al.} first reject the null hypothesis (independent evolution) by applying the tree reconciliation test among gopher, louse and randomly drawn trees, and then examine rates of nucleotide divergence between the gopher and louse. 
+\subfile{FishPoo/figures/figure10}
 
-This dataset has since been reanalyzed in many other publications, has become a sort of base-case for co-diversification methods. Notably, Huelsenbeck {\em et al.} introduced the use of Bayesian inference to cospeciation \cite{huelsenbeck2000bayesian}.
+\subfile{FishPoo/figures/figure11}
 
-Hommola {\em et al.} \cite{hommola2009permutation} describe a method to extend the Mantel test. \cite{mantel1967detection} The Mantel test is a statistic on the correlation of two matrixes, and requires that the matrixes be of equal rank. When applied to distance matrixes for trees containing differing numbers of taxa, one must delete or duplicate taxa until the matrix ranks are equal. This results in anomalous results which Hommola {\em et al.} explore in detail. To address this issue, they take every pair of linked tips (e.g., a parasite species that is observed to associate with a host species), and examine the correlation of distances through the two trees. This accommodates trees of arbitrary size and arbitrary patterns of association among their tips, and can be coupled with a straightforward permutation test to estimate the significance of the correlations. One can walk through every clade in the phylogeny of host-associated OTUs and, for every clade, compute the Hommola correlation with the host phylogeny (Figure \ref{FP_hommola_corr}). 
+\subfile{FishPoo/figures/figure12}
 
-\subfile{FishPoo/figures/figure5}
+In this way, a feature space constructed over the Laplacian spectra of networks of interaction species with known ecologies (parasitic verses mutualistic interactions, for example). These networks are then projected into the space which they span, and a classifier is trained on their ecological labels. The spectra of interactions with unknown ecological labels are then projected into that space, and the trained classifier may then predict which ecological label is most likely for each unlabeled interaction.
 
-However, there are some important difficulties when it comes to applying the Hommola cospeciation test to a large number of clades belonging to the same tree. Fist of all, this approach necessarily entails multiple comparison, and so a correction to the significance values is required. However, a Bonferroni correction is not appropriate because the structure of each clade is not independent of the others. Rather, they are hierarchically nested within a tree, which is itself inferred from an probabilistic model (an approximate maximum likelihood model, in this case), which is based on nucelotide transitions inferred from from an alignment. The autocorrelation within the tree would need to be accounted for, but calculating it would not be straightforward. At a minimum, one would need to take into account the fact that the multiple comparisons have hierarchical relationships.
+For each interaction collected from the literature (which we'll denote $G_{L,i}$, there is a label for the type of ecological interaction taking place. Each spectral density distribution has a set of endogenous features (see also Table \ref{FP_studies_table}) :
 
-The second difficulty arises from the need to perform unsupervised correlation tests. Hommola {\em et al.} use the Pearson product-moment correlation, which assumes that the processes are independent, identically distributed, and follow a bivariate normal distribution. Unfortunately, there is reason to suppose that the distances among tips of a phylogenetic tree would be normally distributed. Of course, other correlation statistics could be substituted at the expense of computational complexity (Spearman's rank correlation coefficient, for example, obeys quadratic scaling), but the number of OTUs present in a typical microbiome would call for the use of a supercomputer.
+\begin{itemize}
+    \item{\textbf{Links} ($n_{L}$)} The number of links connecting the interacting trees.
 
-\subfile{FishPoo/figures/figure6}
+    \item{\textbf{Occupancy} ($k$)} The ratio of the number of links to the number of leafs ($2 n_{L} : n_{\rm hosts} + n_{\rm guests}$).
 
-The reliance on a summary statistic likely dooms the application of Hommola {\em et al} as a way to detect co-diversification in the microbiome, where a supervised method is not practical. All summary statistics are a form of information reduction, usually a projection into a 1-dimensional space, and their interpretation depends on structural properties within the data. While it is often possible to construct complimentary tests to insure that assumptions hold, those tests are themselves likely to rely on summary statistics. Ultimately, someone has to actually inspect the data. \cite{anscombe1973graphs} For example, compare the distribution of pairwise distances for the Gopher/Louse dataset \cite{hafner1994disparate} to Clade 72223, which appears just below it in Figure \ref{FP_highcorr}. Both have about the same correlation coefficient ($r=0.490$ verses $r=0.488$), very high significance ($1.38\times 10^{-9}$ verses $p=3.21\times 10^{-223}$ and are within an order of magnitude in size ($15 \times 17$ verses $14 \times 68$). Nevertheless, the two distributions are obviously different, and the vertical banding pattern in Clade 72223 is strongly reminiscent of Case 4 in Anscombe's quartet. The structural differences between these interactions can also be seen clearly when represented as tanglegrams (Figure \ref{fig:FP_tangles}).
+    \item{\textbf{Squareness} ($q$)} : The ratio of the number of leafs in each tree.
 
-\subfile{FishPoo/figures/figure7}
+    \item{\textbf{Eigengap} ($\lambda_{\delta}$)} The difference between the largest and second largest eigenvalues in the Laplacian spectrum.
+    
+    \item{\textbf{Kurtosis} ($\gamma_{2}$)} The sharpness of the peak in the distribution (the fourth standardized moment).
 
-In principle, one could develop a hierarchical Bonferroni correction, design correlation tests that exclude artifactual features that crop up in distributions of patristic distances, and obtain the use of a powerful supercomputer. However, a third difficulty remains. All of the approaches mentioned so far are based upon an idealized model of co-diversification. In the ideal case, the host and the guest organisms would diverge in lockstep and exhibit phylogenies of perfectly congruent structure. One might imagine this to be the case for vertically transmitted symbionts, but the reality is that it is not even true for different genes within the same organism (MDM: cite some ILS papers here, like some of Graham Coop's). Indeed, many of the methods used to study co-diversification were originally developed with the aim of reconciling gene trees into species trees(MDM: and cite some more). Real cases of co-diversification can be expected to manifest along with other effects, such as ecological interactions with organisms that do not belong to either clade, stochastic variations in nucleotide divergence, extinctions, sampling bias and the emergence of cryptic species. The model, and the statistical tests applied to it, must be able to distinguish between a real case with deviations arising from these other processes and a spurious or artifactual resemblance to one. If the effect of competing processes were small, one could apply the a stringent statistical cutoff. Unfortunately, this is not the case. As mentioned before, the Gopher/Louse dataset from Hafner {\em et. al.} exhibits a Hommola correlation of $r=0.49$, which is rather poor as correlated processes go. Nevertheless, the ecological case for cospeciation is solid and its physiological basis is sound. The Sedge/Smut interaction from Escudero \cite{escudero2015phylogenetic} is also well established, but has a Hommola correlation of only $r=0.15$. It would not make sense to search for new cases of co-diversification with a method that only works within a statistical stringency that would exclude all known cases of the effect. It is possible to address this problem by including other processes in the model, but each new parameter also introduces additional risk of overfitting.
+    \item{\textbf{Skew} ($\gamma_{1}$)} The asymmetry of the distribution (the third standardized moment).
+
+    \item{\textbf{Hommola correlation} ($r_{H}$)} The Hommola correlation of the interaction \cite{hommola2009permutation}.
+
+    \item{\textbf{Hommola significance} ($p_{H}$)} The significance of the Hommola correlation \cite{hommola2009permutation}.
+
+    \item{\textbf{Tree distance} ($D_{t}$)} The Jensen-Shannon divergence between the spectral density distributions of each of the two phylogenetic trees in the interactions.
+\end{itemize}
+
+\noindent These properties form an $n\times 9$ matrix of features, like so :
+
+\begin{equation}
+\psi =
+\bordermatrix{
+        & \lambda_{\delta}   & \gamma_{1}   & \gamma_{2}   & r_{H}   & p_{H}   & D_{t}   & k      & q      & n_{L}   \cr
+G_{L,0} & \lambda_{\delta,0} & \gamma_{1,0} & \gamma_{2,0} & r_{H,0} & p_{H,0} & D_{t,0} & k_{0}  & q_{0}  & n_{L,0} \cr
+G_{L,1} & \lambda_{\delta,1} & \gamma_{1,1} & \gamma_{2,1} & r_{H,1} & p_{H,1} & D_{t,1} & k_{1}  & q_{1}  & n_{L,1} \cr
+G_{L,2} & \lambda_{\delta,2} & \gamma_{1,2} & \gamma_{2,2} & r_{H,2} & p_{H,2} & D_{t,2} & k_{2}  & q_{2}  & n_{L,2} \cr
+\vdots  & \vdots             & \vdots       & \vdots       & \vdots  & \vdots  & \vdots  & \vdots & \vdots & \vdots  \cr 
+G_{L,n} & \lambda_{\delta,n} & \gamma_{1,n} & \gamma_{2,n} & r_{H,n} & p_{H,n} & D_{t,n} & k_{n}  & q_{n}  & n_{L,n} \cr
+}
+\end{equation}
+
+\noindent There are also the Shannon-Jensen distances between each pair of labeled interactions :
+
+\begin{equation}
+    D_{L,L,i,j} = D_{\rm SJ}( G_{L,i}, G_{L,j} )
+\end{equation}
+
+\noindent These distances form an matrix of $n^2$ features, like so :
+
+\begin{equation}
+\xi_L =
+\bordermatrix{
+        & G_{L,0}     & G_{L,1}     & G_{L,2}     & \cdots & G_{L,n}     \cr
+G_{L,0} & D_{L,L,0,0} & D_{L,L,0,1} & D_{L,L,0,2} & \cdots & D_{L,L,0,n} \cr
+G_{L,1} & D_{L,L,1,0} & D_{L,L,1,1} & D_{L,L,1,2} & \cdots & D_{L,L,1,n} \cr
+G_{L,2} & D_{L,L,2,0} & D_{L,L,2,1} & D_{L,L,2,2} & \cdots & D_{L,L,2,n} \cr
+\vdots  & \vdots      & \vdots      & \vdots      & \ddots & \vdots      \cr
+G_{L,n} & D_{L,L,n,0} & D_{L,L,n,1} & D_{L,L,n,2} & \cdots & D_{L,L,n,n} \cr
+}
+\end{equation}
+
+\noindent Together, these two matrixes form the feature space into which we will use to define the system.
+
+\begin{equation}
+    \Psi_{L} = \left[ \psi_{L,(n \times 9)} | \xi_{L,(n \times n)} \right]
+\end{equation}
+
+Interactions with unknown ecology (unlabeled interactions) can then be placed into this space. Like the labeled interactions, the endogenous properties of the Laplacean spectra are tabulated :
+
+\begin{equation}
+\psi_U =
+\bordermatrix{
+        & \lambda_{\delta}   & \gamma_{1}   & \gamma_{2}   & r_{H}   & p_{H}   & D_{t}   & k      & q      & n_{L}   \cr
+G_{U,0} & \lambda_{\delta,0} & \gamma_{1,0} & \gamma_{2,0} & r_{H,0} & p_{H,0} & D_{t,0} & k_{0}  & q_{0}  & n_{L,0} \cr
+G_{U,1} & \lambda_{\delta,1} & \gamma_{1,1} & \gamma_{2,1} & r_{H,1} & p_{H,1} & D_{t,1} & k_{1}  & q_{1}  & n_{L,1} \cr
+G_{U,2} & \lambda_{\delta,2} & \gamma_{1,2} & \gamma_{2,2} & r_{H,2} & p_{H,2} & D_{t,2} & k_{2}  & q_{2}  & n_{L,2} \cr
+\vdots  & \vdots             & \vdots       & \vdots       & \vdots  & \vdots  & \vdots  & \vdots & \vdots & \vdots  \cr 
+G_{U,n} & \lambda_{\delta,n} & \gamma_{1,n} & \gamma_{2,n} & r_{H,n} & p_{H,n} & D_{t,n} & k_{n}  & q_{n}  & n_{L,n} \cr
+}
+\end{equation}
+
+\noindent For $m$ unlabeled interactions and $n$ labeled interactions, the Shannon-Jensen divergence between unlabeled and labeled interactions forms an $m\times n$ matrix of features.
+
+\begin{equation}
+\xi_U =
+\bordermatrix{
+        & G_{L,0}     & G_{L,1}     & G_{L,2}     & \cdots & G_{L,n}     \cr
+G_{U,0} & D_{U,L,0,0} & D_{U,L,0,1} & D_{U,L,0,2} & \cdots & D_{U,L,0,n} \cr
+G_{U,1} & D_{U,L,1,0} & D_{U,L,1,1} & D_{U,L,1,2} & \cdots & D_{U,L,1,n} \cr
+G_{U,2} & D_{U,L,2,0} & D_{U,L,2,1} & D_{U,L,2,2} & \cdots & D_{U,L,2,n} \cr
+\vdots  & \vdots      & \vdots      & \vdots      & \ddots & \vdots      \cr
+G_{U,m} & D_{U,L,m,0} & D_{U,L,m,1} & D_{U,L,m,2} & \cdots & D_{U,L,m,n} \cr
+}
+\end{equation}
+
+\noindent Appending these matrixes yields a set of features that allows us to project each unlabeled interaction into the same feature space as the labeled interactions.
+
+\begin{equation}
+    \Psi_{U} = \left[ \psi_{U,(n \times 9)} | \xi_{U,(m \times n)} \right]
+\end{equation}
+
+\noindent A neural network is then trained on $\Psi_L$ and the corresponding ecological labels and used to predict the ecological labels for $\Psi_U$. \cite{pedregosa2011scikit}
 
 \subsection{Specimen collection and housing}
 
-Specimens were purchased through the aquarium trade and housed in a vivarium on at UC Davis under the supervision of M.D.M and P.C.W. Specimens were housed in single-species groups within 30-100L aquaria filtered by air-driven sponge filters.
+Specimens were purchased as wild-caught individuals shipped from a single import facility (Old World Exotic Fish, Homestead, FL) via air cargo in accordance with guidelines and regulations set out by the US Fish and Wildlife Service. \cite{NASanimals} The import facility packed the fish in individual 4-mil polyethylene bags with square-bottom bags, knotted with a large volume of air above the water. Bags were shipped in insulated foam boxes designed for air cargo shipment of live tropical fish. A direct flight was arranged from Miami International Airport (MIA) to Sacramento International Airport (SMF), and the shipment was received immediately at the Sacramento cargo terminal for transport to the laboratory by car. Specimens were housed in a vivarium at UC Davis under the supervision of M.D.M and P.C.W. Specimens were housed in single-species groups within 30-100L aquaria filtered by air-driven sponge filters.
 
 \subfile{FishPoo/figures/figure1}
 \subfile{FishPoo/tables/table1}
@@ -59,11 +147,37 @@ Specimens were purchased through the aquarium trade and housed in a vivarium on 
 
 \subsection{Sample collection}
 
-Specimens were fed until satiated and placed into 30L tanks. To minimize microbial contamination in the water and tank silicone, we lined each tank with a sterile autoclave bag prepared with 10 liters of molecular water augmented with a small amount of sodium chloride and calcium chloride. To minimize potential contamination from biological filtration, we used chemical filtration via sterile charcoal pellets to sequester nitrogenous wastes produced by the fish, and a sterile plastic tube was submerged and connected to an air pump to aerate the water. Stool was removed using a sterile serological pipette and frozen. Fish remained in these tanks for less than 24 hours and were then returned to their original aquarium.
+After shipping, specimens were placed in tanks separated by species. Where only one member of a species was collected, they were placed in a solitary tank. Specimens were allowed to acclimatize to their tanks and observed for signs of injury or stress. Because fish are usually starved prior to shipping to prevent stool decomposition from suffocating them in transit, feeding began as soon as it deemed safe. All specimens were fed a common diet of kelp and \textit{Arthrospira platensis} pellets (Omega One brand Veggie Mini Pellets) for six weeks. 
+
+For sample collection, specimens were fed until satiated and placed into 30L tanks. To minimize microbial contamination in the water and tank silicone, we lined each tank with a sterile autoclave bag prepared with 10 liters of molecular water augmented with a 5 grams each of sodium chloride and calcium chloride. To minimize potential contamination from biological filtration, we used chemical filtration via sterile charcoal pellets (Petco brand activated carbon pellets boiled in molecular water for 20 minutes) to sequester nitrogenous wastes produced by the fish, and a vinyl aquarium tube was submerged and connected to an air pump to aerate the water. For each collection, fresh tubing was flushed and wiped down with ethanol and dried before use. After feeding, specimens were transferred into the collection tanks and checked frequently until stool was observed. If no stool was observed within 24 hours, the specimen was returned to a standard vivarium tank and the experiment was repeated. After removing the specimen from the collection tank, stool was removed using a sterile serological pipette and frozen. 
 
 \subsection{Sample preparation, processing and sequencing}
 
-Stool samples were subjected to bead beating for 60 seconds and DNA was extracted using MoBio PowerSoil DNA Isolation kit in accordance with the manufacturer's protocol. DNA was amplified by a two-step PCR enrichment of the V4 region of the 16S rRNA gene using primers 515F and 806R, modified by addition of Illumina adaptor and barcodes sequences. Libraries were sequenced using an Illumina MiSeq system, generating 250 base pair paired-end amplicon reads. The amplicon data was multiplexed using dual barcode combinations for each sample. A custom script available in a GitHub repository (\url{https://github.com/gjospin/scripts/blob/master/Demul_trim_prep.pl}), to assign each pair of reads to their respective samples when parsing the raw data. This script allows for one base pair difference per barcode. The paired reads were then aligned and a consensus was computed using {\tt Trimmomatic} \cite{bolger2014trimmomatic} with maximum overlap of 120 and a minimum overlap of 70 (other parameters were left as default). The custom script automatically demultiplexes the data into {\tt fastq} files and parses the results to reformat the sequences in {\tt fasta} format.
+Stool samples were subjected to bead beating for 60 seconds and DNA was extracted using MoBio PowerSoil DNA Isolation kit in accordance with the manufacturer's protocol. DNA yields were measured using a Qubit Fluorometer (Invitrogen) and Quant-iT dsDNA Assay Kit, High Sensitivity (Invitrogen product no. Q33120). DNA was amplified by a two-step PCR enrichment of the V4 region of the 16S rRNA gene using ``universal'' primers 515F (TGCCAGCMGCCGCGGTAA) and 806R (GGACTACHVGGGTWTCTAAT), modified by addition of Illumina adapter and barcodes sequences (See Table \ref{FP_barcodes}).
+
+\subfile{FishPoo/tables/table3}
+
+Cycling conditions were as follows :
+
+\begin{table}[H]
+\centering
+\begin{tabular}{l|r}
+Temperature ($^{\circ}$C) & Time (mm:ss) \\\hline
+95$^{\circ}$C  & 2:00 \\
+\hline
+95$^{\circ}$C & 0:15 \\
+52$^{\circ}$C & 0:30 \\
+72$^{\circ}$C & 1:30 \\
+Repeat & for 10 cycles \\
+\hline
+72$^{\circ}$C &3:00 \\
+4$^{\circ}$C & forever
+\end{tabular}
+\end{table}
+
+PCR products were then purified using magnetic bead capture of high molecular weight DNA (Agricourt Ampure XP beads; product number A63880).
+
+Libraries were sequenced using an Illumina MiSeq system, generating 250 base pair paired-end amplicon reads. The amplicon data was multiplexed using dual barcode combinations for each sample. A custom script available in a GitHub repository (\url{https://github.com/gjospin/scripts/blob/master/Demul_trim_prep.pl}), to assign each pair of reads to their respective samples when parsing the raw data. This script allows for one base pair difference per barcode. The paired reads were then aligned and a consensus was computed using {\tt Trimmomatic} \cite{bolger2014trimmomatic} with maximum overlap of 120 and a minimum overlap of 70 (other parameters were left as default). The custom script automatically demultiplexes the data into {\tt fastq} files and parses the results to reformat the sequences in {\tt fasta} format.
 
 \subsection{Building the observation table}
 
@@ -85,9 +199,9 @@ Alignment of the observed sequences is performed using {\tt Clustal Omega}, \cit
 
 \subsection{Spectral analysis and machine learning}
 
-Classifying organisms by how long they have been present in a particular habitat can yield insights regarding their origins, especially when these relationships are repeated in many similar but distinct habitats. Phylogeographic models regard this collection of habitats as the nodes of a meta-community network. The edges of this network represent dispersal rates, a convolution of both the vectors of dispersal and the barriers that impinge on those vectors. Organisms move from habitat to habitat in discrete events with probabilities related to the dispersal rates. If organisms are gathered from each habitat, and trees of related organisms are constructed, these trees may be used to infer the rates of dispersal. These rates reveal, at least in broad strokes, the structure of the relationships among the habitats.
+%In phylogeographic models, network edges edges represent dispersal rates, a convolution of both the vectors of dispersal and the barriers that impinge on those vectors. Organisms move from habitat to habitat in discrete events with probabilities related to the dispersal rates. If organisms are gathered from each habitat, and trees of related organisms are constructed, these trees may be used to infer the rates of dispersal. These rates reveal, at least in broad strokes, the structure of the relationships among the habitats.
 
-The host tree and guest tree are loaded as {\tt SuchTree} objects, and linked together through the observation table as a {\tt SuchLinkedTrees} object. The {\tt SuchTree} class allows for extremely rapid traversals of large trees, enabling distance correlations to be efficiently computed. The {\tt SuchLinkedTrees} class leverages this to compute graph adjacency and graph Laplacian matrixes of subtrees of host and guest phylogenies. Spectral decomposition and kernel densities of graph Laplacians are computed using {\tt numpy}, and the Jensen-Shannon divergence is calculated between each pair of spectral densities using the {\tt entropy} function in {\tt scipy.stats}. \cite{walt2011numpy} Feature tables were assembled using {\tt Pandas} \cite{mckinney2010data} and machine learning was carried out using {\tt scikit-learn}. \cite{pedregosa2011scikit}
+The host tree and guest tree are loaded as {\tt SuchTree} objects, and linked together through the observation table as a {\tt SuchLinkedTrees} object. The {\tt SuchTree} class allows for extremely efficient traversals of large trees, enabling distance correlations to be efficiently computed. The {\tt SuchLinkedTrees} class leverages this to compute graph adjacency and graph Laplacian matrixes of subtrees of host and guest phylogenies. Spectral decomposition and kernel densities of graph Laplacians are computed using {\tt numpy}, and the Jensen-Shannon divergence is calculated between each pair of spectral densities using the {\tt entropy} function in {\tt scipy.stats}. \cite{walt2011numpy} Feature tables were assembled using {\tt Pandas} \cite{mckinney2010data} and machine learning was carried out using {\tt scikit-learn}. \cite{pedregosa2011scikit}
 
 \subsection{Correlation-based analysis}
 
@@ -95,7 +209,7 @@ For each clade of guest organisms, the {\tt SuchLinkedTrees.linked\_distances} f
 
 \subsection{Literature search for comparative analysis}
 
-Trees and interaction matrixes were compiled from the supplementary material from Rezende {\em et al.}, \cite{rezende2007non} Hafner {\em et al.} \cite{hafner1994disparate} and Escudero \cite{escudero2015phylogenetic} for a total of fifty data sets (Table \ref{FP_studies_table}).
+Trees and interaction matrixes were compiled from the supplementary material from Rezende {\em et al.}, \cite{rezende2007non} Hafner {\em et al.} \cite{hafner1994disparate} and Escudero \cite{escudero2015phylogenetic} for a total of fifty data sets (Table \ref{FP_studies_table}). Taxonimic identifiers were reconciled between trees and interaction matrixes using Levenshtein distances \cite{levenshtein1966binary} calculated using {\tt fuzzywuzzy}, \cite{fuzzywuzzy} and by hand where necessary. Corrected trees and matrixes are distributed with permission with {\tt SuchTree} in Newick format and comma separated values, respectively.
 
 \subsection{Simulated datasets}
 
