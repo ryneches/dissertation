@@ -2,11 +2,11 @@
 
 Here, we propose an comparative method for co-diversifying systems that extends an approach developed by Lewitus and Morlon \cite{lewitus2015characterizing} for use with phylogenetic trees. The graph adjacency matrixes for each phylogenetic tree are constructed, as per Lewitus and Morlon. The total phylogenetic distance for each tree is then normalized to unity. Then, the adjacency matrixes for the two trees are joined along a common diagonal, creating two empty rectangular blocks symmetric about the diagonal. These rectangular blocks are where the any between the two joined graphs must exist, and so the interactions between the leaf nodes in the phylogeny are placed here, weighted at the mean branch length of the two trees. The graph Laplacian is constructed (Figure \ref{fig:FP_ajlp}), the eigenvalues are computed and a spectral density distribution (Figure \ref{fig:FP_eigendensity}) is computed using a kernel density estimator with a Gaussian kernel, as in Lewitus and Morlon. 
 
-\subfile{FishPoo/figures/figure8}
+\subfile{FishPoo/figures/figure8_subfig}
 
 The eigenvalues of a network's Laplacian corresponds to the frequency with which a random walker would visit each node in steady state (i.e., in the limit of the number of random steps as the number of steps approaches infinity). In a network with edge weights (or a tree with branch lengths), the probability distribution of random steps made by the walker from each node is partitioned by the edge weights (or branch lengths) of each edge connected connected to that node. It is a measure of the relative connectivity of each node in the network. 
 
-\subfile{FishPoo/figures/figure9}
+\subfile{FishPoo/figures/figure9_subfig}
 
 The eigenvalues of a network comprise its spectrum. A network's spectrum is a not perfectly unique; very small networks with different topologies may share the same eigenvalues. The probability of one tree being a superset of another approaches unity in the limit of very large trees. For trees of intermediate size ($ \approx 5 < n < n \rightarrow \infty$), the probability that two randomly selected trees will share the same spectrum is finite but negligible. \cite{matsen2012ubiquity} For networks constructed from two interconnected trees, individual internal nodes of the trees will have the same connectivity regardless of whether they are in a network or in a tree. Thus, the spectrum of such a network will be composed of eigenvalues that correspond to those of the internal nodes of each of the two trees, and a third group of eigenvalues corresponding to the leafs and their interactions. There are more possible configurations for networks of this general topology than for trees of a given number of nodes, and thus a larger number of spectra are possible for a network than for a tree.
 
@@ -26,9 +26,9 @@ Spectra are a discrete set of values equal to the number of nodes in the network
 
 \subfile{FishPoo/figures/figure10}
 
-\subfile{FishPoo/figures/figure11}
+\subfile{FishPoo/figures/figure11_subfig}
 
-\subfile{FishPoo/figures/figure12}
+\subfile{FishPoo/figures/figure12_subfig}
 
 In this way, a feature space constructed over the Laplacian spectra of networks of interaction species with known ecologies (parasitic verses mutualistic interactions, for example). These networks are then projected into the space which they span, and a classifier is trained on their ecological labels. The spectra of interactions with unknown ecological labels are then projected into that space, and the trained classifier may then predict which ecological label is most likely for each unlabeled interaction.
 
@@ -134,7 +134,7 @@ G_{U,m} & D_{U,L,m,0} & D_{U,L,m,1} & D_{U,L,m,2} & \cdots & D_{U,L,m,n} \cr
 
 Specimens were purchased as wild-caught individuals shipped from a single import facility (Old World Exotic Fish, Homestead, FL) via air cargo in accordance with guidelines and regulations set out by the US Fish and Wildlife Service. \cite{NASanimals} The import facility packed the fish in individual 4-mil polyethylene bags with square-bottom bags, knotted with a large volume of air above the water. Bags were shipped in insulated foam boxes designed for air cargo shipment of live tropical fish. A direct flight was arranged from Miami International Airport (MIA) to Sacramento International Airport (SMF), and the shipment was received immediately at the Sacramento cargo terminal for transport to the laboratory by car. Specimens were housed in a vivarium at UC Davis under the supervision of M.D.M and P.C.W. Specimens were housed in single-species groups within 30-100L aquaria filtered by air-driven sponge filters.
 
-\subfile{FishPoo/figures/figure1}
+\subfile{FishPoo/figures/figure1_subfig}
 \subfile{FishPoo/tables/table1}
 
 %\begin{figure}
