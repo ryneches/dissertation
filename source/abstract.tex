@@ -1,21 +1,25 @@
+%\section*{Abstract}
 
 % Context: Why now
-\noindent\textbf{Context:}
+\noindent\textbf{Part 1: Fish.}
 The ability to observe associations between microbes and their hosts usually does not, in itself, support conclusions regarding the ecological nature of those interactions. Even when an association is correlated with an outcome (a disease state, for example) under carefully controlled conditions, there are usually many potentially confounding factors. For example, variations in host genotype, phenotype and association with other microbial organisms complicate the ability to establish cause and effect.
 
-% Need: What you want is not what you have
-\noindent\textbf{Need:}
-
-%Task: What I did to address the need
-\noindent\textbf{Task:}
 We propose a similarity metric on host-microbe interactions using the Shannon-Jensen divergence of the Laplacian spectral density distributions of the networks formed by linking the phylogenies of the host and microbial clades through their ecological associations. This metric, along with the skew, kurtosis and other properties linked to the underlying network topology, forms the basis of feature space into which labeled and unlabeled interactions can be projected. In this space, it is possible to apply established clustering and machine learning techniques to classify interactions that exhibit similar phylogenetic topology and patterns of ecological interaction. Using this method, we are able to propose ecological relationships for host-associated bacterial clades based on their structural similarity to interactions with known ecological relationships.
 
-% Findings: What I found doing the task
-\noindent\textbf{Findings:}
-A neural network classifier was trained on 51 interactions with a known ecology (parasitism and two types of mutualism) gathered from the literature, 50 simulated cases of perfect co-evolution and 50 simulated cases of random associations. While this training set is too small to rigorously test the accuracy of the classifier, we demonstrate that the training process reliably converges, yielding a neural network that produces highly consistent predictions. 
+A neural network classifier was trained on 51 interactions with a known ecology (parasitism and two types of mutualism) gathered from the literature, 50 simulated cases of perfect co-evolution and 50 simulated cases of random associations. The classifier was then used to generate predictions as to the type of ecological relationship between clades of bacteria and archaea and their hosts, observed using 16S rRNA sequencing of the gut microbiomes of 14 species of wild-caught fish belonging to the Lake Tanganyika adaptive radiation of cichlid fish. While this training set is too small to rigorously test the accuracy of the classifier, we demonstrate that the training process reliably converges, yielding a neural network that produces highly consistent predictions. 
 
-% Conclusion: What these findings mean to me
-\noindent\textbf{Conclusion:}
+The second chapter explores gene flow among the hosts, \cite{mcgee2016evaluating} and the third chapter explores the ecological dynamics of a mass extinction among the hosts. \cite{mcgee2015pharyngeal} These chapters have been previously published. 
 
-% Perspectives: What we should do next
-\noindent\textbf{Perspectives:}
+\noindent\textbf{Part 2: Oceans.}
+This section is made up of three chapters exploring the biogeography of the planktonic microbial ecology of the open ocean, all of which have been previously published. Chapter one develops Non Negative Matrix Factorization, a statistical approach for predicting ecological functions of protein-coding genes observed from metagenomic data and applies this approach to the 2004--2007 Global Ocean Survey. \cite{jiang2012functional} Chapters two and three present results from a microbial survey of the Indian Ocean, and develops a citizen science approach for performing oceanographic research using small sailboats. \cite{jeffries2015spatially, lauro2014common}
+
+\noindent\textbf{Part 3: ChIP-seq.}
+This section is made up of two chapters that develop the necessary tools for exploring the gene regulatory networks of halophilic archaea. The first chapter lays out a workflow for identifying protein-DNA interactions of natively expressed transcription factors in the model organism {\em Halobacterium salinarum} sp. NRC-1 using ChIP-seq, and has been previously published. \cite{wilbanks2012workflow} The second chapter presents the software developed for this workflow, and has been published as preprint. \cite{neches2014fit}
+
+\noindent\textbf{Part 4: Tools.}
+This section is made up of two chapters that develop applications for 3D printing in microbiology and molecular biology. The first chapter establishes that fused deposition modeling 3D printing is alone sufficient to produce sterile components, and has been previously published. \cite{neches2016intrinsic} In the second chapter, I present single-use 3D printed parts, and the software to create them, that can perform the role of a liquid handling robot.
+
+\noindent\textbf{Part 5: Space.}
+This section is made up of a single chapter that relates a basic microbial growth kinetics experiment aboard the International Space Station, and has been previously published. \cite{coil2016growth}
+
+\printbibliography[heading=subbibliography]

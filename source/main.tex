@@ -18,6 +18,7 @@
 
 \setitemize{noitemsep,topsep=0pt,parsep=0pt,partopsep=0pt}
 
+\addbibresource[label=abstract]{abstract.bib}
 \addbibresource[label=introduction]{introduction.bib}
 \addbibresource[label=FishPoo]{FishPoo/FishPoo.bib}
 \addbibresource[label=SaltyBugs]{SaltyBugs/SaltyBugs.bib}
@@ -81,7 +82,12 @@ For her total confidence that I would find my way out of this particular wildern
 For the risk he took by inviting me into his lab, for his patient tolerance of my folly and stubbornness throughout this journey, for his sacrifices to protect my intellectual freedom, for his encouragement, for his levity and his seriousness, for his irreverence in the face of the trivial and his reverence for the truly profound, for the burden of genuine compassion for others that he refuses to lay down, for his gleeful sprints to understanding and for his reluctant walks to judgment, I thank Jonathan A. Eisen. It has been a privilege to linger in the safe, quiet space outlined by the bow shock of an advisor who stands against the currents of prejudice and cruelty. There are none equal.
 }%
 
-\abstract{\subfile{abstract.tex}}
+\abstract{%
+   	\begin{refsection}
+   	\newrefsection
+	\subfile{abstract.tex}
+	\end{refsection}
+}
 
 \makeatletter
 \newcommand{\chapterauthor}[1]{%
@@ -95,6 +101,11 @@ For the risk he took by inviting me into his lab, for his patient tolerance of m
 \begin{document}
 
 \makeintropages
+
+%\begin{refsection}
+%\newrefsection
+%\subfile{abstract.tex}
+%\end{refsection}
 
 \begin{refsection}
 \newrefsection
