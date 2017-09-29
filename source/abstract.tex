@@ -4,13 +4,15 @@
 The ability to observe associations between microbes and their hosts usually does not, in itself, support conclusions regarding the ecological nature of those interactions. Even when an association is correlated with an outcome (a disease state, for example) under carefully controlled conditions, there are usually many potentially confounding factors. For example, variations in host genotype, phenotype and association with other microbial organisms complicate the ability to establish cause and effect.
 
 % Need: What you want is not what you have
-\noindent\textbf{Need:} 
+\noindent\textbf{Need:}
 
 %Task: What I did to address the need
-\noindent\textbf{Task:} 
+\noindent\textbf{Task:}
+We propose a similarity metric on host-microbe interactions using the Shannon-Jensen divergence of the Laplacian spectral density distributions of the networks formed by linking the phylogenies of the host and microbial clades through their ecological associations. This metric, along with the skew, kurtosis and other properties linked to the underlying network topology, forms the basis of feature space into which labeled and unlabeled interactions can be projected. In this space, it is possible to apply established clustering and machine learning techniques to classify interactions that exhibit similar phylogenetic topology and patterns of ecological interaction. Using this method, we are able to propose ecological relationships for host-associated bacterial clades based on their structural similarity to interactions with known ecological relationships.
 
 % Findings: What I found doing the task
-\noindent\textbf{Findings:} 
+\noindent\textbf{Findings:}
+A neural network classifier was trained on 51 interactions with a known ecology (parasitism and two types of mutualism) gathered from the literature, 50 simulated cases of perfect co-evolution and 50 simulated cases of random associations. While this training set is too small to rigorously test the accuracy of the classifier, we demonstrate that the training process reliably converges, yielding a neural network that produces highly consistent predictions. 
 
 % Conclusion: What these findings mean to me
 \noindent\textbf{Conclusion:}
