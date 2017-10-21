@@ -1,5 +1,6 @@
 \documentclass[PhD]{ucdavisthesis}
 
+\usepackage{epigraph}
 \usepackage{enumitem}
 \usepackage{caption}
 \usepackage{subcaption}
@@ -32,7 +33,7 @@
 \addbibresource[label=SpaceGrowth]{SpaceGrowth/SpaceGrowth.bib}
 \addbibresource[label=DilutionPlates]{DilutionPlates/DilutionPlates.bib}
 
-\title{Something something something something microbes}
+\title{Prediction of ecological function in the microbiome using machine learning on the graph spectra of coevolving subnetworks}
 
 \author{Russell Y. Neches}
 \authordegrees{B.S. (Northeastern University, Boston) 2004}
@@ -47,39 +48,39 @@
 
 % Keepin' these under wraps until final version.
 \acknowledgments{%
-For getting me into graduate school in the first place, I thank Jean-Noel Leboeuf, William Nevins, Pierre-Alexandre Gourdain and Steven C. Cowley.
+% For getting me into graduate school in the first place, I thank Jean-Noel Leboeuf, William Nevins, Pierre-Alexandre Gourdain and Steven C. Cowley.
 
-For the insight that provided the mathematical foundation of this work, I thank Kerstin Hommola, Judith E. Smith, Yang Qiu and Walter R. Gilks.
+% For the insight that provided the mathematical foundation of this work, I thank Kerstin Hommola, Judith E. Smith, Yang Qiu and Walter R. Gilks.
 
-For their work gathering and assembling the literature survey of plant visitor, plant pollinator and frugivory interactions, and for sharing their data and answering questions, I thank Enrico Rezende, Jessica Lavabre, Paulo Guimar{\~a}es, Pedro Jordano and Jordi Bascompte.
+% For their work gathering and assembling the literature survey of plant visitor, plant pollinator and frugivory interactions, and for sharing their data and answering questions, I thank Enrico Rezende, Jessica Lavabre, Paulo Guimar{\~a}es, Pedro Jordano and Jordi Bascompte.
 
-For providing a place to work and for serving the delicious beverages that made much of this work possible (or at least tolerable), I thank Taylor Ramos and his wonderful staff at the Davis Beer Shoppe.
+% For providing a place to work and for serving the delicious beverages that made much of this work possible (or at least tolerable), I thank Taylor Ramos and his wonderful staff at the Davis Beer Shoppe.
 
-For their friendship, companionship and optimistic good humor, and for keeping my spirits up and my loneliness at bay, I thank my two cats, Neil and Buzz, who joined me in the first few weeks graduate school.
+% For their friendship, companionship and optimistic good humor, and for keeping my spirits up and my loneliness at bay, I thank my two cats, Neil and Buzz, who joined me in the first few weeks graduate school.
 
-For providing permanent homes and breeding opportunities for the animals used in this study, I thank the Sacramento Aquarium Society, and Richard Bireley in particular.
+% For providing permanent homes and breeding opportunities for the animals used in this study, I thank the Sacramento Aquarium Society, and Richard Bireley in particular.
 
-For the expressive shrug that sent me down this line of research, I would like to thank Karl Otto Stetter.
+% For the expressive shrug that sent me down this line of research, I would like to thank Karl Otto Stetter.
 
-For inspiring my interest in this topic in the first place, and for being generally inspirational and awesome, I would like to express my deepest gratitude to Rachel J.  Whitaker.
+% For inspiring my interest in this topic in the first place, and for being generally inspirational and awesome, I would like to express my deepest gratitude to Rachel J.  Whitaker.
 
-For devising the strategy that got me thorugh my qualifying exams, and for having the patience to listen to me practice it no fewer than {\em fifty} times, for being a supportive friend, a genrally hilarious person and for offering her substantial scientific insight in the aid of my work, I thank Lea Benedicte Skov Hansen.
+% For devising the strategy that got me thorugh my qualifying exams, and for having the patience to listen to me practice it no fewer than {\em fifty} times, for being a supportive friend, a genrally hilarious person and for offering her substantial scientific insight in the aid of my work, I thank Lea Benedicte Skov Hansen.
 
-For the many hours of plotting and scheming over fizzing pitchers of statistical models, and for being a constant nag about finishing the things we started, I grudgingly admit my gratitude to Matthew D. McGee. 
+% For the many hours of plotting and scheming over fizzing pitchers of statistical models, and for being a constant nag about finishing the things we started, I grudgingly admit my gratitude to Matthew D. McGee. 
 
-For his dedication to teaching and for his habit of elevating students, myself included, by treating them like colleagues, I thank Marc T. Facciotti.
+% For his dedication to teaching and for his habit of elevating students, myself included, by treating them like colleagues, I thank Marc T. Facciotti.
 
-For tolerating my incompetent presence in his laboratory during my first rotation as a microbiology graduate student, for maintaining composure as I clumsily broke his glassware, contaminated his pippetters and ripped the lid off of his PCR machine, for letting me fix the things I broke, for helping me achieve my first success at the bench, and for being a good friend and patent mentor, I thank Mitchell H. Singer.
+% For tolerating my incompetent presence in his laboratory during my first rotation as a microbiology graduate student, for maintaining composure as I clumsily broke his glassware, contaminated his pippetters and ripped the lid off of his PCR machine, for letting me fix the things I broke, for helping me achieve my first success at the bench, and for being a good friend and patent mentor, I thank Mitchell H. Singer.
 
-For her support, encouragement, her unflagging (and sometimes undeserved) confidence in me, and for turning some scribbles in my notebook into a handsome diagram, I thank my sister Annatova.
+% For her support, encouragement, her unflagging (and sometimes undeserved) confidence in me, and for turning some scribbles in my notebook into a handsome diagram, I thank my sister Annatova.
 
-For offering himself as a guiding light through the shoals of my difficult and exasperating education, for listening to me whenever I have needed an ear, for acknowledging my successes and forgiving my far more numerous failures, for continuing to light the way for me long after I left the waters familiar to him, for being the example I have always tried to follow, I thank my dad, Philip M. Neches.
+% For offering himself as a guiding light through the shoals of my difficult and exasperating education, for listening to me whenever I have needed an ear, for acknowledging my successes and forgiving my far more numerous failures, for continuing to light the way for me long after I left the waters familiar to him, for being the example I have always tried to follow, I thank my dad, Philip M. Neches.
 
-For raising me to a love of the natural world, for her steady refusal to displace my own ideas with her own, for teaching me to value and respect and admire people not despite their imperfections but because of them, for building the library of books with which I grew up and for teaching me how to read and understand them, for always asking me about my own struggles and always striving to understand them, for teaching me not just how to think but how to feel about thinking, and for her inordinate fondness of beetles, I thank my mum, Terry T. Young.
+% For raising me to a love of the natural world, for her steady refusal to displace my own ideas with her own, for teaching me to value and respect and admire people not despite their imperfections but because of them, for building the library of books with which I grew up and for teaching me how to read and understand them, for always asking me about my own struggles and always striving to understand them, for teaching me not just how to think but how to feel about thinking, and for her inordinate fondness of beetles, I thank my mum, Terry T. Young.
 
-For her total confidence that I would find my way out of this particular wilderness, for walking alongside through the great crashing meandering mess of it, for wheedling me with clever questions until I understood my own thoughts, for pulling me out of the mud when I was stuck, for sharing the view when we reached a pretty spot, for weathering the storms in my company when she could have left to find shelter for herself, for accepting this plodding peregrination as part of who I am, for transforming this journey from an ordeal into an adventure, and for the love she has shown me the whole way, I thank Ashanti Marie Robinson. I will always be your tortoise.
+% For her total confidence that I would find my way out of this particular wilderness, for walking alongside through the great crashing meandering mess of it, for wheedling me with clever questions until I understood my own thoughts, for pulling me out of the mud when I was stuck, for sharing the view when we reached a pretty spot, for weathering the storms in my company when she could have left to find shelter for herself, for accepting this plodding peregrination as part of who I am, for transforming this journey from an ordeal into an adventure, and for the love she has shown me the whole way, I thank Ashanti Marie Robinson. I will always be your tortoise.
 
-For the risk he took by inviting me into his lab, for his patient tolerance of my folly and stubbornness throughout this journey, for his sacrifices to protect my intellectual freedom, for his encouragement, for his levity and his seriousness, for his irreverence in the face of the trivial and his reverence for the truly profound, for the burden of genuine compassion for others that he refuses to lay down, for his gleeful sprints to understanding and for his reluctant walks to judgment, I thank Jonathan A. Eisen. It has been a privilege to linger in the safe, quiet space outlined by the bow shock of an advisor who stands against the currents of prejudice and cruelty. There are none equal.
+% For the risk he took by inviting me into his lab, for his patient tolerance of my folly and stubbornness throughout this journey, for his sacrifices to protect my intellectual freedom, for his encouragement, for his levity and his seriousness, for his irreverence in the face of the trivial and his reverence for the truly profound, for the burden of genuine compassion for others that he refuses to lay down, for his gleeful sprints to understanding and for his reluctant walks to judgment, I thank Jonathan A. Eisen. It has been a privilege to linger in the safe, quiet space outlined by the bow shock of an advisor who stands against the currents of prejudice and cruelty. There are none equal.
 }%
 
 \abstract{%
@@ -113,6 +114,23 @@ For the risk he took by inviting me into his lab, for his patient tolerance of m
 \end{refsection}
 
 \part{Fish}
+
+\begin{quote}
+\begin{description}
+\item[\sc Ponder Stibbons] : Yes, sir, but the Librarian likes bananas, sir.
+\item[\sc Archchancellor Ridcully] : Very nourishin' fruit, Mr. Stibbons.
+\item[\sc Stibbons] : Yes, sir. Although, funnily enough it's not actually a fruit, sir.
+\item[\sc Ridcully] : Really?
+\item[\sc Stibbons] : Yes, sir. Botanically, it's a type of fish, sir. According to my theory it's cladistically associated with the Krullian pipefish, sir, which of course is also yellow and goes around in bunches or shoals.
+\item[\sc Ridcully] : And lives in trees?
+\item[\sc Stibbons] : Well, not usually, sir. The banana is obviously exploiting a new niche.
+\item[\sc Ridcully] : Good heavens, really? It's a funny thing, but I've never much liked bananas and I've always been a bit suspicious of fish, too. That'd explain it.
+\end{description}
+\rule{0.8\textwidth}{.4pt}\\
+\hspace*{\fill}---Terry Pratchett, {\em Hogfather}
+\end{quote}
+
+\clearpage
 
 \subfile{FishPoo/FishPoo}
 \subfile{uLakes/uLakes}

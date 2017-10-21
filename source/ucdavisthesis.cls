@@ -933,7 +933,7 @@
   \@makecopyrightpage
   \@makededication
   \tableofcontents
-  \listoffigures\newpage
+  %\listoffigures\newpage
   \listoftables\newpage
   \@makeabstractpage{\@doublespacing}
   \@makeacknowledgments

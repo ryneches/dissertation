@@ -5,7 +5,7 @@
 This section is made up of three chapters exploring the evolution and ecology of cichlid fish and the relationship between cichlids and the organisms that make up their associated microbiomes. The first chapter represents the largest single component of this dissertation. 
 
 \begin{quote}
-\textit{Abstract, Chapter 1} : The ability to observe associations between microbes and their hosts usually does not, in itself, support conclusions regarding the ecological nature of those interactions. Even when an association is correlated with an outcome (a disease state, for example) under carefully controlled conditions, there are usually many potentially confounding factors. For example, variations in host genotype, phenotype and association with other microbial organisms complicate the ability to establish cause and effect.
+\noindent\textbf{Chapter 1.} The ability to observe associations between microbes and their hosts usually does not, in itself, support conclusions regarding the ecological nature of those interactions. Even when an association is correlated with an outcome (a disease state, for example) under carefully controlled conditions, there are usually many potentially confounding factors. For example, variations in host genotype, phenotype and association with other microbial organisms complicate the ability to establish cause and effect.
 
 We propose a similarity metric on host-microbe interactions using the Shannon-Jensen divergence of the Laplacian spectral density distributions of the networks formed by linking the phylogenies of the host and microbial clades through their ecological associations. This metric, along with the skew, kurtosis and other properties linked to the underlying network topology, forms the basis of feature space into which labeled and unlabeled interactions can be projected. In this space, it is possible to apply established clustering and machine learning techniques to classify interactions that exhibit similar phylogenetic topology and patterns of ecological interaction. Using this method, we are able to propose ecological relationships for host-associated bacterial clades based on their structural similarity to interactions with known ecological relationships.
 
@@ -15,13 +15,44 @@ A neural network classifier was trained on 51 interactions with a known ecology 
 The second chapter explores gene flow among the hosts, \cite{mcgee2016evaluating} and the third chapter explores the ecological dynamics of a mass extinction among the hosts. \cite{mcgee2015pharyngeal} These chapters have been previously published. 
 
 \noindent\textbf{Part 2: Oceans.}
-This section is made up of three chapters exploring the biogeography of the planktonic microbial ecology of the open ocean, all of which have been previously published. Chapter one develops Non Negative Matrix Factorization, a statistical approach for predicting ecological functions of protein-coding genes observed from metagenomic data and applies this approach to the 2004--2007 Global Ocean Survey. \cite{jiang2012functional} Chapters two and three present results from a microbial survey of the Indian Ocean, and develops a citizen science approach for performing oceanographic research using small sailboats. \cite{jeffries2015spatially, lauro2014common}
+This section is made up of three chapters exploring the biogeography of the planktonic microbial ecology of the open ocean, all of which have been previously published. Chapter four develops Non Negative Matrix Factorization, a statistical approach for predicting ecological functions of protein-coding genes observed from metagenomic data and applies this approach to the 2004--2007 Global Ocean Survey. \cite{jiang2012functional} Chapters five and six present results from a microbial survey of the Indian Ocean, and develops a citizen science approach for performing oceanographic research using small sailboats. \cite{jeffries2015spatially, lauro2014common}
 
 \noindent\textbf{Part 3: ChIP-seq.}
-This section is made up of two chapters that develop the necessary tools for exploring the gene regulatory networks of halophilic archaea. The first chapter lays out a workflow for identifying protein-DNA interactions of natively expressed transcription factors in the model organism {\em Halobacterium salinarum} sp. NRC-1 using ChIP-seq, and has been previously published. \cite{wilbanks2012workflow} The second chapter presents the software developed for this workflow, and has been published as preprint. \cite{neches2014fit}
+This section is made up of two chapters that develop the necessary tools for exploring the gene regulatory networks of halophilic archaea. Chapter seven lays out a workflow for identifying protein-DNA interactions of natively expressed transcription factors in the model organism {\em Halobacterium salinarum} sp. NRC-1 using ChIP-seq, and has been previously published. \cite{wilbanks2012workflow} Chapter nine presents the software developed for this workflow, and has been published as preprint. \cite{neches2014fit}
+
+\begin{quote} \noindent\textbf{Chapter 8.} While numerous effective peak
+finders have been developed for eukaryotic systems, we have found that the
+approaches used can be error prone when run on high coverage bacterial and
+archaeal ChIP-Seq datasets. We have developed Pique, an easy to use ChIP-Seq
+peak finding application for bacterial and archaeal ChIP-Seq experiments. The
+software is cross-platform and Open Source, and based on only freely licensed
+dependencies. Output is provided in standardized file formats, and may be
+easily imported by the Gaggle Genome Browser for manual curation and data
+exploration, or into statistical and graphics software such as R for further
+analysis. \end{quote}
 
 \noindent\textbf{Part 4: Tools.}
-This section is made up of two chapters that develop applications for 3D printing in microbiology and molecular biology. The first chapter establishes that fused deposition modeling 3D printing is alone sufficient to produce sterile components, and has been previously published. \cite{neches2016intrinsic} In the second chapter, I present single-use 3D printed parts, and the software to create them, that can perform the role of a liquid handling robot.
+This section is made up of two chapters that develop applications for 3D printing in microbiology and molecular biology. Chapter nine establishes that fused deposition modeling 3D printing is alone sufficient to produce sterile components, and has been previously published. \cite{neches2016intrinsic} Chapter ten presents single-use 3D printed parts, and the software to create them, that can perform the role of a liquid handling robot.
+
+\begin{quote} \noindent\textbf{Chapter 9.} 3D printers that build objects
+using extruded thermoplastic are quickly becoming commonplace tools in
+laboratories. We demonstrate that with appropriate handling, these devices are
+capable of producing sterile components from a non-sterile feedstock of
+thermoplastic without any treatment after fabrication. The fabrication process
+itself results in sterilization of the material. The resulting 3D printed
+components are suitable for a wide variety of applications, including
+experiments with bacteria and cell culture. \end{quote}
+
+\begin{quote} \noindent\textbf{Chapter 10.} When scaling molecular protocols
+to very large sample sizes (N $>$ 10, 000), any step that requires each sample
+to be treated uniquely becomes a major obstacle. Here, we examine the
+construction of genomic sequencing libraries, and observe that only one step
+--- normalizing DNA concentrations --- requires unique handling. Rather than
+executing a unique liquid handling operation on each sample, we instead
+fabricate single-use microtiter plates with volumes calibrated for each
+sample. Liquid handling operations are then identical across all samples,
+allowing the use of multichannel pipettes. Because many custom plates can be
+3D printed simultaneously, savings are realized in cost and time. \end{quote}
 
 \noindent\textbf{Part 5: Space.}
 This section is made up of a single chapter that relates a basic microbial growth kinetics experiment aboard the International Space Station, and has been previously published. \cite{coil2016growth}
