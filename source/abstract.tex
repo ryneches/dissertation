@@ -2,7 +2,7 @@
 
 % Context: Why now
 \noindent\textbf{Part 1: Fish.} 
-This section is made up of three chapters exploring the evolution and ecology of cichlid fish and the relationship between cichlids and the organisms that make up their associated microbiomes. The first chapter represents the largest single component of this dissertation. 
+This section is made up of three chapters exploring the evolution and ecology of cichlid fish and the relationship between cichlids and the organisms that make up their associated microbiomes. Chapter one describes the development of a new method for predicting the ecological function of clades of host-associated microbes using the Lake Tanganyika adaptive radiation of cichlid fish. The second chapter examines patterns of genomic divergence among cichlid fish from Lake Victoria, Kivu and Mweru. \cite{mcgee2016evaluating} The third chapter proposes and tests a new hypothesis for the ecological dynamics of a mass extinction of cichlids in Lake Victoria. \cite{mcgee2015pharyngeal}
 
 \begin{quote}
 \noindent\textbf{Chapter 1.} The ability to observe associations between microbes and their hosts usually does not, in itself, support conclusions regarding the ecological nature of those interactions. Even when an association is correlated with an outcome (a disease state, for example) under carefully controlled conditions, there are usually many potentially confounding factors. For example, variations in host genotype, phenotype and association with other microbial organisms complicate the ability to establish cause and effect.
@@ -12,15 +12,132 @@ We propose a similarity metric on host-microbe interactions using the Shannon-Je
 A neural network classifier was trained on 51 interactions with a known ecology (parasitism and two types of mutualism) gathered from the literature, 50 simulated cases of perfect co-evolution and 50 simulated cases of random associations. The classifier was then used to generate predictions as to the type of ecological relationship between clades of bacteria and archaea and their hosts, observed using 16S rRNA sequencing of the gut microbiomes of 14 species of wild-caught fish belonging to the Lake Tanganyika adaptive radiation of cichlid fish. While this training set is too small to rigorously test the accuracy of the classifier, we demonstrate that the training process reliably converges, yielding a neural network that produces highly consistent predictions.
 \end{quote}
 
-The second chapter explores gene flow among the hosts, \cite{mcgee2016evaluating} and the third chapter explores the ecological dynamics of a mass extinction among the hosts. \cite{mcgee2015pharyngeal} These chapters have been previously published. 
+\begin{quote}
+\noindent\textbf{Chapter 2.} Comparative genomic studies of closely related species typically focus on single species pairs at one given stage of divergence. That makes it difficult to infer the continuum of evolutionary process during speciation and beyond. Here, we use whole-genome resequencing to examine genomic patterns of divergence in three sympatric cichlid species pairs with very similar functional and ecological differentiation, but different ages. We find a strong signature of increasing genomic divergence with time in both the mitochondrial genome and the nuclear genome. In contrast to many other systems, we find that in these cichlids, regions of elevated relative differentiation also exhibit increased absolute differentiation. We detect a signature of convergent evolution in a comparison of outlier regions across all three species pair comparisons, but the extent of it is modest, and regions that are strongly divergent in any one pair tend to be only slightly elevated in the other pairs, consistent with a repeatable but polygenic basis of traits that characterize the ecomorphs. Our results suggest that strong functional phenotypic differentiation, as seen in all three species pairs, is generally associated with a clear signature of genomic divergence, even in the youngest species pair.
+\end{quote}
+
+\begin{quote} \noindent\textbf{Chapter 3.} Evolutionary innovations, traits
+that give species access to previously unoccupied niches, may promote
+speciation and adaptive radiation. Here, we show that such innovations can
+also result in competitive inferiority and extinction. We present evidence
+that the modified pharyngeal jaws of cichlid fishes and several marine fish
+lineages, a classic example of evolutionary innovation, are not universally
+beneficial. A large-scale analysis of dietary evolution across marine fish
+lineages reveals that the innovation compromises access to energy-rich
+predator niches. We show that this competitive inferiority shaped the adaptive
+radiation of cichlids in Lake Tanganyika and played a pivotal and previously
+unrecognized role in the mass extinction of cichlid fishes in Lake Victoria
+after Nile perch invasion. \end{quote}
 
 \noindent\textbf{Part 2: Oceans.}
-This section is made up of three chapters exploring the biogeography of the planktonic microbial ecology of the open ocean, all of which have been previously published. Chapter four develops Non Negative Matrix Factorization, a statistical approach for predicting ecological functions of protein-coding genes observed from metagenomic data and applies this approach to the 2004--2007 Global Ocean Survey. \cite{jiang2012functional} Chapters five and six present results from a microbial survey of the Indian Ocean, and develops a citizen science approach for performing oceanographic research using small sailboats. \cite{jeffries2015spatially, lauro2014common}
+This section is made up of three chapters exploring the biogeography of the planktonic microbial ecology of the open ocean. Chapter four develops Non Negative Matrix Factorization, a statistical approach for predicting ecological functions of protein-coding genes observed from metagenomic data and applies this approach to the 2004--2007 Global Ocean Survey. \cite{jiang2012functional} Chapters five and six present results from a microbial survey of the Indian Ocean, and develop a citizen science approach for performing oceanographic research using small sailboats. \cite{jeffries2015spatially, lauro2014common}
+
+\begin{quote}
+\noindent\textbf{Chapter 4.} The direct ``metagenomic'' sequencing of genomic
+material from complex assemblages of bacteria, archaea, viruses and
+microeukaryotes has yielded new insights into the structure of microbial
+communities. For example, analysis of metagenomic data has revealed the
+existence of previously unknown microbial taxa whose spatial distributions are
+limited by environmental conditions, ecological competition, and dispersal
+mechanisms. However, differences in genotypes that might lead biologists to
+designate two microbes as taxonom- ically distinct need not necessarily imply
+differences in ecological function. Hence, there is a growing need for large-
+scale analysis of the distribution of microbial function across habitats.
+Here, we present a framework for investigating the biogeography of microbial
+function by analyzing the distribution of protein families inferred from
+environmental se- quence data across a global collection of sites. We map over
+6,000,000 protein sequences from unassembled reads from the Global Ocean
+Survey dataset to 8214 protein families, generating a protein family relative
+abundance matrix that describes the distribution of each protein family across
+sites. We then use non-negative matrix factorization (NMF) to approximate
+these protein family profiles as linear combinations of a small number of eco-
+logical components. Each component has a characteristic functional profile and
+site profile. Our approach identifies common functional signatures within
+several of the components. We use our method as a filter to estimate
+functional distance between sites, and find that an NMF-filtered measure of
+functional distance is more strongly correlated with environ- mental distance
+than a comparable PCA-filtered measure. We also find that functional distance
+is more strongly correlated with environmental distance than with geographic
+distance, in agreement with prior studies. We identify similar protein
+functions in several components and suggest that functional co-occurrence
+across metagenomic samples could lead to future methods for de-novo functional
+prediction. We conclude by discussing how NMF, and other dimension reduction
+methods, can help enable a macroscopic functional description of marine
+ecosystems.
+\end{quote}
+
+\begin{quote}
+\noindent\textbf{Chapter 5.} Many projects have struggled with the unique
+technical, logistical, organizational, and ethical issues that arise for each
+discipline when researchers endeavor to involve citizen scientists. In 2013,
+the Indigo V Indian Ocean Expedition was conceived as a pilot project and
+learning laboratory for citizen science approaches to oceanography. The team
+sailed S/Y {\em Indigo V} -- a 61-foot Nautor Swan sailing yacht -- across the
+Indian Ocean from Cape Town, South Africa, to Phuket, Thailand. The three legs
+of the journey covered approximately 5,800 nautical miles. During this
+expedition, instruments and methods adaptable to citizen scientist deployment
+were tested aboard small vessels not designed or equipped for research. In all
+but the heaviest seas, the crew was able to inventory the surface water
+population of bacterioplankton using a simple pump and filtration apparatus
+and make basic measurements of ocean physics and chemistry. The prototype
+ocean sampling microbial observatory (OSMO) is currently being ruggedidevice
+is being developed as a collaboration between the Indigo V team members in
+their 149laboratories in the US, Singapore, and Australia and will
+autonomously sample microbial populations onto filters and preserve them.
+\end{quote}
+
+\begin{quote}
+\noindent\textbf{Chapter 6.} Microorganisms act both as drivers and indicators
+of perturbations in the marine environment. In an effort to establish
+baselines to predict the response of marine habitats to environmental change,
+here we report a broad survey of microbial diversity across the Indian Ocean,
+including the first microbial samples collected in the pristine lagoon of
+Salomon Islands, Chagos Archipelago. This was the first large-scale ecogenomic
+survey aboard a private yacht employing a `citizen oceanography' approach and
+tools and protocols easily adapted to ocean going sailboats. Our data
+highlighted biogeographic patterns in microbial community composition across
+the Indian Ocean. Samples from within the Salomon Islands lagoon contained a
+community which was different even from adjacent samples despite constant
+water exchange, driven by the dominance of the photosynthetic cyanobacterium
+{\em Synechococcus}. In the lagoon, {\em Synechococcus} was also responsible
+for driving shifts in the metatranscriptional profiles. Enrichment of
+transcripts related to photosynthesis and nutrient cycling indicated bottom-up
+controls of community structure. However a five-fold increase in viral
+transcripts within the lagoon during the day, suggested a concomitant top-down
+control by bacteriophages. Indeed, genome recruitment against {\em
+Synechococcus} reference genomes suggested a role of viruses in providing the
+ecological filter for determining the $\beta$-diversity patterns in this
+system.
+\end{quote}
 
 \noindent\textbf{Part 3: ChIP-seq.}
-This section is made up of two chapters that develop the necessary tools for exploring the gene regulatory networks of halophilic archaea. Chapter seven lays out a workflow for identifying protein-DNA interactions of natively expressed transcription factors in the model organism {\em Halobacterium salinarum} sp. NRC-1 using ChIP-seq, and has been previously published. \cite{wilbanks2012workflow} Chapter nine presents the software developed for this workflow, and has been published as preprint. \cite{neches2014fit}
+This section is made up of two chapters that develop tools for exploring the gene regulatory networks of halophilic archaea. Chapter seven lays out a workflow for identifying protein-DNA interactions of natively expressed transcription factors in the model organism {\em Halobacterium salinarum} sp. NRC-1 using ChIP-seq, and has been previously published. \cite{wilbanks2012workflow} Chapter nine presents the software developed for this workflow, and has been published as preprint. \cite{neches2014fit}
 
-\begin{quote} \noindent\textbf{Chapter 8.} While numerous effective peak
+\begin{quote}
+\noindent\textbf{Chapter 7.} Deciphering the structure of gene regulatory
+networks across the tree of life remains one of the major challenges in
+postgenomic biology. We present a novel ChIP-seq workflow for the archaea
+using the model organism {\em Halobacterium salinarum} sp. NRC-1 and
+demonstrate its application for mapping the genome-wide binding sites of
+natively expressed transcription factors. This end-to-end pipeline is the
+first protocol for ChIP-seq in archaea, with methods and tools for each stage
+from gene tagging to data analysis and biological discovery. Genome-wide
+binding sites for transcription factors with many binding sites (TfbD) are
+identified with sensitivity, while retaining specificity in the identification
+the smaller regulons (bacteriorhodopsin-activator protein). Chromosomal
+tagging of target proteins with a compact epitope facilitates a standardized
+and cost-effective workflow that is compatible with high-throughput
+immunoprecipitation of natively expressed transcription factors. The Pique
+package, an open-source bioinformatics method, is presented for identification
+of binding events. Relative to ChIP-Chip and qPCR, this workflow offers a
+robust catalog of protein–DNA binding events with improved spatial resolution
+and significantly decreased cost. While this study focuses on the application
+of ChIP-seq in {\em H. salinarum} sp. NRC-1, our workflow can also be adapted
+for use in other archaea and bacteria with basic genetic tools.
+\end{quote}
+
+\begin{quote}
+\noindent\textbf{Chapter 8.} While numerous effective peak
 finders have been developed for eukaryotic systems, we have found that the
 approaches used can be error prone when run on high coverage bacterial and
 archaeal ChIP-Seq datasets. We have developed Pique, an easy to use ChIP-Seq
@@ -29,7 +146,8 @@ software is cross-platform and Open Source, and based on only freely licensed
 dependencies. Output is provided in standardized file formats, and may be
 easily imported by the Gaggle Genome Browser for manual curation and data
 exploration, or into statistical and graphics software such as R for further
-analysis. \end{quote}
+analysis.
+\end{quote}
 
 \noindent\textbf{Part 4: Tools.}
 This section is made up of two chapters that develop applications for 3D printing in microbiology and molecular biology. Chapter nine establishes that fused deposition modeling 3D printing is alone sufficient to produce sterile components, and has been previously published. \cite{neches2016intrinsic} Chapter ten presents single-use 3D printed parts, and the software to create them, that can perform the role of a liquid handling robot.
@@ -56,5 +174,31 @@ allowing the use of multichannel pipettes. Because many custom plates can be
 
 \noindent\textbf{Part 5: Space.}
 This section is made up of a single chapter that relates a basic microbial growth kinetics experiment aboard the International Space Station, and has been previously published. \cite{coil2016growth}
+
+\begin{quote}
+
+\noindent\textbf{Chapter 11.} \textbf{Background}. While significant attention
+has been paid to the potential risk of pathogenic microbes aboard crewed
+spacecraft, the non-pathogenic microbes in these habitats have received less
+consideration. Preliminary work has demonstrated that the interior of the
+International Space Station (ISS) has a microbial community resembling those
+of built environments on Earth. Here we report the results of sending 48
+bacterial strains, collected from built environments on Earth, for a growth
+experiment on the ISS. This project was a component of Project MERCCURI
+(Microbial Ecology Research Combining Citizen and University Researchers on
+ISS).
+
+\textbf{Results}. Of the 48 strains sent to the ISS, 45 of them showed similar
+growth in space and on Earth using a relative growth measurement adapted for
+microgravity. The vast majority of species tested in this experiment have also
+been found in culture-independent surveys of the ISS. Only one bacterial
+strain showed significantly different growth in space. {\em Bacillus safensis}
+JPL-MERTA-8-2 grew 60\% better in space than on Earth.
+
+\textbf{Conclusions}. The majority of bacteria tested were not affected by
+conditions aboard the ISS in this experiment (e.g., microgravity, cosmic
+radiation). Further work on {\em Bacillus safensis} could lead to interesting
+insights on why this strain grew so much better in space.
+\end{quote}
 
 \printbibliography[heading=subbibliography]
