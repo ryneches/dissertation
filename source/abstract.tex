@@ -2,50 +2,60 @@
 %This section is made up of three chapters exploring the evolution and ecology of cichlid fish and the relationship between cichlids and the organisms that make up their associated microbiomes. 
 
 %\begin{quote}
-\noindent\textbf{Chapter 1.} We propose a similarity metric on host-microbe interactions using the Shannon-Jensen divergence of the Laplacian spectral density distributions of the networks formed by linking the phylogenies of the host and microbial clades through their ecological associations. This metric, along with the skew, kurtosis and other properties linked to the underlying network topology, forms the basis of feature space into which labeled and unlabeled interactions can be projected. A neural network classifier was trained on 51 interactions with a known ecology (parasitism and two types of mutualism) gathered from the literature, 50 simulated cases of perfect co-evolution and 50 simulated cases of random associations. The classifier was then used to generate predictions as to the type of ecological relationship between clades of bacteria and archaea and their hosts, observed using 16S rRNA sequencing of the gut microbiomes of 14 species of wild-caught fish belonging to the Lake Tanganyika adaptive radiation of cichlid fish. While this training set is too small to rigorously test the accuracy of the classifier, we demonstrate that the training process reliably converges, yielding a neural network that produces highly consistent predictions. Using this method, we are able to propose ecological relationships for host-associated bacterial clades based on their structural similarity to interactions with known ecological relationships.
+\noindent\textbf{Chapter 1.} We propose a method for predicting the ecological function of host-associated
+microbes using neural networks trained on a feature space of labeled
+ecological interactions from the literature. The feature space is constructed
+on a similarity metric using the Shannon-Jensen divergence of the Laplacian
+spectral density distributions of the networks formed by linking the
+phylogenies of the host and microbial clades through their ecological
+associations. A classifier trained on 51 interactions with known ecology and
+100 simulated controls was used predict the ecological function in the
+microbimes of 14 species of wild-caught cichlid fish from the Lake Tanganyika
+adaptive radiation observed using 16S rRNA sequencing.
+
 %\end{quote}
 
-
 %\begin{quote}
-\noindent\textbf{Chapter 2.} Genomic patterns of divergence are examined using whole-genome resequencing of three sympatric cichlid species pairs with very similar functional and ecological differentiation, but different ages. We find a strong signature of increasing genomic divergence with time in both the mitochondrial genome and the nuclear genome. In contrast to many other systems, we find that in these cichlids, regions of elevated relative differentiation also exhibit increased absolute differentiation. We detect a signature of convergent evolution in a comparison of outlier regions across all three species pair comparisons, but the extent of it is modest, and regions that are strongly divergent in any one pair tend to be only slightly elevated in the other pairs, consistent with a repeatable but polygenic basis of traits that characterize the ecomorphs. Our results suggest that strong functional phenotypic differentiation, as seen in all three species pairs, is generally associated with a clear signature of genomic divergence, even in the youngest species pair.
+\noindent\textbf{Chapter 2.} Genomic patterns of divergence are examined using whole-genome resequencing of
+three sympatric cichlid species pairs with similar functional and ecological
+differentiation but different ages, revealing a strong signature of genomic
+divergence in both the mitochondrial and the nuclear genome. Regions of
+elevated relative differentiation also exhibit increased absolute
+differentiation. We detect a signature of convergent evolution across all
+three species pairs. Our results suggest that strong functional phenotypic
+differentiation is generally associated with a signature of genomic
+divergence.
+
 %\end{quote}
 
 %\begin{quote}
-\noindent\textbf{Chapter 3.} We show that evolutionary innovations can
-also result in competitive inferiority and extinction. We present evidence
-that the modified pharyngeal jaws of cichlid fishes and several marine fish
-lineages, a classic example of evolutionary innovation, are not universally
-beneficial. A large-scale analysis of dietary evolution across marine fish
+\noindent\textbf{Chapter 3.} We show that evolutionary innovations can result in competitive inferiority
+and extinction. The modified pharyngeal jaws of cichlid fishes and several
+marine fish lineages, a classic example of evolutionary innovation, are not
+universally beneficial. Analysis of dietary evolution across marine fish
 lineages reveals that the innovation compromises access to energy-rich
 predator niches. We show that this competitive inferiority shaped the adaptive
-radiation of cichlids in Lake Tanganyika and played a pivotal and previously
+radiation of cichlids in Lake Tanganyika and played a pivotal, previously
 unrecognized role in the mass extinction of cichlid fishes in Lake Victoria
 after Nile perch invasion.
+
 %\end{quote}
 
 %\noindent\textbf{Part 2: Oceans.}
 %This section is made up of three chapters exploring the biogeography of the planktonic microbial ecology of the open ocean. %Chapter four develops Non Negative Matrix Factorization, a statistical approach for predicting ecological functions of protein-coding genes observed from metagenomic data and applies this approach to the 2004--2007 Global Ocean Survey. \cite{jiang2012functional} Chapters five and six present results from a microbial survey of the Indian Ocean, and develop a citizen science approach for performing oceanographic research using small sailboats. \cite{jeffries2015spatially, lauro2014common}
 
 %\begin{quote}
-\noindent\textbf{Chapter 4.} We present a framework for
-investigating the biogeography of microbial function by analyzing the
-distribution of protein families inferred from environmental sequence data
-across a global collection of sites. We map over 6,000,000 protein sequences
-from unassembled reads from the Global Ocean Survey dataset to 8214 protein
-families, generating a protein family relative abundance matrix that describes
-the distribution of each protein family across sites. We then use non-negative
-matrix factorization (NMF) to approximate these protein family profiles as
-linear combinations of a small number of ecological components. Each component
-has a characteristic functional profile and site profile. We identify common
-functional signatures within several of the components, estimate functional
-distance between sites, and find that an NMF-filtered measure of functional
-distance is more strongly correlated with environmental distance than a
-comparable PCA-filtered measure. We also find that functional distance is more
-strongly correlated with environmental distance than with geographic distance,
-in agreement with prior studies. We identify similar protein functions in
-several components and suggest that functional co-occurrence across
-metagenomic samples could lead to future methods for de-novo functional
-prediction.
+\noindent\textbf{Chapter 4.} We map protein sequences from unassembled reads from the Global Ocean Survey
+dataset to protein families and use non-negative matrix factorization (NMF) to
+approximate protein family profiles as linear combinations of ecological
+components with characteristic functional and site profiles. We identify
+common functional signatures, estimate functional distance between sites, and
+find that an NMF-filtered measure of functional distance is more strongly
+correlated with environmental distance than a comparable PCA-filtered measure.
+We find that functional distance is more strongly correlated with
+environmental distance than geographic distance in agreement with prior
+studies.
+
 %\end{quote}
 
 %\begin{quote}
@@ -60,45 +70,35 @@ tabulated.
 %\end{quote}
 
 %\begin{quote}
-\noindent\textbf{Chapter 6.} We report a broad survey of
-microbial diversity across the Indian Ocean, including the first microbial
-samples collected in the pristine lagoon of Salomon Islands, Chagos
-Archipelago. Our data highlighted biogeographic
-patterns in microbial community composition across the Indian Ocean. Samples
-from within the Salomon Islands lagoon contained a community which was
-different even from adjacent samples despite constant water exchange, driven
-by the dominance of the photosynthetic cyanobacterium {\em Synechococcus}. In
-the lagoon, {\em Synechococcus} was also responsible for driving shifts in the
-metatranscriptional profiles. Enrichment of transcripts related to
-photosynthesis and nutrient cycling indicated bottom-up controls of community
-structure. A five-fold increase in viral transcripts within the lagoon
-during the day suggested a concomitant top-down control by bacteriophages.
+\noindent\textbf{Chapter 6.} We report a survey of microbial diversity across the Indian Ocean and a
+pristine lagoon in the Chagos Archipelago. Samples from within the lagoon
+contained a community differing from adjacent samples despite constant water
+exchange, driven by the dominance of the photosynthetic cyanobacterium {\em
+Synechococcus}. Enrichment of transcripts related to photosynthesis and
+nutrient cycling indicated bottom-up controls of community structure. A five-
+fold increase in viral transcripts within the lagoon during the day suggested
+a concomitant top-down control by bacteriophages.
+
 %\end{quote}
 
 %\noindent\textbf{Part 3: ChIP-seq.}
 %This section is made up of two chapters that develop tools for exploring the gene regulatory networks of halophilic archaea. %Chapter seven lays out a workflow for identifying protein-DNA interactions of natively expressed transcription factors in the model organism {\em Halobacterium salinarum} sp. NRC-1 using ChIP-seq, and has been previously published. \cite{wilbanks2012workflow} Chapter nine presents the software developed for this workflow, and has been published as preprint. \cite{neches2014fit}
 
 %\begin{quote}
-\noindent\textbf{Chapter 7.} We present a novel ChIP-seq
-workflow for the archaea using the model organism {\em Halobacterium
-salinarum} sp. NRC-1 and demonstrate its application for mapping the genome-
-wide binding sites of natively expressed transcription factors. Genome-wide
-binding sites for transcription factors with many binding sites (TfbD) are
-identified with sensitivity, while retaining specificity in the identification
-the smaller regulons (bacteriorhodopsin-activator protein). Relative to ChIP-
-Chip and qPCR, this workflow offers a robust catalog of protein-DNA binding
-events with improved spatial resolution and significantly decreased cost.
-%\end{quote}
+\noindent\textbf{Chapter 7.} We present a novel ChIP-seq workflow for archaea using the model organism {\em
+Halobacterium salinarum} sp. NRC-1 and demonstrate its application for mapping
+the genome-wide binding sites of natively expressed transcription factors.
+Genome-wide binding sites for transcription factors (TfbD) are identified.
+Relative to ChIP-Chip and qPCR, this workflow offers a robust catalog of
+protein-DNA binding events with improved spatial resolution and significantly
+decreased cost. %\end{quote}
 
 %\begin{quote}
-\noindent\textbf{Chapter 8.} We have developed Pique, an easy to use ChIP-Seq
-peak finding application for bacterial and archaeal ChIP-Seq experiments. The
-software is cross-platform and Open Source, and based on only freely licensed
-dependencies. Output is provided in standardized file formats, and may be
-easily imported by the Gaggle Genome Browser for manual curation and data
-exploration, or into statistical and graphics software such as R for further
-analysis.
-%\end{quote}
+\noindent\textbf{Chapter 8.} Pique is a user-friendly, freely licensed ChIP-Seq peak finding application
+for bacterial and archaeal ChIP-Seq experiments. Output is provided in
+standardized file formats, and may be easily imported by the Gaggle Genome
+Browser for manual curation and data exploration, or into statistical and
+graphics software such as R for further analysis. %\end{quote}
 
 %\noindent\textbf{Part 4: Tools.}
 %This section is made up of two chapters that develop applications for 3D printing in microbiology and molecular biology. %Chapter nine establishes that fused deposition modeling 3D printing is alone sufficient to produce sterile components, and has been previously published. \cite{neches2016intrinsic} Chapter ten presents single-use 3D printed parts, and the software to create them, that can perform the role of a liquid handling robot.
