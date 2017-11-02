@@ -1,7 +1,14 @@
 \documentclass[PhD]{ucdavisthesis}
 
+%\usepackage{syntonly}
+%\syntaxonly
+
+\tracinggroups=1
+\tracingnesting=2
+
 \usepackage{amsmath}
 \usepackage{epigraph}
+%\usepackage{epigraphhead}
 \usepackage{enumitem}
 \usepackage{caption}
 \usepackage{subcaption}
@@ -22,7 +29,7 @@
 
 \setitemize{noitemsep,topsep=0pt,parsep=0pt,partopsep=0pt}
 
-\addbibresource[label=abstract]{abstract.bib}
+%\addbibresource[label=abstract]{abstract.bib}
 \addbibresource[label=introduction]{introduction.bib}
 \addbibresource[label=FishPoo]{FishPoo/FishPoo.bib}
 \addbibresource[label=SaltyBugs]{SaltyBugs/SaltyBugs.bib}
@@ -87,10 +94,7 @@
 }%
 
 \abstract{%
-   	\begin{refsection}
-   	\newrefsection
 	\subfile{abstract.tex}
-	\end{refsection}
 }
 
 \makeatletter
@@ -140,6 +144,9 @@
 \subfile{FishJaws/FishJaws}
 
 \part{Oceans}
+
+\epigraph{This is a planet. Most of it is covered in water but it's still
+called Earth.}{Terry Pratchett -- {\em Wings}}
 
 \subfile{NMF/NMF}
 \subfile{IndigoV/IndigoV}
