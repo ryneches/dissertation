@@ -26,6 +26,9 @@
 \usepackage[utf8]{inputenc}
 % bibliographies
 \usepackage[backend=biber,defernumbers=true,sorting=none,style=ieee]{biblatex}
+\AtEveryBibitem{%
+  \clearfield{note}%
+}
 
 \setitemize{noitemsep,topsep=0pt,parsep=0pt,partopsep=0pt}
 
